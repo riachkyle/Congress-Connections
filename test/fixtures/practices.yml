@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  too: MyString
+  many: MyString
+  newbs: MyString
+  here: MyString
+
+two:
+  too: MyString
+  many: MyString
+  newbs: MyString
+  here: MyString
