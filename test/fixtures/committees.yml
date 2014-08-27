@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  committee_id: MyString
+  name: MyString
+  members_id: MyString
+  senator_id: 
+
+two:
+  committee_id: MyString
+  name: MyString
+  members_id: MyString
+  senator_id: 

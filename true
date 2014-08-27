@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20140826202711_add_members_to_senator.rb
