@@ -1,0 +1,16 @@
+<% @committees.each do |c| %>
+  <%= c.name.to_json %>
+  <%= c.cmembers_id.to_json %>
+
+  <% end %><br>
+
+
+
+  <% @senators.each do |s| %>
+  <%= s.first_name.to_json %>
+  <%= s.last_name.to_json %>
+  <%= s.bioguide_Id.to_json %>
+  <br>
+  <% end %><br>
+
+  

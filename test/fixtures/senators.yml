@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bioguide_Id: MyString
+  first_name: MyString
+  last_name: MyString
+  state: MyString
+  party: MyString
+  committee_id: 
+
+two:
+  bioguide_Id: MyString
+  first_name: MyString
+  last_name: MyString
+  state: MyString
+  party: MyString
+  committee_id: 
