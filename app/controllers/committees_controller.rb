@@ -1,7 +1,5 @@
 class CommitteesController < ApplicationController
   def index 
-    @committees = Committee.all
-    @senators = Senator.all
-  
+    @committees = render json: Committee.all      
   end
 end
