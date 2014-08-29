@@ -1,6 +1,11 @@
 class SenatorsController < ApplicationController
 
   def index
-    @senators = render json: Senator.all
+    
   end
+
+  def show
+	@senators = render json: Senator.all
+  end
+
 end
