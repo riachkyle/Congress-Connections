@@ -1041,6 +1041,8 @@ var drawGraph = function(){
 
     var committees = [];
 
+    var view = "first view";
+
     
     // --- Set Up the Data --- //
 
@@ -1080,6 +1082,8 @@ var drawGraph = function(){
         return data;
 
     };
+
+    console.log(newLinks);
 
     data = setupData(json);
 
@@ -1242,46 +1246,42 @@ var drawGraph = function(){
                     return nodesMap;
                 }
 
-                if (!senators){
-                    committees = committeesArray;
-                    nodesMap = mapNodes(senators.concat(committees));
-                }
-                else if (!committees){
-                    senators = senatorsArray;
-                    nodesMap = mapNodes(senators.concat(committees));
-                }
-                else{
-                    committees = committeesArray;
-                    senators = senatorsArray;
-                    nodesMap = mapNodes(senators.concat(committees));
+                
+                committees = committeesArray;
+                senators = senatorsArray;
+                nodesMap = mapNodes(senators.concat(committees));
 
-                }
+                console.log(nodesMap)
+
+
 
             }; // end of updateNodes()
 
-            function updateLinks(links){ 
+            function updateLinks(newlinks){ 
 
-                links.forEach(function(l){
-                    l.source = nodesMap.get(l.source);
-                    l.target = nodesMap.get(l.target);
-
-                })
+                if (view != "new view"){
+                    newlinks.forEach(function(l){
+                        l.source = nodesMap.get(l.source);
+                        l.target = nodesMap.get(l.target);
+                        view = "new view"
+                    });
+                }
 
 
             }; // end of updateLinks()
 
-            function updateGraph(){
+            function updateGraph(links, nodes){
 
                 force
                         .nodes(senators)
                         .start();
 
                 force2
-                        .nodes(committees)
+                        .nodes(nodes)
                         .start();
 
                 var node = svg.selectAll(".node")
-                .data(senators.concat(committees))
+                    .data(senators.concat(nodes))
                 
                 node.enter()
                             .append("circle")
@@ -1313,10 +1313,10 @@ var drawGraph = function(){
                         .text(function(d) { return d.name; });
 
                 var link = svg.selectAll(".line")
-                    .data(newLinks);
+                    .data(links);
 
                 link = svg.selectAll("line.link")
-                    .data(newLinks)
+                    .data(links)
 
                 link.enter()
                             .append("line")
@@ -1341,16 +1341,15 @@ var drawGraph = function(){
 
                 link.exit().remove();
 
-                console.log(newLinks);
-
             } //end of updateGraph()
 
             
             // --- Run the Functions --- //
 
+            console.log(newLinks);
             updateNodes(senators, newCommittees);
             updateLinks(newLinks);
-            updateGraph();
+            updateGraph(newLinks, newCommittees);
 
         }// end of update()
 
