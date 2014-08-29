@@ -36,6 +36,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.1)
+    d3_rails (3.4.11)
+      railties (>= 3.1.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.1)
@@ -133,6 +135,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
+  d3_rails
   jbuilder (~> 2.0)
   jquery-rails
   pg
