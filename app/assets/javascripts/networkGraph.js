@@ -1034,10 +1034,6 @@ window.onload = function(){
 
 var drawGraph = function(){
 
-    console.log(json.links)
-
-    
-
     var width = 800;
     var height = 800;
 
@@ -1106,7 +1102,7 @@ var drawGraph = function(){
                 .linkDistance(0)
                 .size([width, height]);
 
-    var svg = d3.select("body")
+    var svg = d3.select("#graph")
                 .append("svg")
                 .attr("width", width)
                 .attr("height", height)
