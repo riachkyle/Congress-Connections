@@ -14,10 +14,10 @@ var congressApp = angular.module('congressApp',[])
 congressApp.controller('Congress', ['$scope', 'SenateData', 'CommitteeData',
   function($scope, SenateData, CommitteeData) {
 
-  $scope.senatordata = {};
+  $scope.json = {};
 
   SenateData.getData().then(function(json){
-    $scope.senatordata = json.data;
+    $scope.json = json.data;
 
           console.log($scope.senatordata)
   });
@@ -29,6 +29,30 @@ congressApp.controller('Congress', ['$scope', 'SenateData', 'CommitteeData',
     $scope.committeedata = json.data;
   });
 
+  $scope.newLinks = [
+                    {"source": "M001", "target": "D001"},
+                    {"source": "D001", "target": "M001"}
+                ]
+
+  $scope.update = function(){
+    $scope.json = [{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001"}, {"firs_name": "Sam", "node_type": "senator", "bioguide_Id": "D001"}];
+
+    $scope.newLinks = [
+                    {"source": "M001", "target": "D001"},
+                    {"source": "D001", "target": "M001"}
+                ];
+
+     $scope.mapNodes = function (nodes){
+                          nodesMap = d3.map()
+                          nodes.forEach(function(n){
+                              nodesMap.set(n.bioguide_Id, n)
+                          })
+                          return nodesMap;
+                      };
+
+      nodesMap = $scope.mapNodes($scope.json);
+
+    }
 }]);
 
 // create factory for the senators data
@@ -65,1024 +89,13 @@ congressApp.directive("networkGraph", function($window){
     template: "<svg width='800' height='800'></svg>",
     link: function(scope, elem, attrs){
 
-      json = {"nodes":[
-            {
-                 "bioguide_Id": "C001071",
-                 "name": "Bob Corker",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000639",
-                 "name": "Robert Menendez",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "R000584",
-                 "name": "Jim Risch",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/R000584.json",
-                 "party": "R",
-                 "rank_in_party": "2",
-                 "state":"bioguide_Id",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "B000711",
-                 "name": "Barbara Boxer",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/B000711.json",
-                 "party": "D",
-                 "rank_in_party": "2",
-                 "state":"CA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "R000595",
-                 "name": "Marco Rubio",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/R000595.json",
-                 "party": "R",
-                 "rank_in_party": "3",
-                 "state":"FL",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C000141",
-                 "name": "Benjamin L. Cardin",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C000141.json",
-                 "party": "D",
-                 "rank_in_party": "3",
-                 "state":"MD",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "J000293",
-                 "name": "Ron Johnson",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/J000293.json",
-                 "party": "R",
-                 "rank_in_party": "4",
-                 "state":"WI",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C001070",
-                 "name": "Bob Casey",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001070.json",
-                 "party": "D",
-                 "rank_in_party": "4",
-                 "state":"PA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "F000444",
-                 "name": "Jeff Flake",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/F000444.json",
-                 "party": "R",
-                 "rank_in_party": "5",
-                 "state":"AZ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "S001181",
-                 "name": "Jeanne Shaheen",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/S001181.json",
-                 "party": "D",
-                 "rank_in_party": "5",
-                 "state":"NH",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000303",
-                 "name": "John McCain",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000303.json",
-                 "party": "R",
-                 "rank_in_party": "6",
-                 "state":"AZ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C001088",
-                 "name": "Christopher A. Coons",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001088.json",
-                 "party": "D",
-                 "rank_in_party": "6",
-                 "state":"DE",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "B001261",
-                 "name": "John Barrasso",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/B001261.json",
-                 "party": "R",
-                 "rank_in_party": "7",
-                 "state":"WY",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "U000039",
-                 "name": "Tom Udall",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/U000039.json",
-                 "party": "D",
-                 "rank_in_party": "7",
-                 "state":"NM",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "P000603",
-                 "name": "Rand Paul",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/P000603.json",
-                 "party": "R",
-                 "rank_in_party": "8",
-                 "state":"KY",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M001169",
-                 "name": "Christopher S. Murphy",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M001169.json",
-                 "party": "D",
-                 "rank_in_party": "8",
-                 "state":"CT",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "K000384",
-                 "name": "Tim Kaine",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/K000384.json",
-                 "party": "D",
-                 "rank_in_party": "9",
-                 "state":"VA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000133",
-                 "name": "Edward J. Markey",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000133.json",
-                 "party": "D",
-                 "rank_in_party": "10",
-                 "state":"MA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-               {
-                 "bioguide_Id": "C001071",
-                 "name": "Bob Corker",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001071.json",
-                 "party": "R",
-                 "rank_in_party": "1",
-                 "state":"TN",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000639",
-                 "name": "Robert Menendez",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000639.json",
-                 "party": "D",
-                 "rank_in_party": "1",
-                 "state":"NJ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "R000584",
-                 "name": "Jim Risch",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/R000584.json",
-                 "party": "R",
-                 "rank_in_party": "2",
-                 "state":"bioguide_Id",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "B000711",
-                 "name": "Barbara Boxer",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/B000711.json",
-                 "party": "D",
-                 "rank_in_party": "2",
-                 "state":"CA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "R000595",
-                 "name": "Marco Rubio",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/R000595.json",
-                 "party": "R",
-                 "rank_in_party": "3",
-                 "state":"FL",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C000141",
-                 "name": "Benjamin L. Cardin",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C000141.json",
-                 "party": "D",
-                 "rank_in_party": "3",
-                 "state":"MD",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "J000293",
-                 "name": "Ron Johnson",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/J000293.json",
-                 "party": "R",
-                 "rank_in_party": "4",
-                 "state":"WI",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C001070",
-                 "name": "Bob Casey",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001070.json",
-                 "party": "D",
-                 "rank_in_party": "4",
-                 "state":"PA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "F000444",
-                 "name": "Jeff Flake",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/F000444.json",
-                 "party": "R",
-                 "rank_in_party": "5",
-                 "state":"AZ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "S001181",
-                 "name": "Jeanne Shaheen",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/S001181.json",
-                 "party": "D",
-                 "rank_in_party": "5",
-                 "state":"NH",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000303",
-                 "name": "John McCain",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000303.json",
-                 "party": "R",
-                 "rank_in_party": "6",
-                 "state":"AZ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C001088",
-                 "name": "Christopher A. Coons",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001088.json",
-                 "party": "D",
-                 "rank_in_party": "6",
-                 "state":"DE",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "B001261",
-                 "name": "John Barrasso",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/B001261.json",
-                 "party": "R",
-                 "rank_in_party": "7",
-                 "state":"WY",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "U000039",
-                 "name": "Tom Udall",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/U000039.json",
-                 "party": "D",
-                 "rank_in_party": "7",
-                 "state":"NM",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "P000603",
-                 "name": "Rand Paul",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/P000603.json",
-                 "party": "R",
-                 "rank_in_party": "8",
-                 "state":"KY",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M001169",
-                 "name": "Christopher S. Murphy",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M001169.json",
-                 "party": "D",
-                 "rank_in_party": "8",
-                 "state":"CT",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "K000384",
-                 "name": "Tim Kaine",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/K000384.json",
-                 "party": "D",
-                 "rank_in_party": "9",
-                 "state":"VA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000133",
-                 "name": "Edward J. Markey",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000133.json",
-                 "party": "D",
-                 "rank_in_party": "10",
-                 "state":"MA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-               {
-                 "bioguide_Id": "C001071",
-                 "name": "Bob Corker",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001071.json",
-                 "party": "R",
-                 "rank_in_party": "1",
-                 "state":"TN",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000639",
-                 "name": "Robert Menendez",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000639.json",
-                 "party": "D",
-                 "rank_in_party": "1",
-                 "state":"NJ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "R000584",
-                 "name": "Jim Risch",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/R000584.json",
-                 "party": "R",
-                 "rank_in_party": "2",
-                 "state":"bioguide_Id",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "B000711",
-                 "name": "Barbara Boxer",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/B000711.json",
-                 "party": "D",
-                 "rank_in_party": "2",
-                 "state":"CA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "R000595",
-                 "name": "Marco Rubio",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/R000595.json",
-                 "party": "R",
-                 "rank_in_party": "3",
-                 "state":"FL",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C000141",
-                 "name": "Benjamin L. Cardin",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C000141.json",
-                 "party": "D",
-                 "rank_in_party": "3",
-                 "state":"MD",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "J000293",
-                 "name": "Ron Johnson",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/J000293.json",
-                 "party": "R",
-                 "rank_in_party": "4",
-                 "state":"WI",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C001070",
-                 "name": "Bob Casey",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001070.json",
-                 "party": "D",
-                 "rank_in_party": "4",
-                 "state":"PA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "F000444",
-                 "name": "Jeff Flake",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/F000444.json",
-                 "party": "R",
-                 "rank_in_party": "5",
-                 "state":"AZ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "S001181",
-                 "name": "Jeanne Shaheen",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/S001181.json",
-                 "party": "D",
-                 "rank_in_party": "5",
-                 "state":"NH",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000303",
-                 "name": "John McCain",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000303.json",
-                 "party": "R",
-                 "rank_in_party": "6",
-                 "state":"AZ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C001088",
-                 "name": "Christopher A. Coons",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001088.json",
-                 "party": "D",
-                 "rank_in_party": "6",
-                 "state":"DE",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "B001261",
-                 "name": "John Barrasso",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/B001261.json",
-                 "party": "R",
-                 "rank_in_party": "7",
-                 "state":"WY",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "U000039",
-                 "name": "Tom Udall",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/U000039.json",
-                 "party": "D",
-                 "rank_in_party": "7",
-                 "state":"NM",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "P000603",
-                 "name": "Rand Paul",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/P000603.json",
-                 "party": "R",
-                 "rank_in_party": "8",
-                 "state":"KY",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M001169",
-                 "name": "Christopher S. Murphy",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M001169.json",
-                 "party": "D",
-                 "rank_in_party": "8",
-                 "state":"CT",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "K000384",
-                 "name": "Tim Kaine",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/K000384.json",
-                 "party": "D",
-                 "rank_in_party": "9",
-                 "state":"VA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000133",
-                 "name": "Edward J. Markey",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000133.json",
-                 "party": "D",
-                 "rank_in_party": "10",
-                 "state":"MA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                  "node_type": "senator"
-               },
-               {
-                 "bioguide_Id": "C001071",
-                 "name": "Bob Corker",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001071.json",
-                 "party": "R",
-                 "rank_in_party": "1",
-                 "state":"TN",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000639",
-                 "name": "Robert Menendez",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000639.json",
-                 "party": "D",
-                 "rank_in_party": "1",
-                 "state":"NJ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "R000584",
-                 "name": "Jim Risch",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/R000584.json",
-                 "party": "R",
-                 "rank_in_party": "2",
-                 "state":"bioguide_Id",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "B000711",
-                 "name": "Barbara Boxer",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/B000711.json",
-                 "party": "D",
-                 "rank_in_party": "2",
-                 "state":"CA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "R000595",
-                 "name": "Marco Rubio",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/R000595.json",
-                 "party": "R",
-                 "rank_in_party": "3",
-                 "state":"FL",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C000141",
-                 "name": "Benjamin L. Cardin",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C000141.json",
-                 "party": "D",
-                 "rank_in_party": "3",
-                 "state":"MD",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "J000293",
-                 "name": "Ron Johnson",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/J000293.json",
-                 "party": "R",
-                 "rank_in_party": "4",
-                 "state":"WI",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C001070",
-                 "name": "Bob Casey",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001070.json",
-                 "party": "D",
-                 "rank_in_party": "4",
-                 "state":"PA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "F000444",
-                 "name": "Jeff Flake",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/F000444.json",
-                 "party": "R",
-                 "rank_in_party": "5",
-                 "state":"AZ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "S001181",
-                 "name": "Jeanne Shaheen",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/S001181.json",
-                 "party": "D",
-                 "rank_in_party": "5",
-                 "state":"NH",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000303",
-                 "name": "John McCain",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000303.json",
-                 "party": "R",
-                 "rank_in_party": "6",
-                 "state":"AZ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C001088",
-                 "name": "Christopher A. Coons",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001088.json",
-                 "party": "D",
-                 "rank_in_party": "6",
-                 "state":"DE",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "B001261",
-                 "name": "John Barrasso",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/B001261.json",
-                 "party": "R",
-                 "rank_in_party": "7",
-                 "state":"WY",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "U000039",
-                 "name": "Tom Udall",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/U000039.json",
-                 "party": "D",
-                 "rank_in_party": "7",
-                 "state":"NM",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "P000603",
-                 "name": "Rand Paul",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/P000603.json",
-                 "party": "R",
-                 "rank_in_party": "8",
-                 "state":"KY",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M001169",
-                 "name": "Christopher S. Murphy",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M001169.json",
-                 "party": "D",
-                 "rank_in_party": "8",
-                 "state":"CT",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "K000384",
-                 "name": "Tim Kaine",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/K000384.json",
-                 "party": "D",
-                 "rank_in_party": "9",
-                 "state":"VA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000133",
-                 "name": "Edward J. Markey",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000133.json",
-                 "party": "D",
-                 "rank_in_party": "10",
-                 "state":"MA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                  "node_type": "senator"
-               },
-               {
-                 "bioguide_Id": "C001071",
-                 "name": "Bob Corker",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001071.json",
-                 "party": "R",
-                 "rank_in_party": "1",
-                 "state":"TN",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000639",
-                 "name": "Robert Menendez",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000639.json",
-                 "party": "D",
-                 "rank_in_party": "1",
-                 "state":"NJ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "R000584",
-                 "name": "Jim Risch",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/R000584.json",
-                 "party": "R",
-                 "rank_in_party": "2",
-                 "state":"bioguide_Id",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "B000711",
-                 "name": "Barbara Boxer",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/B000711.json",
-                 "party": "D",
-                 "rank_in_party": "2",
-                 "state":"CA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "R000595",
-                 "name": "Marco Rubio",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/R000595.json",
-                 "party": "R",
-                 "rank_in_party": "3",
-                 "state":"FL",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C000141",
-                 "name": "Benjamin L. Cardin",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C000141.json",
-                 "party": "D",
-                 "rank_in_party": "3",
-                 "state":"MD",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "J000293",
-                 "name": "Ron Johnson",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/J000293.json",
-                 "party": "R",
-                 "rank_in_party": "4",
-                 "state":"WI",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C001070",
-                 "name": "Bob Casey",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001070.json",
-                 "party": "D",
-                 "rank_in_party": "4",
-                 "state":"PA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "F000444",
-                 "name": "Jeff Flake",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/F000444.json",
-                 "party": "R",
-                 "rank_in_party": "5",
-                 "state":"AZ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "S001181",
-                 "name": "Jeanne Shaheen",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/S001181.json",
-                 "party": "D",
-                 "rank_in_party": "5",
-                 "state":"NH",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "M000303",
-                 "name": "John McCain",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000303.json",
-                 "party": "R",
-                 "rank_in_party": "6",
-                 "state":"AZ",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "C001088",
-                 "name": "Christopher A. Coons",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/C001088.json",
-                 "party": "D",
-                 "rank_in_party": "6",
-                 "state":"DE",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "B001261",
-                 "name": "John Barrasso",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/B001261.json",
-                 "party": "R",
-                 "rank_in_party": "7",
-                 "state":"WY",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "U000039",
-                 "name": "Tom Udall",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/U000039.json",
-                 "party": "D",
-                 "rank_in_party": "7",
-                 "state":"NM",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "P000603",
-                 "name": "Rand Paul",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/P000603.json",
-                 "party": "R",
-                 "rank_in_party": "8",
-                 "state":"KY",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "uniqueID3",
-                 "name": "Christopher S. Murphy",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M001169.json",
-                 "party": "D",
-                 "rank_in_party": "8",
-                 "state":"CT",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "uniqueID2",
-                 "name": "Tim Kaine",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/K000384.json",
-                 "party": "D",
-                 "rank_in_party": "9",
-                 "state":"VA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-                           {
-                 "bioguide_Id": "uniqueID1",
-                 "name": "Edward J. Markey",
-                 "api_uri":"http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/M000133.json",
-                 "party": "D",
-                 "rank_in_party": "10",
-                 "state":"MA",
-                 "note": "",
-                 "begin_date":"2013-07-17",
-                 "node_type": "senator"
-               },
-               {
-                "bioguide_Id": "uniqueID4",
-                "name": "committee1",
-                "node_type": "committee"
-               },
-               {
-                "bioguide_Id": "uniqueID5",
-                "name": "committee2",
-                "node_type": "committee"
-               },
-               {
-                "bioguide_Id": "uniqueID6",
-                "name": "Finance Committee",
-                "node_type": "committee"
-               },
-                {
-                "bioguide_Id": "uniqueID7",
-                "name": "Committee on Foreign Relations",
-                "node_type": "committee"
-               }
-             ],
-             "links": [
-                {"source": "uniqueID1", "target": "uniqueID4"},
-                {"source": "uniqueID2", "target": "uniqueID5"},
-                {"source": "uniqueID3", "target": "uniqueID6"},
-                {"source": "uniqueID3", "target": "uniqueID7"}
-             ]
-    };
+     
 
-    newLinks = [
-                    {"source": "M001", "target": "uniqueID6"},
-                    {"source": "D001", "target": "uniqueID6"}
-                ];
-
-      window.onload = function(){
+      scope.$watch( 'json', function(){
   
           drawGraph();
 
-      }
+      });
 
       var drawGraph = function(){
 
@@ -1101,7 +114,6 @@ congressApp.directive("networkGraph", function($window){
           function setupData(data){
 
               mapNodes = function (nodes){
-                console.log(nodes)
                   nodesMap = d3.map()
                   nodes.forEach(function(n){
                       nodesMap.set(n.bioguide_Id, n)
@@ -1109,9 +121,9 @@ congressApp.directive("networkGraph", function($window){
                   return nodesMap;
               }
 
-              var nodesMap = mapNodes(data.nodes)
+              var nodesMap = mapNodes(data)
 
-              var links = data.links;
+              var links = scope.newLinks;
               
               var linkedByIndex = {};
 
@@ -1121,10 +133,9 @@ congressApp.directive("networkGraph", function($window){
 
                   linkedByIndex["#{l.source.bioguide_Id},#{l.target.bioguide_Id}"] = 1;
               })
-              console.log(data.nodes)
               
               //push senators to senator array and committees to committee array
-              json.nodes.forEach(function(n){
+              data.forEach(function(n){
                   if (n.node_type == "senator"){
                       senators.push(n)
                   }
@@ -1137,7 +148,7 @@ congressApp.directive("networkGraph", function($window){
 
           };
 
-          data = setupData(json);
+          data = setupData(scope.json);
 
           var color = d3.scale.category20();
 
@@ -1171,8 +182,10 @@ congressApp.directive("networkGraph", function($window){
                   .start();
 
 
+          console.log(scope.newLinks);
+
           var link = svg.selectAll(".line")
-                      .data(data.links);
+                      .data(scope.newLinks);
 
           link.enter()
                       .append("line")
@@ -1251,7 +264,7 @@ congressApp.directive("networkGraph", function($window){
                       var firstCircle = 0;
 
                       //count number of senators to make up the first circle (should almost always be equal to 100 but in case of certain circumstances, should be counted)
-                      json.nodes.forEach(function(n){
+                      data.forEach(function(n){
                               if (n.node_type == "senator"){
                                   firstCircle++
                           }
@@ -1326,10 +339,10 @@ congressApp.directive("networkGraph", function($window){
 
                   }; // end of updateNodes()
 
-                  function updateLinks(newlinks){ 
+                  function updateLinks(links){ 
 
                       if (view != "new view"){
-                          newlinks.forEach(function(l){
+                          links.forEach(function(l){
                               l.source = nodesMap.get(l.source);
                               l.target = nodesMap.get(l.target);
                               view = "new view"
@@ -1444,15 +457,12 @@ congressApp.directive("networkGraph", function($window){
                   // --- Run the Functions --- //
 
                   updateNodes(scope.senatordata, committees);
-                  updateLinks(newLinks);
-                  updateGraph(newLinks, scope.senatordata);
+                  updateLinks(scope.newLinks);
+                  updateGraph(scope.newLinks, scope.senatordata);
 
               }// end of update()
 
-              document.getElementById("update").onclick = function(){
-                  update();
-              };
-
+             
               
 
 
