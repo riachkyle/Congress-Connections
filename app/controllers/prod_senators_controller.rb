@@ -1,0 +1,2 @@
+class ProdSenatorsController < ApplicationController
+end
