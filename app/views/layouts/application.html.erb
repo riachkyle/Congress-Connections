@@ -14,33 +14,83 @@ var congressApp = angular.module('congressApp',[])
 congressApp.controller('Congress', ['$scope', 'SenateData', 'CommitteeData',
   function($scope, SenateData, CommitteeData) {
 
-  $scope.json = {};
+  
+  // --- Senator Data API --- //
 
+  $scope.senators = {};
+
+  //Get Senator data from the API
   SenateData.getData().then(function(json){
-    $scope.json = json.data;
-
-          console.log($scope.senatordata)
+    $scope.senators = json.data;
   });
 
 
-  $scope.committeedata = {};
 
+
+
+  // --- Group Data API --- //
+
+  $scope.groups = {};
+
+  //Get Group Data from the API (including committees, industries)
   CommitteeData.getData().then(function(json){
-    $scope.committeedata = json.data;
+    // $scope.groups = json.data;
   });
+
+  $scope.groups = [
+      {"bioguide_Id": "SSVA", "name": "Senate Committee on Veterans' Affairs", "member_count": 14},
+      { "bioguide_Id": "SSSB", "name": "Senate Committee on Small Business and Entrepreneurship", "member_count": 18},
+      { "bioguide_Id": "SSRA", "name": "Senate Committee on Rules and Administration", "member_count": 18 },
+      { "bioguide_Id": "SSJU", "name": "Senate Committee on the Judiciary", "member_count": 18 },
+      { "bioguide_Id": "SSHR", "name": "Senate Committee on Health Education Labor and Pensions", "member_count": 22 },
+      { "bioguide_Id": "SSGA" , "name": "Senate Committee on Homeland Security and Governmental Affairs", "member_count": 16 },
+      { "bioguide_Id": "SSFR", "name": "Senate Committee on Foreign Relations", "member_count": 18 },
+      { "bioguide_Id": "SSFI", "name": "Senate Committee on Finance", "member_count": 24 },
+      { "bioguide_Id": "SSEV", "name": "Senate Committee on Environment and Public Works", "member_count": 18 },
+      { "bioguide_Id": "SSEG", "name": "Senate Committee on Energy and Natural Resources", "member_count": 22 },
+      { "bioguide_Id": "SSCM", "name": "Senate Committee on Commerce Science and Transportation", "member_count": 24 },
+      { "bioguide_Id": "SSBU", "name": "Senate Committee on the Budget", "member_count": 22 },
+      { "bioguide_Id": "SSBK", "name": "Senate Committee on Banking Housing and Urban Affairs", "member_count": 22 },
+      { "bioguide_Id": "SSAS", "name": "Senate Committee on Armed Services", "member_count": 26},
+      { "bioguide_Id": "SSAP", "name": "Senate Committee on Appropriations", "member_count": 30},
+      { "bioguide_Id": "SSAF", "name": "Senate Committee on Agriculture Nutrition and Forestry", "member_count": 20 },
+      {"bioguide_Id": "SPAG", "name": "Senate Special Committee on Aging", "member_count": 20 },
+      { "bioguide_Id": "SLIN", "name": "Senate Select Committee on Intelligence", "member_count": 19 },
+      { "bioguide_Id": "SLIA", "name": "Senate Committee on Indian Affairs", "member_count": 14 },
+      { "bioguide_Id": "SLET", "name": "Senate Select Committee on Ethics", "member_count": 6 },
+      { "bioguide_Id": "SCNC", "name": "United States Senate Caucus on International Narcotics Control", "member_count": 7 }
+    ]
+
+
+
+  
+  // --- Links Data --- //
 
   $scope.newLinks = [
-                    {"source": "M001", "target": "D001"},
-                    {"source": "D001", "target": "M001"}
+                    {"source": "SSVA", "target": "D001"},
+                    {"source": "SSAS", "target": "D002"}
                 ]
 
-  $scope.update = function(){
-    $scope.json = [{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001"}, {"firs_name": "Sam", "node_type": "senator", "bioguide_Id": "D001"}];
+  // --- Update --- //
 
-    $scope.newLinks = [
-                    {"source": "M001", "target": "D001"},
-                    {"source": "D001", "target": "M001"}
+
+
+  $scope.update = function(){
+
+  //update links
+
+  $scope.newLinks = [
+                    {"source": "SLIN", "target": "D001"}
                 ];
+
+
+
+  //update nodes
+    
+     
+      //update senators
+
+     $scope.senators = [{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}];
 
      $scope.mapNodes = function (nodes){
                           nodesMap = d3.map()
@@ -50,12 +100,33 @@ congressApp.controller('Congress', ['$scope', 'SenateData', 'CommitteeData',
                           return nodesMap;
                       };
 
-      nodesMap = $scope.mapNodes($scope.json);
+      var senatorNode = d3.select("svg").selectAll("circle.senator")
+                          .data($scope.senators)
+                      
+                      senatorNode
+                                .attr("r", 4)
+                                  .attr("fill", function(d) {
+                                      if (d.party == "R"){
+                                          return "rgb(177,22,35)";
+                                      }
+                                      else if (d.party == "D"){
+                                          return "rgb(28,39,135)";
+                                      }
+                                      else{
+                                          return "rgb(240,216,120)"
+                                       }
+                                  })
+                                  .attr("stroke", "rgb(100,100,100)");
+
+      senatorNode.append("title")
+                              .text(function(d) { return d.first_name; });
+
+     
 
     }
 }]);
 
-// create factory for the senators data
+// factory for the senators data
 congressApp.factory('SenateData', ['$http', function($http){
   var senators = {};
 
@@ -69,7 +140,7 @@ congressApp.factory('SenateData', ['$http', function($http){
 
 }]);
 
-// create factory for the committees data
+// factory for the committees data
 congressApp.factory('CommitteeData', ['$http', function($http){
   var committees = {};
 
@@ -83,6 +154,8 @@ congressApp.factory('CommitteeData', ['$http', function($http){
 
 }])
 
+
+//directive created to connect D3 graph to scope variables
 congressApp.directive("networkGraph", function($window){
   return{
     restrict: "EA",
@@ -91,66 +164,70 @@ congressApp.directive("networkGraph", function($window){
 
      
 
-      scope.$watch( 'json', function(){
+      //Watch the $scope.senators variable. If it updates, run the draw senators function.
+      scope.$watch( 'senators', function(){
   
-          drawGraph();
+          if (scope.senators.length){
+
+            drawSenators();
+
+          }
 
       });
 
-      var drawGraph = function(){
+      //Watch $scope.groups variable. If it updates, run the draw senators function.
+      scope.$watch( 'groups', function() {
+
+          drawGroups();
+
+      })
+
+      
+      // --- Draw Senator Nodes --- //
+
+      var drawSenators = function(){
 
           var width = 800;
-          var height = 800;
+          var height = 700;
 
-          var senators = [];
+          // --- Scales --- //
 
-          var committees = [];
-
-          var view = "first view";
+          groupScale = d3.scale.linear()
+                      .domain([0, 30])
+                      .range([5, 25]);
 
           
           // --- Set Up the Data --- //
 
-          function setupData(data){
+          function setupData(senators, groups){
 
-              mapNodes = function (nodes){
-                  nodesMap = d3.map()
-                  nodes.forEach(function(n){
-                      nodesMap.set(n.bioguide_Id, n)
-                  })
-                  return nodesMap;
-              }
+              if (senators.length){
+              
+                mapNodes = function (nodes){
+                    nodesMap = d3.map()
+                    nodes.forEach(function(n){
+                        nodesMap.set(n.bioguide_Id, n)
+                    })
+                    return nodesMap;
+                }
 
-              var nodesMap = mapNodes(data)
+              var senatorsNodesMap = mapNodes(scope.senators)
+              var groupsNodesMap = mapNodes(scope.groups)
 
               var links = scope.newLinks;
-              
+
               var linkedByIndex = {};
 
               links.forEach(function(l){
-                  l.source = nodesMap.get(l.source);
-                  l.target = nodesMap.get(l.target);
-
-                  linkedByIndex["#{l.source.bioguide_Id},#{l.target.bioguide_Id}"] = 1;
+                  l.source = groupsNodesMap.get(l.source);
+                  l.target = senatorsNodesMap.get(l.target);
               })
-              
-              //push senators to senator array and committees to committee array
-              data.forEach(function(n){
-                  if (n.node_type == "senator"){
-                      senators.push(n)
-                  }
-                  else if(n.node_type == "committee"){
-                      committees.push(n)
-                  }
-              });
 
-              return data;
+            }
 
           };
 
-          data = setupData(scope.json);
-
-          var color = d3.scale.category20();
+          setupData(scope.senators, scope.groups);
 
           
           // --- Outer Force for Senators --- //
@@ -165,7 +242,7 @@ congressApp.directive("networkGraph", function($window){
           //this force will group the groups (committees, industries, etc.) into a forced layout in the center of the circle
 
           var force2 = d3.layout.force()
-                      .charge(-160)
+                      .charge(-100)
                       .linkDistance(0)
                       .size([width, height]);
 
@@ -174,17 +251,15 @@ congressApp.directive("networkGraph", function($window){
                       .attr("height", height)
 
           force
-                  .nodes(senators)
+                  .nodes(scope.senators)
                   .start();
 
           force2
-                  .nodes(committees)
+                  .nodes(scope.groups)
                   .start();
 
 
-          console.log(scope.newLinks);
-
-          var link = svg.selectAll(".line")
+          var link = svg.selectAll("line.link")
                       .data(scope.newLinks);
 
           link.enter()
@@ -208,80 +283,70 @@ congressApp.directive("networkGraph", function($window){
           link.exit().remove();
 
           var senatorNode = svg.selectAll("circle.senator")
-                          .data(senators)
+                          .data(scope.senators)
                       
                       senatorNode.enter()
                                   .append("circle")
                                   .attr("class", "senator")
-                                  .attr("r", function(d){
-                                      if (d.node_type == "senator"){
-                                          return 6
-                                      }
-                                      else{
-                                          return 20
-                                      }
-                                  })
+                                  .attr("r", 4)
                                   .attr("fill", function(d) {
                                       if (d.party == "R"){
-                                          return "rgb(255,0,0)";
+                                          return "rgb(177,22,35)";
                                       }
                                       else if (d.party == "D"){
-                                          return "rgb(0,0,255)"
+                                          return "rgb(28,39,135)"
                                       }
                                       else{
-
+                                          return "rgb(240,216,120)"
                                        }
-                                  });
+                                  })
+                                  .attr("stroke", "rgb(150,150,150");
 
                       senatorNode.exit().remove();
 
-            var committeeNode = svg.selectAll("circle.committee")
-                          .data(committees)
+            var committeeNodeGroup = svg.selectAll("g.committee")
+                          .data(scope.groups)
                       
-                      committeeNode.enter()
+                      committeeNodeGroup.enter()
+                                  .append("g")
+                                  .attr("class", "committee")
                                   .append("circle")
                                   .attr("class", "committee")
                                   .attr("r", function(d){
-                                      if (d.node_type == "senator"){
-                                          return 6
-                                      }
-                                      else{
-                                          return 20
-                                      }
+                                    return groupScale(d.member_count)
                                   })
                                   .attr("fill", function(d) {
-                                      
-                                  });
+                                      return "rgb(240,240,240)"
+                                  })
+                                  .attr("stroke", "rgb(180,180,180)");
 
-                      committeeNode.exit().remove();
+                      committeeNodeGroup.append("text")
+                                  .text(function(d){
+                                    return d.bioguide_Id
+                                  })
+                                  .style("font-size", "12px")
+                                  .style("font-family", "Oswald")
+                                  .attr("transform", "translate(-13,5)");
+                                  
+
+                      committeeNodeGroup.exit().remove();
 
 
-                      committeeNode.append("title")
+                      committeeNodeGroup.append("title")
                               .text(function(d) { return d.name; });
 
               force.on("tick", function(e) {
 
-                      var firstCircle = 0;
+                     scope.senators.forEach(function(o, i){
 
-                      //count number of senators to make up the first circle (should almost always be equal to 100 but in case of certain circumstances, should be counted)
-                      data.forEach(function(n){
-                              if (n.node_type == "senator"){
-                                  firstCircle++
-                          }
+                          keys = scope.senators.length;
+                          
+                          k = e.alpha * 0.1;
+
+                          o.x += (centerPlacement(550, keys, i).x - o.x) * k;
+                          o.y += (centerPlacement(550, keys, i).y - o.y) * k;
                       });
-
                   
-                  senators.forEach(function(o, i){
-
-                      keys = senators.length;
-                      
-                      k = e.alpha * 0.1;
-
-                      if (o.node_type == "senator"){
-                          o.x += (centerPlacement(600, keys, i).x - o.x) * k;
-                          o.y += (centerPlacement(600, keys, i).y - o.y) * k;
-                      }
-                  });
 
                   link.attr("x1", function(d) { return d.source.x })
                       .attr("y1", function(d) { return d.source.y });
@@ -295,9 +360,9 @@ congressApp.directive("networkGraph", function($window){
                   link.attr("x2", function(d) { return d.target.x })
                       .attr("y2", function(d) { return d.target.y });
 
-                  committeeNode.attr("cx", function(d) { return d.x })
-                      .attr("cy", function(d) { return d.y });
-
+                  committeeNodeGroup.attr("transform", function(d) {
+                      return "translate(" + d.x + ", " + d.y + ")"
+                  });
               });
 
               
@@ -313,160 +378,6 @@ congressApp.directive("networkGraph", function($window){
                   return {"x": x, "y": y}
 
               };
-
-
-              // --- Update Data Function --- //
-
-              function update(data){
-                  
-
-                  // --- Update Nodes Data --- //
-
-                  function updateNodes(senatorsArray, committeesArray){
-
-                      mapNodes = function (nodes){
-                          nodesMap = d3.map()
-                          nodes.forEach(function(n){
-                              nodesMap.set(n.bioguide_Id, n)
-                          })
-                          return nodesMap;
-                      }
-
-                      committees = committeesArray;
-                      senators = senatorsArray;
-                      nodesMap = mapNodes(senatorsArray.concat(committeesArray));
-
-
-                  }; // end of updateNodes()
-
-                  function updateLinks(links){ 
-
-                      if (view != "new view"){
-                          links.forEach(function(l){
-                              l.source = nodesMap.get(l.source);
-                              l.target = nodesMap.get(l.target);
-                              view = "new view"
-                          });
-                      }
-
-
-                  }; // end of updateLinks()
-
-                  function updateGraph(links, nodes){
-
-                      force
-                              .nodes(nodes)
-                              .start();
-
-                      force2
-                              .nodes(committees)
-                              .start();
-
-                      var senatorNode = svg.selectAll("circle.senator")
-                          .data(nodes)
-                      
-                      senatorNode.attr("r", function(d){
-                                      if (d.node_type == "senator"){
-                                          return 6
-                                      }
-                                      else{
-                                          return 20
-                                      }
-                                  })
-                                  .attr("fill", function(d) {
-                                      if (d.party == "R"){
-                                          return "rgb(255,0,0)";
-                                      }
-                                      else if (d.party == "D"){
-                                          return "rgb(0,0,255)";
-                                      }
-                                      else{
-
-                                       }
-                                  });
-
-                      senatorNode.exit().remove();
-
-                      senatorNode.append("title")
-                              .text(function(d) { return d.first_name; });
-
-                      var committeeNode = svg.selectAll(".committee")
-                          .data(committees)
-                      
-                      committeeNode.enter()
-                                  .append("circle")
-                                  .attr("class", "node")
-                                  .attr("r", function(d){
-                                      if (d.node_type == "senator"){
-                                          return 6
-                                      }
-                                      else{
-                                          return 20
-                                      }
-                                  })
-                                  .attr("fill", function(d) {
-                                      if (d.party == "R"){
-                                          return "rgb(255,0,0)";
-                                      }
-                                      else if (d.party == "D"){
-                                          return "rgb(0,0,255)"
-                                      }
-                                      else{
-
-                                       }
-                                  });
-
-                      committeeNode.exit().remove();
-
-
-                      committeeNode.append("title")
-                              .text(function(d) { return d.name; });
-
-                      var link = svg.selectAll(".line")
-                          .data(links);
-
-                      link = svg.selectAll("line.link")
-                          .data(links)
-
-                      link.enter()
-                                  .append("line")
-                                  .attr("class", "link")
-                                  .attr("stroke", "#ddd")
-                                  .attr("stroke-opacity", 0.8)
-                                  .attr("x1", function(d){
-                                      return d.source.x
-                                  })
-                                  .attr("y1", function(d){
-                                      return d.source.y
-                                  })
-                                  .attr("x2", function(d){
-                                      return d.target.x
-                                  })
-                                  .attr("y2", function(d){
-                                      return d.target.y
-                                  })
-                                  .attr("class", "link")
-                                  .attr("stroke", "#ddd")
-                                  .attr("stroke-opacity", 0.8);
-
-                      link.exit().remove();
-
-                  } //end of updateGraph()
-
-                  
-                  // --- Run the Functions --- //
-
-                  updateNodes(scope.senatordata, committees);
-                  updateLinks(scope.newLinks);
-                  updateGraph(scope.newLinks, scope.senatordata);
-
-              }// end of update()
-
-             
-              
-
-
-
       }
 
     }

@@ -1,7 +1,12 @@
-<div ng-controller="Congress">
+	
+	<h1>The Congress Connection Project</h1>
 
-	<p id="update" ng-click="update()">Click me</p>
+	<div class="description">The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress.  Using APIs compiled by the Sunlight Foundation, we have created an interactive network visualization for users to explore.  Press the various connection options to see different data views.</div>
 
-	<div network-graph chart-data="senatordata"></div>
+	<div ng-controller="Congress">
 
-</div>
+		<p id="update" ng-click="update()">Click me</p>
+
+		<div network-graph id="network-graph" chart-data="senatordata"></div>
+
+	</div>
