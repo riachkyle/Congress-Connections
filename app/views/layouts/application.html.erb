@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="congressApp">
 <head>
   <title>CongressConnections</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -14,11 +14,12 @@ var congressApp = angular.module('congressApp',[])
 congressApp.controller('Congress', ['$scope', 'SenateData', 'CommitteeData',
   function($scope, SenateData, CommitteeData) {
 
-  $scope.senatordata = {};
+  $scope.json = {};
 
   SenateData.getData().then(function(json){
-    $scope.senatordata = json.data;
-    console.log(json.data);
+    $scope.json = json.data;
+
+          console.log($scope.senatordata)
   });
 
 
@@ -26,9 +27,32 @@ congressApp.controller('Congress', ['$scope', 'SenateData', 'CommitteeData',
 
   CommitteeData.getData().then(function(json){
     $scope.committeedata = json.data;
-    console.log(json.data);
   });
 
+  $scope.newLinks = [
+                    {"source": "M001", "target": "D001"},
+                    {"source": "D001", "target": "M001"}
+                ]
+
+  $scope.update = function(){
+    $scope.json = [{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001"}, {"firs_name": "Sam", "node_type": "senator", "bioguide_Id": "D001"}];
+
+    $scope.newLinks = [
+                    {"source": "M001", "target": "D001"},
+                    {"source": "D001", "target": "M001"}
+                ];
+
+     $scope.mapNodes = function (nodes){
+                          nodesMap = d3.map()
+                          nodes.forEach(function(n){
+                              nodesMap.set(n.bioguide_Id, n)
+                          })
+                          return nodesMap;
+                      };
+
+      nodesMap = $scope.mapNodes($scope.json);
+
+    }
 }]);
 
 // create factory for the senators data
@@ -36,7 +60,7 @@ congressApp.factory('SenateData', ['$http', function($http){
   var senators = {};
 
   senators.getData = function(){
-    var url = 'http://localhost:3000/senators';
+    var url = 'http://localhost:3000/senators/show';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };
@@ -57,15 +81,404 @@ congressApp.factory('CommitteeData', ['$http', function($http){
 
   return committees;
 
-}]);
+}])
+
+congressApp.directive("networkGraph", function($window){
+  return{
+    restrict: "EA",
+    template: "<svg width='800' height='800'></svg>",
+    link: function(scope, elem, attrs){
+
+     
+
+      scope.$watch( 'json', function(){
+  
+          drawGraph();
+
+      });
+
+      var drawGraph = function(){
+
+          var width = 800;
+          var height = 800;
+
+          var senators = [];
+
+          var committees = [];
+
+          var view = "first view";
+
+          
+          // --- Set Up the Data --- //
+
+          function setupData(data){
+
+              mapNodes = function (nodes){
+                  nodesMap = d3.map()
+                  nodes.forEach(function(n){
+                      nodesMap.set(n.bioguide_Id, n)
+                  })
+                  return nodesMap;
+              }
+
+              var nodesMap = mapNodes(data)
+
+              var links = scope.newLinks;
+              
+              var linkedByIndex = {};
+
+              links.forEach(function(l){
+                  l.source = nodesMap.get(l.source);
+                  l.target = nodesMap.get(l.target);
+
+                  linkedByIndex["#{l.source.bioguide_Id},#{l.target.bioguide_Id}"] = 1;
+              })
+              
+              //push senators to senator array and committees to committee array
+              data.forEach(function(n){
+                  if (n.node_type == "senator"){
+                      senators.push(n)
+                  }
+                  else if(n.node_type == "committee"){
+                      committees.push(n)
+                  }
+              });
+
+              return data;
+
+          };
+
+          data = setupData(scope.json);
+
+          var color = d3.scale.category20();
+
+          
+          // --- Outer Force for Senators --- //
+          //this force will push the senators into a circle on the outside of the visualization
+
+          var force = d3.layout.force()
+                      .charge(-20)
+                      .linkDistance(0)
+                      .size([width, height]);
+
+          // --- Inner Force for Groups --- //
+          //this force will group the groups (committees, industries, etc.) into a forced layout in the center of the circle
+
+          var force2 = d3.layout.force()
+                      .charge(-160)
+                      .linkDistance(0)
+                      .size([width, height]);
+
+          var svg = d3.select("svg")
+                      .attr("width", width)
+                      .attr("height", height)
+
+          force
+                  .nodes(senators)
+                  .start();
+
+          force2
+                  .nodes(committees)
+                  .start();
+
+
+          console.log(scope.newLinks);
+
+          var link = svg.selectAll(".line")
+                      .data(scope.newLinks);
+
+          link.enter()
+                      .append("line")
+                      .attr("x1", function(d){
+                          return d.source.x
+                      })
+                      .attr("y1", function(d){
+                          return d.source.y
+                      })
+                      .attr("x2", function(d){
+                          return d.target.x
+                      })
+                      .attr("y2", function(d){
+                          return d.target.y
+                      })
+                      .attr("class", "link")
+                      .attr("stroke", "#ddd")
+                      .attr("stroke-opacity", 0.8);
+
+          link.exit().remove();
+
+          var senatorNode = svg.selectAll("circle.senator")
+                          .data(senators)
+                      
+                      senatorNode.enter()
+                                  .append("circle")
+                                  .attr("class", "senator")
+                                  .attr("r", function(d){
+                                      if (d.node_type == "senator"){
+                                          return 6
+                                      }
+                                      else{
+                                          return 20
+                                      }
+                                  })
+                                  .attr("fill", function(d) {
+                                      if (d.party == "R"){
+                                          return "rgb(255,0,0)";
+                                      }
+                                      else if (d.party == "D"){
+                                          return "rgb(0,0,255)"
+                                      }
+                                      else{
+
+                                       }
+                                  });
+
+                      senatorNode.exit().remove();
+
+            var committeeNode = svg.selectAll("circle.committee")
+                          .data(committees)
+                      
+                      committeeNode.enter()
+                                  .append("circle")
+                                  .attr("class", "committee")
+                                  .attr("r", function(d){
+                                      if (d.node_type == "senator"){
+                                          return 6
+                                      }
+                                      else{
+                                          return 20
+                                      }
+                                  })
+                                  .attr("fill", function(d) {
+                                      
+                                  });
+
+                      committeeNode.exit().remove();
+
+
+                      committeeNode.append("title")
+                              .text(function(d) { return d.name; });
+
+              force.on("tick", function(e) {
+
+                      var firstCircle = 0;
+
+                      //count number of senators to make up the first circle (should almost always be equal to 100 but in case of certain circumstances, should be counted)
+                      data.forEach(function(n){
+                              if (n.node_type == "senator"){
+                                  firstCircle++
+                          }
+                      });
+
+                  
+                  senators.forEach(function(o, i){
+
+                      keys = senators.length;
+                      
+                      k = e.alpha * 0.1;
+
+                      if (o.node_type == "senator"){
+                          o.x += (centerPlacement(600, keys, i).x - o.x) * k;
+                          o.y += (centerPlacement(600, keys, i).y - o.y) * k;
+                      }
+                  });
+
+                  link.attr("x1", function(d) { return d.source.x })
+                      .attr("y1", function(d) { return d.source.y });
+
+                  senatorNode.attr("cx", function(d) { return d.x })
+                      .attr("cy", function(d) { return d.y });
+              });
+
+              force2.on("tick", function(e) {
+
+                  link.attr("x2", function(d) { return d.target.x })
+                      .attr("y2", function(d) { return d.target.y });
+
+                  committeeNode.attr("cx", function(d) { return d.x })
+                      .attr("cy", function(d) { return d.y });
+
+              });
+
+              
+              //Find the center value for the nodes that they will gravitate to
+              centerPlacement = function(radius, keyLength, nodeIndex){
+
+                  //the x value is a function of cosine and the index value of the node
+                  var x = (width/2 + radius * Math.cos((360/keyLength * nodeIndex) * Math.PI / 180));
+
+                  //the y value is a function of sine and the index value they will gravitate to
+                  var y = ((height/2 + radius * Math.sin((360/keyLength * nodeIndex) * Math.PI / 180)));
+
+                  return {"x": x, "y": y}
+
+              };
+
+
+              // --- Update Data Function --- //
+
+              function update(data){
+                  
+
+                  // --- Update Nodes Data --- //
+
+                  function updateNodes(senatorsArray, committeesArray){
+
+                      mapNodes = function (nodes){
+                          nodesMap = d3.map()
+                          nodes.forEach(function(n){
+                              nodesMap.set(n.bioguide_Id, n)
+                          })
+                          return nodesMap;
+                      }
+
+                      committees = committeesArray;
+                      senators = senatorsArray;
+                      nodesMap = mapNodes(senatorsArray.concat(committeesArray));
+
+
+                  }; // end of updateNodes()
+
+                  function updateLinks(links){ 
+
+                      if (view != "new view"){
+                          links.forEach(function(l){
+                              l.source = nodesMap.get(l.source);
+                              l.target = nodesMap.get(l.target);
+                              view = "new view"
+                          });
+                      }
+
+
+                  }; // end of updateLinks()
+
+                  function updateGraph(links, nodes){
+
+                      force
+                              .nodes(nodes)
+                              .start();
+
+                      force2
+                              .nodes(committees)
+                              .start();
+
+                      var senatorNode = svg.selectAll("circle.senator")
+                          .data(nodes)
+                      
+                      senatorNode.attr("r", function(d){
+                                      if (d.node_type == "senator"){
+                                          return 6
+                                      }
+                                      else{
+                                          return 20
+                                      }
+                                  })
+                                  .attr("fill", function(d) {
+                                      if (d.party == "R"){
+                                          return "rgb(255,0,0)";
+                                      }
+                                      else if (d.party == "D"){
+                                          return "rgb(0,0,255)";
+                                      }
+                                      else{
+
+                                       }
+                                  });
+
+                      senatorNode.exit().remove();
+
+                      senatorNode.append("title")
+                              .text(function(d) { return d.first_name; });
+
+                      var committeeNode = svg.selectAll(".committee")
+                          .data(committees)
+                      
+                      committeeNode.enter()
+                                  .append("circle")
+                                  .attr("class", "node")
+                                  .attr("r", function(d){
+                                      if (d.node_type == "senator"){
+                                          return 6
+                                      }
+                                      else{
+                                          return 20
+                                      }
+                                  })
+                                  .attr("fill", function(d) {
+                                      if (d.party == "R"){
+                                          return "rgb(255,0,0)";
+                                      }
+                                      else if (d.party == "D"){
+                                          return "rgb(0,0,255)"
+                                      }
+                                      else{
+
+                                       }
+                                  });
+
+                      committeeNode.exit().remove();
+
+
+                      committeeNode.append("title")
+                              .text(function(d) { return d.name; });
+
+                      var link = svg.selectAll(".line")
+                          .data(links);
+
+                      link = svg.selectAll("line.link")
+                          .data(links)
+
+                      link.enter()
+                                  .append("line")
+                                  .attr("class", "link")
+                                  .attr("stroke", "#ddd")
+                                  .attr("stroke-opacity", 0.8)
+                                  .attr("x1", function(d){
+                                      return d.source.x
+                                  })
+                                  .attr("y1", function(d){
+                                      return d.source.y
+                                  })
+                                  .attr("x2", function(d){
+                                      return d.target.x
+                                  })
+                                  .attr("y2", function(d){
+                                      return d.target.y
+                                  })
+                                  .attr("class", "link")
+                                  .attr("stroke", "#ddd")
+                                  .attr("stroke-opacity", 0.8);
+
+                      link.exit().remove();
+
+                  } //end of updateGraph()
+
+                  
+                  // --- Run the Functions --- //
+
+                  updateNodes(scope.senatordata, committees);
+                  updateLinks(scope.newLinks);
+                  updateGraph(scope.newLinks, scope.senatordata);
+
+              }// end of update()
+
+             
+              
+
+
+
+      }
+
+    }
+  };
+});
+
+;
 </script>
 </head>
 <body>
 
 <%= yield %>
-
-<p>Hello World</p>
-<h1>Rails is fun!!!! Not!</h1>
 
 
 

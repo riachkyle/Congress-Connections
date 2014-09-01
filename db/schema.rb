@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826204537) do
+ActiveRecord::Schema.define(version: 20140829222447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20140826204537) do
     t.datetime "updated_at"
     t.integer  "members",      array: true
     t.string   "cmembers_id",  array: true
+    t.string   "node_type"
   end
 
   add_index "committees", ["senator_id"], name: "index_committees_on_senator_id", using: :btree
@@ -48,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140826204537) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "members",      array: true
+    t.string   "node_type"
   end
 
   add_index "senators", ["committee_id"], name: "index_senators_on_committee_id", using: :btree
