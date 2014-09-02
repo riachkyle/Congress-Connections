@@ -1,15 +1,25 @@
-<html lang="en" ng-app="congressApp">
-
-
-
-  <div class="view-container" ng-controller="Congress">
-     
-     {{senatordata}}
-
-
-       
-
-   </div>
-
   
-</html>
+  <h1>The Congress Connection Project</h1>
+
+  <div class="description">The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress.  Using APIs compiled by the Sunlight Foundation, we have created an interactive network visualization for users to explore.  Press the various connection options to see different data views.</div>
+
+  <div ng-controller="Congress">
+
+    <p id="update" ng-click="update()">Click me</p>
+
+    <div network-graph id="network-graph" chart-data="senatordata" ng-click="senatorinfo"></div>
+
+    <div class="eachsenator"> 
+      <div class="senator-images"><img ng-src="/assets/225x275/{{currentsen.bioguide_Id}}.jpg"/></div>
+      <div class"senator-text">
+      <p>Click on an Senator circle to find out more info</p>
+      <p>Name: {{currentsen.first_name}}  {{currentsen.last_name}}<br>
+      State:  {{currentsen.state}} <br>
+      Party: {{currentsen.party}} </p>
+      </div>
+    </div>
+ 
+
+  </div>
+
+
