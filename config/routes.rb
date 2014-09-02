@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     resources :senators
     resources :prod_senators
 
+  
+
   root 'senators#index'
   
   # The priority is based upon order of creation: first created -> highest priority.

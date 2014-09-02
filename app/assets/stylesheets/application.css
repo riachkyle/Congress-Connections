@@ -13,3 +13,49 @@
  *= require_tree .
  *= require_self
  */
+
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+
+@mixin translate-center($x, $y) {
+  left: $x;
+  position: fixed;
+  top: $y;
+  -webkit-transform: translateX(-$x) translateY(-$y);
+  -moz-transform: translateX(-$x) translateY(-$y);
+  -ms-transform: translateX(-$x) translateY(-$y);
+  transform: translateX(-$x) translateY(-$y);
+}
+
+h1{
+	font-size: 40px;
+	text-align: center;
+}
+
+.description{
+	width: 850px;
+	margin: 0 auto;
+	font-size: 18px;
+}
+
+#network-graph{
+	width: 800px;
+	margin: 0 auto;
+}
+
+.eachsenator {
+ 
+  width: 500px;
+  height: 400px;
+  margin: 0 auto;
+  text-align: center;
+  border: 2px solid black;
+ 
+}
+
+.senator-images {
+  float:left;
+}
+
+.senator-text {
+  float:left;
+}
