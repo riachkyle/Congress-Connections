@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829222447) do
+ActiveRecord::Schema.define(version: 20140830004007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 20140829222447) do
     t.string   "many"
     t.string   "newbs"
     t.string   "here"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "senator_committee_refs", force: true do |t|
+    t.string   "committee_id"
+    t.string   "committee_name"
+    t.integer  "committee_seq_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
