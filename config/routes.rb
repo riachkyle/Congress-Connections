@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   resources :committees 
     resources :senators
+    resources :prod_senators
+
+  
 
   root 'senators#index'
   

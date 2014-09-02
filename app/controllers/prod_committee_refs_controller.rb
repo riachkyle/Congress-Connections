@@ -1,0 +1,2 @@
+class ProdCommitteeRefsController < ApplicationController
+end
