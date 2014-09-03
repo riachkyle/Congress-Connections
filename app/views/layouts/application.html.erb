@@ -205,7 +205,7 @@ congressApp.directive("networkGraph", function($window){
       var width = 800;
       var height = 700;
 
-      var svg = d3.select(selection)
+      var svg = d3.select(svg)
                       .attr("width", width)
                       .attr("height", height)
       
@@ -375,6 +375,8 @@ congressApp.directive("networkGraph", function($window){
       // --- Draw Groups Nodes --- //
 
       var drawGroups = function(){
+
+          setupData(scope.senators, scope.groups);
 
           var committeeNodeGroup = svg.selectAll("g.committee")
                           .data(scope.groups)
