@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :committees 
     resources :senators
     resources :prod_senators
+    resources :prod_committees
+    resources :prod_committee_refs
 
   
 

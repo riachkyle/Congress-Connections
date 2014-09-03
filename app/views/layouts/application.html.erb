@@ -32,6 +32,8 @@ congressApp.controller('Congress', ['$scope', 'SenateData', 'CommitteeData', fun
   //Get Senator data from the API
   SenateData.getData().then(function(json){
     $scope.senators = json.data;
+    
+console.log($scope.senators.length)
   });
 
 
@@ -48,37 +50,36 @@ congressApp.controller('Congress', ['$scope', 'SenateData', 'CommitteeData', fun
   });
 
   $scope.groups = [
-      {"bioguide_Id": "SSVA", "name": "Senate Committee on Veterans' Affairs", "member_count": 14},
-      { "bioguide_Id": "SSSB", "name": "Senate Committee on Small Business and Entrepreneurship", "member_count": 18},
-      { "bioguide_Id": "SSRA", "name": "Senate Committee on Rules and Administration", "member_count": 18 },
-      { "bioguide_Id": "SSJU", "name": "Senate Committee on the Judiciary", "member_count": 18 },
-      { "bioguide_Id": "SSHR", "name": "Senate Committee on Health Education Labor and Pensions", "member_count": 22 },
-      { "bioguide_Id": "SSGA" , "name": "Senate Committee on Homeland Security and Governmental Affairs", "member_count": 16 },
-      { "bioguide_Id": "SSFR", "name": "Senate Committee on Foreign Relations", "member_count": 18 },
-      { "bioguide_Id": "SSFI", "name": "Senate Committee on Finance", "member_count": 24 },
-      { "bioguide_Id": "SSEV", "name": "Senate Committee on Environment and Public Works", "member_count": 18 },
-      { "bioguide_Id": "SSEG", "name": "Senate Committee on Energy and Natural Resources", "member_count": 22 },
-      { "bioguide_Id": "SSCM", "name": "Senate Committee on Commerce Science and Transportation", "member_count": 24 },
-      { "bioguide_Id": "SSBU", "name": "Senate Committee on the Budget", "member_count": 22 },
-      { "bioguide_Id": "SSBK", "name": "Senate Committee on Banking Housing and Urban Affairs", "member_count": 22 },
-      { "bioguide_Id": "SSAS", "name": "Senate Committee on Armed Services", "member_count": 26},
-      { "bioguide_Id": "SSAP", "name": "Senate Committee on Appropriations", "member_count": 30},
-      { "bioguide_Id": "SSAF", "name": "Senate Committee on Agriculture Nutrition and Forestry", "member_count": 20 },
-      {"bioguide_Id": "SPAG", "name": "Senate Special Committee on Aging", "member_count": 20 },
-      { "bioguide_Id": "SLIN", "name": "Senate Select Committee on Intelligence", "member_count": 19 },
-      { "bioguide_Id": "SLIA", "name": "Senate Committee on Indian Affairs", "member_count": 14 },
-      { "bioguide_Id": "SLET", "name": "Senate Select Committee on Ethics", "member_count": 6 },
-      { "bioguide_Id": "SCNC", "name": "United States Senate Caucus on International Narcotics Control", "member_count": 7 }
+      {"bioguide_id": "SSVA", "name": "Senate Committee on Veterans' Affairs", "member_count": 14},
+      { "bioguide_id": "SSSB", "name": "Senate Committee on Small Business and Entrepreneurship", "member_count": 18},
+      { "bioguide_id": "SSRA", "name": "Senate Committee on Rules and Administration", "member_count": 18 },
+      { "bioguide_id": "SSJU", "name": "Senate Committee on the Judiciary", "member_count": 18 },
+      { "bioguide_id": "SSHR", "name": "Senate Committee on Health Education Labor and Pensions", "member_count": 22 },
+      { "bioguide_id": "SSGA" , "name": "Senate Committee on Homeland Security and Governmental Affairs", "member_count": 16 },
+      { "bioguide_id": "SSFR", "name": "Senate Committee on Foreign Relations", "member_count": 18 },
+      { "bioguide_id": "SSFI", "name": "Senate Committee on Finance", "member_count": 24 },
+      { "bioguide_id": "SSEV", "name": "Senate Committee on Environment and Public Works", "member_count": 18 },
+      { "bioguide_id": "SSEG", "name": "Senate Committee on Energy and Natural Resources", "member_count": 22 },
+      { "bioguide_id": "SSCM", "name": "Senate Committee on Commerce Science and Transportation", "member_count": 24 },
+      { "bioguide_id": "SSBU", "name": "Senate Committee on the Budget", "member_count": 22 },
+      { "bioguide_id": "SSBK", "name": "Senate Committee on Banking Housing and Urban Affairs", "member_count": 22 },
+      { "bioguide_id": "SSAS", "name": "Senate Committee on Armed Services", "member_count": 26},
+      { "bioguide_id": "SSAP", "name": "Senate Committee on Appropriations", "member_count": 30},
+      { "bioguide_id": "SSAF", "name": "Senate Committee on Agriculture Nutrition and Forestry", "member_count": 20 },
+      {"bioguide_id": "SPAG", "name": "Senate Special Committee on Aging", "member_count": 20 },
+      { "bioguide_id": "SLIN", "name": "Senate Select Committee on Intelligence", "member_count": 19 },
+      { "bioguide_id": "SLIA", "name": "Senate Committee on Indian Affairs", "member_count": 14 },
+      { "bioguide_id": "SLET", "name": "Senate Select Committee on Ethics", "member_count": 6 },
+      { "bioguide_id": "SCNC", "name": "United States Senate Caucus on International Narcotics Control", "member_count": 7 }
     ]
-
 
 
   
   // --- Links Data --- //
 
   $scope.newLinks = [
-                    {"source": "SSVA", "target": "D001"},
-                    {"source": "SSAS", "target": "D002"}
+                    {"source": "SSVA", "target": "W000818"},
+                    {"source": "SSAS", "target": "B001288"}
                 ]
 
   // --- Update --- //
@@ -103,12 +104,12 @@ congressApp.controller('Congress', ['$scope', 'SenateData', 'CommitteeData', fun
      
       //update senators
 
-     $scope.senators = [{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_Id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_Id": "D003"}];
+     $scope.senators = [{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}, {"first_name": "Joe", "node_type": "senator", "bioguide_id": "M001", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D001", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M002", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D002", "party":"D"},{"first_name": "Joe", "node_type": "senator", "bioguide_id": "M003", "party":"R"}, {"first_name": "Sam", "node_type": "senator", "bioguide_id": "D003"}];
 
       $scope.mapNodes = function (nodes){
                           nodesMap = d3.map()
                           nodes.forEach(function(n){
-                              nodesMap.set(n.bioguide_Id, n)
+                              nodesMap.set(n.bioguide_id, n)
                           })
                           return nodesMap;
                       };
@@ -145,7 +146,7 @@ congressApp.factory('SenateData', ['$http', function($http){
   var senators = {};
 
   senators.getData = function(){
-    var url = 'http://localhost:3000/senators/show';
+    var url = 'http://localhost:3000/prod_senators/show';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };
@@ -159,7 +160,7 @@ congressApp.factory('CommitteeData', ['$http', function($http){
   var committees = {};
 
   committees.getData = function(){
-    var url = 'http://localhost:3000/committees';
+    var url = 'http://localhost:3000/prod_committees/show';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };
@@ -217,12 +218,12 @@ congressApp.directive("networkGraph", function($window){
           if (senators.length){
               
             mapNodes = function (nodes){
-                nodesMap = d3.map()
-                nodes.forEach(function(n){
-                     nodesMap.set(n.bioguide_Id, n)
-                })
-                return nodesMap;
-            }
+                    nodesMap = d3.map()
+                    nodes.forEach(function(n){
+                        nodesMap.set(n.bioguide_id, n)
+                    })
+                    return nodesMap;
+                }
 
           var senatorsNodesMap = mapNodes(scope.senators)
           var groupsNodesMap = mapNodes(scope.groups)
@@ -326,7 +327,42 @@ congressApp.directive("networkGraph", function($window){
 
                       senatorNode.exit().remove();
 
+<<<<<<< HEAD
             scope.force.on("tick", function(e) {
+=======
+            var committeeNodeGroup = svg.selectAll("g.committee")
+                          .data(scope.groups)
+                      
+                      committeeNodeGroup.enter()
+                                  .append("g")
+                                  .attr("class", "committee")
+                                  .append("circle")
+                                  .attr("class", "committee")
+                                  .attr("r", function(d){
+                                    return groupScale(d.member_count)
+                                  })
+                                  .attr("fill", function(d) {
+                                      return "rgb(240,240,240)"
+                                  })
+                                  .attr("stroke", "rgb(180,180,180)");
+
+                      committeeNodeGroup.append("text")
+                                  .text(function(d){
+                                    return d.bioguide_id
+                                  })
+                                  .style("font-size", "12px")
+                                  .style("font-family", "Oswald")
+                                  .attr("transform", "translate(-13,5)");
+                                  
+
+                      committeeNodeGroup.exit().remove();
+
+
+                      committeeNodeGroup.append("title")
+                              .text(function(d) { return d.name; });
+
+              force.on("tick", function(e) {
+>>>>>>> master
 
                      scope.senators.forEach(function(o, i){
 
