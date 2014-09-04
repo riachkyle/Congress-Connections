@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140831205257) do
+ActiveRecord::Schema.define(version: 20140904192626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(version: 20140831205257) do
     t.string   "many"
     t.string   "newbs"
     t.string   "here"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "prod_bills", force: true do |t|
+    t.string   "bill_id"
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -73,6 +80,27 @@ ActiveRecord::Schema.define(version: 20140831205257) do
     t.datetime "updated_at"
   end
 
+  create_table "prod_votes", force: true do |t|
+    t.string   "bioguide_id"
+    t.string   "bill_id"
+    t.string   "vote"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "senator_committee", id: false, force: true do |t|
+    t.string "bioguide_id",    limit: 10
+    t.string "committee_id",   limit: 6
+    t.string "committee_name", limit: 65
+    t.string "senator_name",   limit: 20
+  end
+
+  create_table "senator_committee_ref", id: false, force: true do |t|
+    t.string  "committee_id",     limit: 6
+    t.string  "committee_name",   limit: 65
+    t.integer "committee_seq_id", limit: 8
+  end
+
   create_table "senator_committee_ref_2s", force: true do |t|
     t.string   "committee_id"
     t.string   "committee_name"
@@ -81,12 +109,34 @@ ActiveRecord::Schema.define(version: 20140831205257) do
     t.datetime "updated_at"
   end
 
-  create_table "senator_committee_refs", force: true do |t|
-    t.string   "committee_id"
-    t.string   "committee_name"
-    t.integer  "committee_seq_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "senator_desc", id: false, force: true do |t|
+    t.string "bioguide_id",  limit: 10
+    t.string "senator_name", limit: 20
+    t.string "chamber",      limit: 10
+    t.string "nm_first",     limit: 15
+    t.string "nm_last",      limit: 15
+    t.string "gender",       limit: 1
+    t.string "party",        limit: 1
+    t.string "state",        limit: 2
+    t.string "state_name",   limit: 14
+    t.string "rank",         limit: 6
+    t.date   "term_end"
+    t.date   "term_start"
+  end
+
+  create_table "senator_ref", id: false, force: true do |t|
+    t.string "bioguide_id",  limit: 10
+    t.string "senator_name", limit: 20
+    t.string "chamber",      limit: 10
+    t.string "nm_first",     limit: 15
+    t.string "nm_last",      limit: 15
+    t.string "gender",       limit: 1
+    t.string "party",        limit: 1
+    t.string "state",        limit: 2
+    t.string "state_name",   limit: 14
+    t.string "rank",         limit: 6
+    t.date   "term_end"
+    t.date   "term_start"
   end
 
   create_table "senators", force: true do |t|

@@ -1,0 +1,2 @@
+class ProdBillsController < ApplicationController
+end

@@ -1,0 +1,2 @@
+module ProdVotesHelper
+end
