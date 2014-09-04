@@ -14,7 +14,8 @@
 var congressApp = angular.module('congressApp',[])
 
 
-congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeData', function($scope, $http, SenateData, CommitteeData) {
+congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeData', 'CommitteeLinksData', function($scope, $http, SenateData, CommitteeData, CommitteeLinksData) {
+
 
 
 
@@ -35,7 +36,7 @@ $scope.senwords = {};
   };
 //function that will make a live api call to Sunlight Capitol Words======
 $scope.updatesenwords = function(){
-console.log($scope.senwords)
+console.log($scope.senfor)
 var query_params = { apikey: 'fa096fc2f69047c8a33d4c3862cba250',
                     entity_type: 'legislator',
                     entity_value: $scope.senfor,
@@ -521,7 +522,8 @@ congressApp.directive("networkGraph", function($window){
   };
 });
 
-;
+
+
 </script>
 
 </head>
