@@ -11,16 +11,31 @@
     <div class="eachsenator"> 
       <div class="senator-images"><img ng-src="/assets/225x275/{{currentsen.bioguide_id}}.jpg"/></div>
       <div class"senator-text">
-      <p>Click on an Senator circle to find out more info</p>
+      <p>Click on an Senator circle </p>
       <p>Name: {{currentsen.senator_name}}<br>
       State:  {{currentsen.state_name}} <br>
       Party: {{currentsen.party}} <br>
       Rank: {{currentsen.rank}} <br>
       Term Started: {{currentsen.term_start}} <br>
       Term Ended: {{currentsen.tern_end}}</p>
+
+      <p>Top 5 words said by this senator: 
+        <br>1: {{senwords[0].ngram}}
+        <br>2: {{senwords[1].ngram}}
+        <br>3: {{senwords[2].ngram}}
+        <br>4: {{senwords[3].ngram}}
+        <br> 5: {{senwords[4].ngram}}</p>
       </div>
     </div>
  
+   <div class="capwords">
+        <input type="text" size="25" placeholder="Search items by tags" data-ng-model="words">
+        <button type="submit" ng-click="updatewords()">Search!</button>
+    </div>
+
+
+
+
 
   </div>
 
