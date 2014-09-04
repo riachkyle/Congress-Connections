@@ -1,6 +1,10 @@
 class ProdSenatorsController < ApplicationController
-  def show
-    @senators = render json: ProdSenator.all
+  
+  respond_to :json
+
+  def index
+    @senators = ProdSenator.all
+    respond_with @senators, each_serializer: ProdSenatorSerializer
   end
 
 end
