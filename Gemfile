@@ -37,6 +37,10 @@ group :test do
   gem 'shoulda-matchers', require: false
 end
 
+gem 'rack-jsonp', '~> 1.3.1'
+
+gem 'jsonp', '~> 0.0.1'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

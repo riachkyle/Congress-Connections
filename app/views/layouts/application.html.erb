@@ -8,30 +8,120 @@
   <%= yield :javascript_includes %>
   <%= csrf_meta_tags %>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.js"> </script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      
 <script> 
 var congressApp = angular.module('congressApp',[])
 
 
-congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeData', 'CommitteeLinksData', function($scope, $http, SenateData, CommitteeData, CommitteeLinksData) {
+congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeData', function($scope, $http, SenateData, CommitteeData) {
 
+
+
+$scope.words = '';
+$scope.wordsdata = {};
+$scope.senfor = {};
+$scope.senwords = {};
 
 
 // Sets the variable for the senator info box
   $scope.currentsen = {};
 // Will change senator info when clicked 
   $scope.senatorinfo = function (info) {
-    $scope.currentsen= info;  
+    $scope.currentsen= info;
+    $scope.senfor = info.bioguide_id;
+    $scope.updatesenwords();
+     
   };
+//function that will make a live api call to Sunlight Capitol Words======
+$scope.updatesenwords = function(){
+console.log($scope.senwords)
+var query_params = { apikey: 'fa096fc2f69047c8a33d4c3862cba250',
+                    entity_type: 'legislator',
+                    entity_value: $scope.senfor,
+                    sort: 'count desc'
+                     
+                   };
+var endpoint = 'http://capitolwords.org/api/phrases.json';
+ 
+var options = {
+  data: query_params,
+  type: 'GET',
+  dataType: 'jsonp'      
+};
+
+var request = jQuery.ajax(endpoint, options)
+                    .done(showResponse2);
+};
+
+// function to return the json and reset 'wordsdata' variable=============
+function showResponse2 (response) {
+            RESPONSE = response;
+            $scope.senwords = response;
+            $scope.$apply();
+            console.log($scope.senwords);
+           
+            if (this && this.url && (typeof(this.url) == "string")) {
+                var anchor = jQuery("#url");
+                anchor.text(this.url.toString());
+                anchor.attr('href', this.url.toString());
+            }
+            jQuery("#output").text(JSON.stringify(response, null, '  '));
+
+        }
+
+
+//function that will make a live api call to Sunlight Capitol Words======
+$scope.updatewords = function(){
+var query_params = { apikey: 'fa096fc2f69047c8a33d4c3862cba250',
+                     phrase: $scope.words,
+                     start_date: '2012-11-01',
+                     end_date: '2014-12-31'
+                     
+                   };
+var endpoint = 'http://capitolwords.org/api/phrases/legislator.json';
+ 
+var options = {
+  data: query_params,
+  type: 'GET',
+  dataType: 'jsonp'      
+};
+
+var request = jQuery.ajax(endpoint, options)
+                    .done(showResponse);
+};
+
+// function to return the json and reset 'wordsdata' variable=============
+function showResponse (response) {
+            RESPONSE = response;
+            
+            $scope.wordsdata = response.results;
+            console.log($scope.wordsdata)
+
+            if (this && this.url && (typeof(this.url) == "string")) {
+                var anchor = jQuery("#url");
+                anchor.text(this.url.toString());
+                anchor.attr('href', this.url.toString());
+            }
+            jQuery("#output").text(JSON.stringify(response, null, '  '));
+
+        }
+
   
   // --- Senator Data API --- //
 
   $scope.senators = {};
+  
 
   //Get Senator data from the API
   SenateData.getData().then(function(json){
     $scope.senators = json.data;
     
+console.log($scope.senators.length)
   });
+
+
+
 
 
   // --- Group Data API --- //
