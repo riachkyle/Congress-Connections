@@ -31,15 +31,16 @@ gem 'active_model_serializers'
 
 group :development, :test do
   gem 'rspec-rails', '~>3.0.0'
+  gem 'guard-rspec', require: false
+ 
+
+  gem "jasmine", github: "pivotal/jasmine-gem" #js testing
 end
 
 group :test do
   gem 'shoulda-matchers', require: false
 end
 
-gem 'rack-jsonp', '~> 1.3.1'
-
-gem 'jsonp', '~> 0.0.1'
 
 
 # Use ActiveModel has_secure_password

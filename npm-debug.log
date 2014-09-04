@@ -1,0 +1,526 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'd3.layout.cloud' ]
+2 info using npm@1.4.21
+3 info using node@v0.10.30
+4 verbose cache add [ 'd3.layout.cloud', null ]
+5 verbose cache add name=undefined spec="d3.layout.cloud" args=["d3.layout.cloud",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'd3.layout.cloud',
+6 verbose parsed url   path: 'd3.layout.cloud',
+6 verbose parsed url   href: 'd3.layout.cloud' }
+7 silly lockFile ed2bef4a-d3-layout-cloud d3.layout.cloud
+8 verbose lock d3.layout.cloud /Users/kyleriach/.npm/ed2bef4a-d3-layout-cloud.lock
+9 silly lockFile ed2bef4a-d3-layout-cloud d3.layout.cloud
+10 silly lockFile ed2bef4a-d3-layout-cloud d3.layout.cloud
+11 verbose addNamed [ 'd3.layout.cloud', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile ccb4975f-d3-layout-cloud d3.layout.cloud@
+14 verbose lock d3.layout.cloud@ /Users/kyleriach/.npm/ccb4975f-d3-layout-cloud.lock
+15 silly addNameRange { name: 'd3.layout.cloud', range: '*', hasData: false }
+16 verbose request where is /d3.layout.cloud
+17 verbose request registry https://registry.npmjs.org/
+18 verbose request id 597e467f43ab5dea
+19 verbose url raw /d3.layout.cloud
+20 verbose url resolving [ 'https://registry.npmjs.org/', './d3.layout.cloud' ]
+21 verbose url resolved https://registry.npmjs.org/d3.layout.cloud
+22 verbose request where is https://registry.npmjs.org/d3.layout.cloud
+23 info trying registry request attempt 1 at 15:19:00
+24 verbose etag "23FX8LR0UR2UQY98E5MY4WZMV"
+25 http GET https://registry.npmjs.org/d3.layout.cloud
+26 http 304 https://registry.npmjs.org/d3.layout.cloud
+27 silly registry.get cb [ 304,
+27 silly registry.get   { date: 'Thu, 04 Sep 2014 22:19:00 GMT',
+27 silly registry.get     server: 'Apache',
+27 silly registry.get     via: '1.1 varnish',
+27 silly registry.get     'last-modified': 'Thu, 04 Sep 2014 22:19:00 GMT',
+27 silly registry.get     'cache-control': 'max-age=60',
+27 silly registry.get     etag: '"23FX8LR0UR2UQY98E5MY4WZMV"',
+27 silly registry.get     'x-served-by': 'cache-sjc3123-SJC',
+27 silly registry.get     'x-cache': 'HIT',
+27 silly registry.get     'x-cache-hits': '1',
+27 silly registry.get     'x-timer': 'S1409869140.889044,VS0,VE0',
+27 silly registry.get     vary: 'Accept',
+27 silly registry.get     'content-length': '0',
+27 silly registry.get     'keep-alive': 'timeout=10, max=50',
+27 silly registry.get     connection: 'Keep-Alive' } ]
+28 verbose etag https://registry.npmjs.org/d3.layout.cloud from cache
+29 silly addNameRange number 2 { name: 'd3.layout.cloud', range: '*', hasData: true }
+30 silly addNameRange versions [ 'd3.layout.cloud', [ '1.0.5' ] ]
+31 verbose addNamed [ 'd3.layout.cloud', '1.0.5' ]
+32 verbose addNamed [ '1.0.5', '1.0.5' ]
+33 silly lockFile 0a1e776b-d3-layout-cloud-1-0-5 d3.layout.cloud@1.0.5
+34 verbose lock d3.layout.cloud@1.0.5 /Users/kyleriach/.npm/0a1e776b-d3-layout-cloud-1-0-5.lock
+35 silly lockFile 0a1e776b-d3-layout-cloud-1-0-5 d3.layout.cloud@1.0.5
+36 silly lockFile 0a1e776b-d3-layout-cloud-1-0-5 d3.layout.cloud@1.0.5
+37 silly lockFile ccb4975f-d3-layout-cloud d3.layout.cloud@
+38 silly lockFile ccb4975f-d3-layout-cloud d3.layout.cloud@
+39 silly resolved [ { name: 'd3.layout.cloud',
+39 silly resolved     version: '1.0.5',
+39 silly resolved     description: 'Generate word clouds in JavaScript.',
+39 silly resolved     keywords: [ 'word', 'cloud', 'tag', 'visualization', 'canvas' ],
+39 silly resolved     homepage: 'http://www.jasondavies.com/wordcloud/',
+39 silly resolved     author: { name: 'Jason Davies', url: 'http://www.jasondavies.com/' },
+39 silly resolved     repository:
+39 silly resolved      { type: 'git',
+39 silly resolved        url: 'http://github.com/jasondavies/d3-cloud.git' },
+39 silly resolved     main: 'index.js',
+39 silly resolved     dependencies: { canvas: '1.1.x' },
+39 silly resolved     devDependencies: { 'uglify-js': '1.2.x' },
+39 silly resolved     readme: '# Word Cloud Layout\n\nThis is a [Wordle](http://www.wordle.net/)-inspired word cloud layout written\nin JavaScript. It uses HTML5 canvas and sprite masks to achieve\nnear-interactive speeds.\n\nSee [here](http://www.jasondavies.com/wordcloud/) for an interactive\ndemonstration along with implementation details.\n\n![Example cloud of Twitter search results for “amazing”](http://www.jasondavies.com/wordcloud/amazing.png)\n\n## Usage\n\nSee the samples in `examples/`.\n\nThis layout requires [D3](http://mbostock.github.com/d3/).  It’s similar to\n[d3.layout.force](https://github.com/mbostock/d3/wiki/Force-Layout), in that\nit’s **asynchronous** and **stateful**.\n',
+39 silly resolved     readmeFilename: 'README.md',
+39 silly resolved     bugs: { url: 'https://github.com/jasondavies/d3-cloud/issues' },
+39 silly resolved     _id: 'd3.layout.cloud@1.0.5',
+39 silly resolved     dist:
+39 silly resolved      { shasum: '86c92e8b89273e366d257b1f363275b2a09a91bf',
+39 silly resolved        tarball: 'http://registry.npmjs.org/d3.layout.cloud/-/d3.layout.cloud-1.0.5.tgz' },
+39 silly resolved     _from: 'd3.layout.cloud@',
+39 silly resolved     _npmVersion: '1.3.14',
+39 silly resolved     _npmUser: { name: 'jasondavies', email: 'jason@jasondavies.com' },
+39 silly resolved     maintainers: [ [Object] ],
+39 silly resolved     directories: {},
+39 silly resolved     _shasum: '86c92e8b89273e366d257b1f363275b2a09a91bf',
+39 silly resolved     _resolved: 'https://registry.npmjs.org/d3.layout.cloud/-/d3.layout.cloud-1.0.5.tgz' } ]
+40 info install d3.layout.cloud@1.0.5 into /Users/kyleriach/Documents/General Assembly/Projects/congress_connections
+41 info installOne d3.layout.cloud@1.0.5
+42 verbose node_modules/d3.layout.cloud unbuild
+43 verbose tar unpack /Users/kyleriach/.npm/d3.layout.cloud/1.0.5/package.tgz
+44 silly lockFile e1db775d-ons-node-modules-d3-layout-cloud tar:///Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud
+45 verbose lock tar:///Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud /Users/kyleriach/.npm/e1db775d-ons-node-modules-d3-layout-cloud.lock
+46 silly lockFile 039db8cb-3-layout-cloud-1-0-5-package-tgz tar:///Users/kyleriach/.npm/d3.layout.cloud/1.0.5/package.tgz
+47 verbose lock tar:///Users/kyleriach/.npm/d3.layout.cloud/1.0.5/package.tgz /Users/kyleriach/.npm/039db8cb-3-layout-cloud-1-0-5-package-tgz.lock
+48 silly gunzTarPerm modes [ '755', '644' ]
+49 silly gunzTarPerm extractEntry package.json
+50 silly gunzTarPerm extractEntry README.md
+51 silly gunzTarPerm extractEntry LICENSE
+52 silly gunzTarPerm extractEntry d3.layout.cloud.js
+53 silly gunzTarPerm extractEntry index.js
+54 silly gunzTarPerm extractEntry examples/simple.html
+55 silly gunzTarPerm extractEntry lib/d3/LICENSE
+56 silly gunzTarPerm extractEntry lib/d3/d3.js
+57 silly lockFile e1db775d-ons-node-modules-d3-layout-cloud tar:///Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud
+58 silly lockFile e1db775d-ons-node-modules-d3-layout-cloud tar:///Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud
+59 silly lockFile 039db8cb-3-layout-cloud-1-0-5-package-tgz tar:///Users/kyleriach/.npm/d3.layout.cloud/1.0.5/package.tgz
+60 silly lockFile 039db8cb-3-layout-cloud-1-0-5-package-tgz tar:///Users/kyleriach/.npm/d3.layout.cloud/1.0.5/package.tgz
+61 info preinstall d3.layout.cloud@1.0.5
+62 verbose readDependencies using package.json deps
+63 verbose readDependencies using package.json deps
+64 verbose cache add [ 'canvas@1.1.x', null ]
+65 verbose cache add name=undefined spec="canvas@1.1.x" args=["canvas@1.1.x",null]
+66 verbose parsed url { protocol: null,
+66 verbose parsed url   slashes: null,
+66 verbose parsed url   auth: null,
+66 verbose parsed url   host: null,
+66 verbose parsed url   port: null,
+66 verbose parsed url   hostname: null,
+66 verbose parsed url   hash: null,
+66 verbose parsed url   search: null,
+66 verbose parsed url   query: null,
+66 verbose parsed url   pathname: 'canvas@1.1.x',
+66 verbose parsed url   path: 'canvas@1.1.x',
+66 verbose parsed url   href: 'canvas@1.1.x' }
+67 verbose cache add name="canvas" spec="1.1.x" args=["canvas","1.1.x"]
+68 verbose parsed url { protocol: null,
+68 verbose parsed url   slashes: null,
+68 verbose parsed url   auth: null,
+68 verbose parsed url   host: null,
+68 verbose parsed url   port: null,
+68 verbose parsed url   hostname: null,
+68 verbose parsed url   hash: null,
+68 verbose parsed url   search: null,
+68 verbose parsed url   query: null,
+68 verbose parsed url   pathname: '1.1.x',
+68 verbose parsed url   path: '1.1.x',
+68 verbose parsed url   href: '1.1.x' }
+69 verbose addNamed [ 'canvas', '1.1.x' ]
+70 verbose addNamed [ null, '>=1.1.0-0 <1.2.0-0' ]
+71 silly lockFile 1cc172a4-canvas-1-1-x canvas@1.1.x
+72 verbose lock canvas@1.1.x /Users/kyleriach/.npm/1cc172a4-canvas-1-1-x.lock
+73 silly addNameRange { name: 'canvas', range: '>=1.1.0-0 <1.2.0-0', hasData: false }
+74 verbose request where is /canvas
+75 verbose request registry https://registry.npmjs.org/
+76 verbose url raw /canvas
+77 verbose url resolving [ 'https://registry.npmjs.org/', './canvas' ]
+78 verbose url resolved https://registry.npmjs.org/canvas
+79 verbose request where is https://registry.npmjs.org/canvas
+80 info trying registry request attempt 1 at 15:19:01
+81 verbose etag "9I5J6E7HHR9LAM9S0L1FVD28P"
+82 http GET https://registry.npmjs.org/canvas
+83 http 304 https://registry.npmjs.org/canvas
+84 silly registry.get cb [ 304,
+84 silly registry.get   { date: 'Thu, 04 Sep 2014 22:19:01 GMT',
+84 silly registry.get     server: 'Apache',
+84 silly registry.get     via: '1.1 varnish',
+84 silly registry.get     'last-modified': 'Thu, 04 Sep 2014 22:19:01 GMT',
+84 silly registry.get     'cache-control': 'max-age=60',
+84 silly registry.get     etag: '"9I5J6E7HHR9LAM9S0L1FVD28P"',
+84 silly registry.get     'x-served-by': 'cache-sjc3130-SJC',
+84 silly registry.get     'x-cache': 'HIT',
+84 silly registry.get     'x-cache-hits': '1',
+84 silly registry.get     'x-timer': 'S1409869141.257560,VS0,VE0',
+84 silly registry.get     vary: 'Accept',
+84 silly registry.get     'content-length': '0',
+84 silly registry.get     'keep-alive': 'timeout=10, max=50',
+84 silly registry.get     connection: 'Keep-Alive' } ]
+85 verbose etag https://registry.npmjs.org/canvas from cache
+86 silly addNameRange number 2 { name: 'canvas', range: '>=1.1.0-0 <1.2.0-0', hasData: true }
+87 silly addNameRange versions [ 'canvas',
+87 silly addNameRange   [ '0.0.1',
+87 silly addNameRange     '0.0.2',
+87 silly addNameRange     '0.0.3',
+87 silly addNameRange     '0.0.4',
+87 silly addNameRange     '0.0.5',
+87 silly addNameRange     '0.0.6',
+87 silly addNameRange     '0.0.7',
+87 silly addNameRange     '0.0.8',
+87 silly addNameRange     '0.1.0',
+87 silly addNameRange     '0.2.0',
+87 silly addNameRange     '0.2.1',
+87 silly addNameRange     '0.3.0',
+87 silly addNameRange     '0.3.1',
+87 silly addNameRange     '0.3.2',
+87 silly addNameRange     '0.3.3',
+87 silly addNameRange     '0.4.0',
+87 silly addNameRange     '0.4.1',
+87 silly addNameRange     '0.4.2',
+87 silly addNameRange     '0.4.3',
+87 silly addNameRange     '0.5.0',
+87 silly addNameRange     '0.5.1',
+87 silly addNameRange     '0.5.2',
+87 silly addNameRange     '0.5.3',
+87 silly addNameRange     '0.5.4',
+87 silly addNameRange     '0.6.0',
+87 silly addNameRange     '0.7.0',
+87 silly addNameRange     '0.7.1',
+87 silly addNameRange     '0.7.2',
+87 silly addNameRange     '0.7.3',
+87 silly addNameRange     '0.8.0',
+87 silly addNameRange     '0.8.1',
+87 silly addNameRange     '0.8.2',
+87 silly addNameRange     '0.8.3',
+87 silly addNameRange     '0.9.0',
+87 silly addNameRange     '0.10.0',
+87 silly addNameRange     '0.10.1',
+87 silly addNameRange     '0.10.2',
+87 silly addNameRange     '0.10.3',
+87 silly addNameRange     '0.11.0',
+87 silly addNameRange     '0.11.1',
+87 silly addNameRange     '0.11.2',
+87 silly addNameRange     '0.11.3',
+87 silly addNameRange     '0.12.0',
+87 silly addNameRange     '0.12.1',
+87 silly addNameRange     '0.13.0',
+87 silly addNameRange     '0.13.1',
+87 silly addNameRange     '1.0.0',
+87 silly addNameRange     '1.0.1',
+87 silly addNameRange     '1.0.2',
+87 silly addNameRange     '1.0.3',
+87 silly addNameRange     '1.0.4',
+87 silly addNameRange     '1.1.0',
+87 silly addNameRange     '1.1.1',
+87 silly addNameRange     '1.1.2',
+87 silly addNameRange     '1.1.3',
+87 silly addNameRange     '1.1.4',
+87 silly addNameRange     '1.1.5',
+87 silly addNameRange     '1.1.6' ] ]
+88 verbose addNamed [ 'canvas', '1.1.6' ]
+89 verbose addNamed [ '1.1.6', '1.1.6' ]
+90 silly lockFile 4f76786f-canvas-1-1-6 canvas@1.1.6
+91 verbose lock canvas@1.1.6 /Users/kyleriach/.npm/4f76786f-canvas-1-1-6.lock
+92 silly lockFile 4f76786f-canvas-1-1-6 canvas@1.1.6
+93 silly lockFile 4f76786f-canvas-1-1-6 canvas@1.1.6
+94 silly lockFile 1cc172a4-canvas-1-1-x canvas@1.1.x
+95 silly lockFile 1cc172a4-canvas-1-1-x canvas@1.1.x
+96 silly resolved [ { name: 'canvas',
+96 silly resolved     description: 'Canvas graphics API backed by Cairo',
+96 silly resolved     version: '1.1.6',
+96 silly resolved     author: { name: 'TJ Holowaychuk', email: 'tj@learnboost.com' },
+96 silly resolved     contributors: [ [Object], [Object], [Object] ],
+96 silly resolved     keywords:
+96 silly resolved      [ 'canvas',
+96 silly resolved        'graphic',
+96 silly resolved        'graphics',
+96 silly resolved        'pixman',
+96 silly resolved        'cairo',
+96 silly resolved        'image',
+96 silly resolved        'images',
+96 silly resolved        'pdf' ],
+96 silly resolved     homepage: 'https://github.com/learnboost/node-canvas',
+96 silly resolved     repository: { type: 'git', url: 'git://github.com/learnboost/node-canvas' },
+96 silly resolved     scripts: { test: 'make test', install: 'node-gyp rebuild' },
+96 silly resolved     dependencies: { nan: '~1.2.0' },
+96 silly resolved     devDependencies: { express: '3.0', jade: '0.28.1', mocha: '*', should: '*' },
+96 silly resolved     engines: { node: '>= 0.6.0' },
+96 silly resolved     main: './lib/canvas.js',
+96 silly resolved     gypfile: true,
+96 silly resolved     gitHead: '138abe9aa30b75e8406ceddd9177bff20ac44ceb',
+96 silly resolved     bugs: { url: 'https://github.com/learnboost/node-canvas/issues' },
+96 silly resolved     _id: 'canvas@1.1.6',
+96 silly resolved     _shasum: 'd84b088f3bcd3840fe14977cd3625f5fe89f81ee',
+96 silly resolved     _from: 'canvas@1.1.x',
+96 silly resolved     _npmVersion: '1.4.21',
+96 silly resolved     _npmUser: { name: 'tootallnate', email: 'nathan@tootallnate.net' },
+96 silly resolved     maintainers: [ [Object], [Object], [Object], [Object] ],
+96 silly resolved     dist:
+96 silly resolved      { shasum: 'd84b088f3bcd3840fe14977cd3625f5fe89f81ee',
+96 silly resolved        tarball: 'http://registry.npmjs.org/canvas/-/canvas-1.1.6.tgz' },
+96 silly resolved     directories: {},
+96 silly resolved     _resolved: 'https://registry.npmjs.org/canvas/-/canvas-1.1.6.tgz',
+96 silly resolved     readme: 'ERROR: No README data found!' } ]
+97 info install canvas@1.1.6 into /Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud
+98 info installOne canvas@1.1.6
+99 verbose node_modules/d3.layout.cloud/node_modules/canvas unbuild
+100 verbose tar unpack /Users/kyleriach/.npm/canvas/1.1.6/package.tgz
+101 silly lockFile f6d29d14-layout-cloud-node-modules-canvas tar:///Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas
+102 verbose lock tar:///Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas /Users/kyleriach/.npm/f6d29d14-layout-cloud-node-modules-canvas.lock
+103 silly lockFile 5f71b77d-ach-npm-canvas-1-1-6-package-tgz tar:///Users/kyleriach/.npm/canvas/1.1.6/package.tgz
+104 verbose lock tar:///Users/kyleriach/.npm/canvas/1.1.6/package.tgz /Users/kyleriach/.npm/5f71b77d-ach-npm-canvas-1-1-6-package-tgz.lock
+105 silly gunzTarPerm modes [ '755', '644' ]
+106 silly gunzTarPerm extractEntry package.json
+107 silly gunzTarPerm extractEntry .npmignore
+108 silly gunzTarPerm extractEntry index.js
+109 silly gunzTarPerm extractEntry History.md
+110 silly gunzTarPerm extractEntry Makefile
+111 silly gunzTarPerm extractEntry Readme.md
+112 silly gunzTarPerm extractEntry binding.gyp
+113 silly gunzTarPerm extractEntry .gitmodules
+114 silly gunzTarPerm extractEntry install
+115 silly gunzTarPerm extractEntry lib/bindings.js
+116 silly gunzTarPerm extractEntry lib/canvas.js
+117 silly gunzTarPerm extractEntry lib/context2d.js
+118 silly gunzTarPerm extractEntry lib/image.js
+119 silly gunzTarPerm extractEntry lib/jpegstream.js
+120 silly gunzTarPerm extractEntry lib/pixelarray.js
+121 silly gunzTarPerm extractEntry lib/pngstream.js
+122 silly gunzTarPerm extractEntry src/Image.h
+123 silly gunzTarPerm extractEntry src/Canvas.cc
+124 silly gunzTarPerm extractEntry src/CanvasGradient.cc
+125 silly gunzTarPerm extractEntry src/CanvasGradient.h
+126 silly gunzTarPerm extractEntry src/CanvasPattern.cc
+127 silly gunzTarPerm extractEntry src/CanvasPattern.h
+128 silly gunzTarPerm extractEntry src/CanvasRenderingContext2d.cc
+129 silly gunzTarPerm extractEntry src/CanvasRenderingContext2d.h
+130 silly gunzTarPerm extractEntry src/FontFace.cc
+131 silly gunzTarPerm extractEntry src/FontFace.h
+132 silly gunzTarPerm extractEntry src/Image.cc
+133 silly gunzTarPerm extractEntry src/Canvas.h
+134 silly gunzTarPerm extractEntry src/ImageData.cc
+135 silly gunzTarPerm extractEntry src/ImageData.h
+136 silly gunzTarPerm extractEntry src/JPEGStream.h
+137 silly gunzTarPerm extractEntry src/PNG.h
+138 silly gunzTarPerm extractEntry src/PixelArray.cc
+139 silly gunzTarPerm extractEntry src/PixelArray.h
+140 silly gunzTarPerm extractEntry src/Point.h
+141 silly gunzTarPerm extractEntry src/closure.h
+142 silly gunzTarPerm extractEntry src/color.cc
+143 silly gunzTarPerm extractEntry src/color.h
+144 silly gunzTarPerm extractEntry src/init.cc
+145 silly gunzTarPerm extractEntry .travis.yml
+146 silly gunzTarPerm extractEntry util/cairo_include.sh
+147 silly gunzTarPerm extractEntry util/has_cairo_freetype.sh
+148 silly gunzTarPerm extractEntry util/has_lib.sh
+149 silly gunzTarPerm extractEntry util/lib_lookup.sh
+150 silly lockFile f6d29d14-layout-cloud-node-modules-canvas tar:///Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas
+151 silly lockFile f6d29d14-layout-cloud-node-modules-canvas tar:///Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas
+152 silly lockFile 5f71b77d-ach-npm-canvas-1-1-6-package-tgz tar:///Users/kyleriach/.npm/canvas/1.1.6/package.tgz
+153 silly lockFile 5f71b77d-ach-npm-canvas-1-1-6-package-tgz tar:///Users/kyleriach/.npm/canvas/1.1.6/package.tgz
+154 info preinstall canvas@1.1.6
+155 verbose readDependencies using package.json deps
+156 verbose readDependencies using package.json deps
+157 verbose cache add [ 'nan@~1.2.0', null ]
+158 verbose cache add name=undefined spec="nan@~1.2.0" args=["nan@~1.2.0",null]
+159 verbose parsed url { protocol: null,
+159 verbose parsed url   slashes: null,
+159 verbose parsed url   auth: null,
+159 verbose parsed url   host: null,
+159 verbose parsed url   port: null,
+159 verbose parsed url   hostname: null,
+159 verbose parsed url   hash: null,
+159 verbose parsed url   search: null,
+159 verbose parsed url   query: null,
+159 verbose parsed url   pathname: 'nan@~1.2.0',
+159 verbose parsed url   path: 'nan@~1.2.0',
+159 verbose parsed url   href: 'nan@~1.2.0' }
+160 verbose cache add name="nan" spec="~1.2.0" args=["nan","~1.2.0"]
+161 verbose parsed url { protocol: null,
+161 verbose parsed url   slashes: null,
+161 verbose parsed url   auth: null,
+161 verbose parsed url   host: null,
+161 verbose parsed url   port: null,
+161 verbose parsed url   hostname: null,
+161 verbose parsed url   hash: null,
+161 verbose parsed url   search: null,
+161 verbose parsed url   query: null,
+161 verbose parsed url   pathname: '~1.2.0',
+161 verbose parsed url   path: '~1.2.0',
+161 verbose parsed url   href: '~1.2.0' }
+162 verbose addNamed [ 'nan', '~1.2.0' ]
+163 verbose addNamed [ null, '>=1.2.0-0 <1.3.0-0' ]
+164 silly lockFile 6bb36ab7-nan-1-2-0 nan@~1.2.0
+165 verbose lock nan@~1.2.0 /Users/kyleriach/.npm/6bb36ab7-nan-1-2-0.lock
+166 silly addNameRange { name: 'nan', range: '>=1.2.0-0 <1.3.0-0', hasData: false }
+167 verbose request where is /nan
+168 verbose request registry https://registry.npmjs.org/
+169 verbose url raw /nan
+170 verbose url resolving [ 'https://registry.npmjs.org/', './nan' ]
+171 verbose url resolved https://registry.npmjs.org/nan
+172 verbose request where is https://registry.npmjs.org/nan
+173 info trying registry request attempt 1 at 15:19:01
+174 verbose etag "EHSGUSL5485V42YB6X3SJ857Q"
+175 http GET https://registry.npmjs.org/nan
+176 http 304 https://registry.npmjs.org/nan
+177 silly registry.get cb [ 304,
+177 silly registry.get   { date: 'Thu, 04 Sep 2014 22:19:01 GMT',
+177 silly registry.get     server: 'Apache',
+177 silly registry.get     via: '1.1 varnish',
+177 silly registry.get     'last-modified': 'Thu, 04 Sep 2014 22:19:01 GMT',
+177 silly registry.get     'cache-control': 'max-age=60',
+177 silly registry.get     etag: '"EHSGUSL5485V42YB6X3SJ857Q"',
+177 silly registry.get     'x-served-by': 'cache-sjc3125-SJC',
+177 silly registry.get     'x-cache': 'HIT',
+177 silly registry.get     'x-cache-hits': '1',
+177 silly registry.get     'x-timer': 'S1409869141.457744,VS0,VE0',
+177 silly registry.get     vary: 'Accept',
+177 silly registry.get     'content-length': '0',
+177 silly registry.get     'keep-alive': 'timeout=10, max=50',
+177 silly registry.get     connection: 'Keep-Alive' } ]
+178 verbose etag https://registry.npmjs.org/nan from cache
+179 silly addNameRange number 2 { name: 'nan', range: '>=1.2.0-0 <1.3.0-0', hasData: true }
+180 silly addNameRange versions [ 'nan',
+180 silly addNameRange   [ '0.3.0-wip',
+180 silly addNameRange     '0.3.0-wip2',
+180 silly addNameRange     '0.3.0',
+180 silly addNameRange     '0.3.1',
+180 silly addNameRange     '0.3.2',
+180 silly addNameRange     '0.4.0',
+180 silly addNameRange     '0.4.1',
+180 silly addNameRange     '0.4.2',
+180 silly addNameRange     '0.4.3',
+180 silly addNameRange     '0.4.4',
+180 silly addNameRange     '0.5.0',
+180 silly addNameRange     '0.5.1',
+180 silly addNameRange     '0.5.2',
+180 silly addNameRange     '0.6.0',
+180 silly addNameRange     '0.7.0',
+180 silly addNameRange     '0.7.1',
+180 silly addNameRange     '0.8.0',
+180 silly addNameRange     '1.0.0',
+180 silly addNameRange     '1.1.0',
+180 silly addNameRange     '1.1.1',
+180 silly addNameRange     '1.1.2',
+180 silly addNameRange     '1.2.0',
+180 silly addNameRange     '1.3.0' ] ]
+181 verbose addNamed [ 'nan', '1.2.0' ]
+182 verbose addNamed [ '1.2.0', '1.2.0' ]
+183 silly lockFile 859d0f28-nan-1-2-0 nan@1.2.0
+184 verbose lock nan@1.2.0 /Users/kyleriach/.npm/859d0f28-nan-1-2-0.lock
+185 silly lockFile 859d0f28-nan-1-2-0 nan@1.2.0
+186 silly lockFile 859d0f28-nan-1-2-0 nan@1.2.0
+187 silly lockFile 6bb36ab7-nan-1-2-0 nan@~1.2.0
+188 silly lockFile 6bb36ab7-nan-1-2-0 nan@~1.2.0
+189 silly resolved [ { name: 'nan',
+189 silly resolved     version: '1.2.0',
+189 silly resolved     description: 'Native Abstractions for Node.js: C++ header for Node 0.8->0.12 compatibility',
+189 silly resolved     main: 'include_dirs.js',
+189 silly resolved     repository: { type: 'git', url: 'git://github.com/rvagg/nan.git' },
+189 silly resolved     contributors: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+189 silly resolved     license: 'MIT',
+189 silly resolved     bugs: { url: 'https://github.com/rvagg/nan/issues' },
+189 silly resolved     homepage: 'https://github.com/rvagg/nan',
+189 silly resolved     _id: 'nan@1.2.0',
+189 silly resolved     dist:
+189 silly resolved      { shasum: '9c4d63ce9e4f8e95de2d574e18f7925554a8a8ef',
+189 silly resolved        tarball: 'http://registry.npmjs.org/nan/-/nan-1.2.0.tgz' },
+189 silly resolved     _from: 'nan@~1.2.0',
+189 silly resolved     _npmVersion: '1.4.3',
+189 silly resolved     _npmUser: { name: 'rvagg', email: 'rod@vagg.org' },
+189 silly resolved     maintainers: [ [Object] ],
+189 silly resolved     directories: {},
+189 silly resolved     _shasum: '9c4d63ce9e4f8e95de2d574e18f7925554a8a8ef',
+189 silly resolved     _resolved: 'https://registry.npmjs.org/nan/-/nan-1.2.0.tgz',
+189 silly resolved     readme: 'ERROR: No README data found!' } ]
+190 info install nan@1.2.0 into /Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas
+191 info installOne nan@1.2.0
+192 verbose node_modules/d3.layout.cloud/node_modules/canvas/node_modules/nan unbuild
+193 verbose tar unpack /Users/kyleriach/.npm/nan/1.2.0/package.tgz
+194 silly lockFile bc263a98--modules-canvas-node-modules-nan tar:///Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas/node_modules/nan
+195 verbose lock tar:///Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas/node_modules/nan /Users/kyleriach/.npm/bc263a98--modules-canvas-node-modules-nan.lock
+196 silly lockFile 90c0397d-eriach-npm-nan-1-2-0-package-tgz tar:///Users/kyleriach/.npm/nan/1.2.0/package.tgz
+197 verbose lock tar:///Users/kyleriach/.npm/nan/1.2.0/package.tgz /Users/kyleriach/.npm/90c0397d-eriach-npm-nan-1-2-0-package-tgz.lock
+198 silly gunzTarPerm modes [ '755', '644' ]
+199 silly gunzTarPerm extractEntry package.json
+200 silly gunzTarPerm extractEntry README.md
+201 silly gunzTarPerm extractEntry LICENSE
+202 silly gunzTarPerm extractEntry include_dirs.js
+203 silly gunzTarPerm extractEntry .dntrc
+204 silly gunzTarPerm extractEntry build/config.gypi
+205 silly gunzTarPerm extractEntry nan.h
+206 silly lockFile bc263a98--modules-canvas-node-modules-nan tar:///Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas/node_modules/nan
+207 silly lockFile bc263a98--modules-canvas-node-modules-nan tar:///Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas/node_modules/nan
+208 silly lockFile 90c0397d-eriach-npm-nan-1-2-0-package-tgz tar:///Users/kyleriach/.npm/nan/1.2.0/package.tgz
+209 silly lockFile 90c0397d-eriach-npm-nan-1-2-0-package-tgz tar:///Users/kyleriach/.npm/nan/1.2.0/package.tgz
+210 info preinstall nan@1.2.0
+211 verbose readDependencies using package.json deps
+212 verbose readDependencies using package.json deps
+213 silly resolved []
+214 verbose about to build /Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas/node_modules/nan
+215 info build /Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas/node_modules/nan
+216 verbose linkStuff [ false,
+216 verbose linkStuff   false,
+216 verbose linkStuff   false,
+216 verbose linkStuff   '/Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas/node_modules' ]
+217 info linkStuff nan@1.2.0
+218 verbose linkBins nan@1.2.0
+219 verbose linkMans nan@1.2.0
+220 verbose rebuildBundles nan@1.2.0
+221 info install nan@1.2.0
+222 info postinstall nan@1.2.0
+223 verbose about to build /Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas
+224 info build /Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules/canvas
+225 verbose linkStuff [ false,
+225 verbose linkStuff   false,
+225 verbose linkStuff   false,
+225 verbose linkStuff   '/Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules' ]
+226 info linkStuff canvas@1.1.6
+227 verbose linkBins canvas@1.1.6
+228 verbose linkMans canvas@1.1.6
+229 verbose rebuildBundles canvas@1.1.6
+230 verbose rebuildBundles [ 'nan' ]
+231 info install canvas@1.1.6
+232 verbose unsafe-perm in lifecycle false
+233 info canvas@1.1.6 Failed to exec install script
+234 verbose node_modules/d3.layout.cloud/node_modules/canvas unbuild
+235 info preuninstall canvas@1.1.6
+236 info uninstall canvas@1.1.6
+237 verbose false,/Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules,/Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud/node_modules unbuild canvas@1.1.6
+238 info postuninstall canvas@1.1.6
+239 verbose about to build /Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules/d3.layout.cloud
+240 verbose node_modules/d3.layout.cloud unbuild
+241 info preuninstall d3.layout.cloud@1.0.5
+242 info uninstall d3.layout.cloud@1.0.5
+243 verbose true,/Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules,/Users/kyleriach/Documents/General Assembly/Projects/congress_connections/node_modules unbuild d3.layout.cloud@1.0.5
+244 info postuninstall d3.layout.cloud@1.0.5
+245 error canvas@1.1.6 install: `node-gyp rebuild`
+245 error Exit status 1
+246 error Failed at the canvas@1.1.6 install script.
+246 error This is most likely a problem with the canvas package,
+246 error not with npm itself.
+246 error Tell the author that this fails on your system:
+246 error     node-gyp rebuild
+246 error You can get their info via:
+246 error     npm owner ls canvas
+246 error There is likely additional logging output above.
+247 error System Darwin 13.2.0
+248 error command "node" "/usr/local/bin/npm" "install" "d3.layout.cloud"
+249 error cwd /Users/kyleriach/Documents/General Assembly/Projects/congress_connections
+250 error node -v v0.10.30
+251 error npm -v 1.4.21
+252 error code ELIFECYCLE
+253 verbose exit [ 1, true ]
