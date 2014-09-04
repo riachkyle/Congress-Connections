@@ -210,7 +210,7 @@ congressApp.factory('SenateData', ['$http', function($http){
   var senators = {};
 
   senators.getData = function(){
-    var url = 'http://localhost:3000/prod_senators/show';
+    var url = 'http://localhost:3000/prod_senators/';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };
@@ -224,7 +224,7 @@ congressApp.factory('CommitteeData', ['$http', function($http){
   var committees = {};
 
   committees.getData = function(){
-    var url = 'http://localhost:3000/prod_committee_refs/show';
+    var url = 'http://localhost:3000/prod_committee_refs/';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };
@@ -239,7 +239,7 @@ congressApp.factory('CommitteeLinksData', ['$http', function($http){
   var committeelinks = {};
 
   committeelinks.getData = function(){
-    var url = 'http://localhost:3000/prod_committees/show';
+    var url = 'http://localhost:3000/prod_committees/';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };

@@ -1,0 +1,2 @@
+class ProdVotesController < ApplicationController
+end
