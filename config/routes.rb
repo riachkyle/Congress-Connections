@@ -5,7 +5,8 @@ Rails.application.routes.draw do
     resources :prod_senators, defaults: {format: :json}
     resources :prod_committees, defaults: {format: :json}
     resources :prod_committee_refs, defaults: {format: :json}
-
+    resources :prod_votes, defaults: {format: :json}
+    resources :prod_bills, defaults: {format: :json}
   
 
   root 'senators#index'
