@@ -1,0 +1,7 @@
+class ProdSenatorSerializer < ActiveModel::Serializer
+<<<<<<< HEAD
+  attributes :bioguide_id, :senator_name, :state_name, :rank, :tern_end, :party, :term_start
+=======
+  attributes :bioguide_id, :senator_name, :nm_first, :nm_last, :gender, :party, :state, :state_name, :rank, :term_start, :tern_end
+>>>>>>> 29a54d0904bebdcd68b336159849667baaaa31c4
+end
