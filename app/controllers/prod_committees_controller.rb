@@ -1,6 +1,10 @@
 class ProdCommitteesController < ApplicationController
 
-  def show
-    @committees = render json: ProdCommittee.all      
+  respond_to :json
+
+  def index
+  	@links = ProdCommittee.all
+  	respond_with @links, each_serializer: ProdCommitteeSerializer    
   end
+
 end

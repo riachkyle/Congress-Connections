@@ -2,9 +2,9 @@ Rails.application.routes.draw do
 
   resources :committees 
     resources :senators
-    resources :prod_senators
-    resources :prod_committees
-    resources :prod_committee_refs
+    resources :prod_senators, defaults: {format: :json}
+    resources :prod_committees, defaults: {format: :json}
+    resources :prod_committee_refs, defaults: {format: :json}
 
   
 
