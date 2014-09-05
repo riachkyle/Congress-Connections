@@ -129,13 +129,9 @@ congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeD
 
                 var wordsMap = $scope.mapNodes($scope.wordsdata, "legislator");
 
-                console.log(wordsMap);
-
                 $scope.senators.forEach(function(s){
                     s.words = wordsMap.get(s.bioguide_id);
                 })
-
-                console.log($scope.senators);
 
                 for(i = $scope.senators.length-1; i >= 0; --i){
                     if( typeof $scope.senators[i].words === "undefined" ){
@@ -258,7 +254,7 @@ congressApp.factory('CommitteeLinksData', ['$http', function($http){
 congressApp.directive("networkGraph", function($window){
   return{
     restrict: "EA",
-    template: "<svg width='800' height='800'></svg>",
+    template: "<svg width='800' height='750'></svg>",
     link: function(scope, elem, attrs){
 
 
@@ -307,11 +303,13 @@ congressApp.directive("networkGraph", function($window){
       // --- Draw SVG --- //
 
       var width = 800;
-      var height = 700;
+      var height = 750;
 
       var svg = d3.select(svg)
                       .attr("width", width)
                       .attr("height", height);
+
+        var linkGroup = d3.select("svg").append("g").attr("class", "linkGroup");
 
       // --- Color Scale --- //
 
@@ -324,7 +322,7 @@ congressApp.directive("networkGraph", function($window){
       //this force will push the senators into a circle on the outside of the visualization
 
       var force = d3.layout.force()
-                      .charge(-20)
+                      .charge(-40)
                       .linkDistance(0)
                       .size([width, height]);
 
@@ -363,7 +361,7 @@ congressApp.directive("networkGraph", function($window){
 
           });
 
-          var link = selection.selectAll("line.link")
+          var link = linkGroup.selectAll("line.link")
                         .data(scope.links);
 
           link.enter()
@@ -383,13 +381,15 @@ congressApp.directive("networkGraph", function($window){
 
           //Function to establish whether or not there is a word count for the senators
 
-          var senatorNode = selection.selectAll("circle.senator")
+          var senatorNodeGroup = selection.selectAll("g.senator")
                           .data(scope.senators)
                       
-                      senatorNode.enter()
+                      senatorNodeGroup.enter()
+                                  .append("g")
+                                  .attr("class", "senator")
                                   .append("circle")
                                   .attr("class", "senator")
-                                  .attr("r", 4)
+                                  .attr("r", 6)
                                   .on("click", function(d,i) { scope.senatorinfo(d); })
                                   .attr("fill", function(d){
                                       if (d.party == "D"){
@@ -402,9 +402,28 @@ congressApp.directive("networkGraph", function($window){
                                         return "rgb(252,245,162)"
                                       }
                                   })
-                                  .attr("stroke", "rgb(150,150,150");
+                                  .attr("stroke", "rgb(220,220,220)");
 
-                      senatorNode.exit().remove();
+                      
+                                  
+                      senatorNodeGroup
+                                  .on("mouseover", function(d){
+                                      d3.select(this)
+                                          .append("text")
+                                          .text(function(d){
+                                            return d.nm_last
+                                          })
+                                          .attr("text-anchor", "middle")
+                                          .attr("transform", "translate(0, -5)")
+                                          .style("font-family", "Oswald");
+
+                                  })
+                                  .on("mouseout", function(d){
+                                      d3.select(this).select("text")
+                                          .remove();
+                                  });
+
+                      senatorNodeGroup.exit().remove();
 
           
 
@@ -424,8 +443,9 @@ congressApp.directive("networkGraph", function($window){
                       });
                   
 
-                  senatorNode.attr("cx", function(d) { return d.x })
-                      .attr("cy", function(d) { return d.y });
+                  senatorNodeGroup.attr("transform", function(d) {
+                      return "translate(" + d.x + ", " + d.y + ")"
+                    });
 
                   link.attr("x1", function(d) { return d.source.x })
                         .attr("y1", function(d) { return d.source.y });
@@ -454,10 +474,10 @@ congressApp.directive("networkGraph", function($window){
 
         selection = d3.select(selection);
 
-        var senatorNode = selection.selectAll("circle.senator")
+        var senatorNodeGroup = selection.selectAll("g.senator")
                           .data(scope.senators)
                       
-                      senatorNode.attr("class", "senator")
+                    senatorNodeGroup.select("circle")
                                   .attr("r", 4)
                                   .on("click", function(d,i) { scope.senatorinfo(d); })
                                   .attr("fill", function(d){
@@ -471,30 +491,18 @@ congressApp.directive("networkGraph", function($window){
                                         return "rgb(252,245,162)"
                                       }
                                   })
-                                  .attr("stroke", "rgb(150,150,150");
+                                  .attr("stroke", "rgb(220,220,220");
 
-                      senatorNode.exit().remove();
+                    senatorNodeGroup.exit().remove();
+
+                    
 
         force
                   .nodes(scope.senators)
                   .start();
 
-        var link = selection.selectAll("line.link")
-                        .data(scope.links);
 
-          link.attr("x1", function(d){
-                              return d.source.x
-                          })
-                          .attr("y1", function(d){
-                              return d.source.y
-                          })
-                          .attr("class", "link")
-                          .attr("stroke", "#ddd")
-                          .attr("stroke-opacity", 0.8);
-
-          link.exit().remove();
-
-      }
+      };
 
       
       // --- Draw Groups Nodes --- //
@@ -525,7 +533,8 @@ congressApp.directive("networkGraph", function($window){
                           })
                           .style("font-size", "12px")
                           .style("font-family", "Oswald")
-                          .attr("transform", "translate(-13,5)");
+                          .attr("text-anchor", "middle")
+                          .attr("transform", "translate(0, 5)");
                                   
 
               committeeNodeGroup.exit().remove();

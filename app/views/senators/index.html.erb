@@ -8,6 +8,14 @@
 
     <div network-graph id="network-graph" chart-data="senatordata" ng-click="senatorinfo"></div>
 
+
+    <!-- Capital Words Search Bar -->
+    
+    <div class="capwords">
+        <input type="text" size="25" placeholder="Search items by tags" data-ng-model="words">
+        <button type="submit" ng-click="updatewords()">Search!</button>
+    </div>
+
     <div class="eachsenator"> 
       <div class="senator-images"><img ng-src="/assets/225x275/{{currentsen.bioguide_id}}.jpg"/></div>
       <div class"senator-text">
@@ -28,10 +36,7 @@
       </div>
     </div>
  
-   <div class="capwords">
-        <input type="text" size="25" placeholder="Search items by tags" data-ng-model="words">
-        <button type="submit" ng-click="updatewords()">Search!</button>
-    </div>
+   
 
 
 
