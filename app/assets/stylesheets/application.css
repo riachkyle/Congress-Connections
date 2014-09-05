@@ -42,6 +42,23 @@ h1{
 	margin: 0 auto;
 }
 
+.senator{
+  cursor: pointer;
+}
+
+.capwords{
+  width: 100px;
+  margin: 0 auto;
+
+  input{
+    width: 100%;
+  }
+
+  button{
+    width: 100px;
+  }
+}
+
 .eachsenator {
  
   width: 500px;
