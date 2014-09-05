@@ -17,7 +17,7 @@ var congressApp = angular.module('congressApp',[])
 congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeData', 'CommitteeLinksData', 'BillsData', 'VotesData', function($scope, $http, SenateData, CommitteeData, CommitteeLinksData, BillsData, VotesData) {
 
 
-    // --- Map Nodes --- //
+    // ------ Map Nodes ------ //
 
     //Mapping nodes is necessary in order to tie data together
 
@@ -32,7 +32,10 @@ congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeD
 
       };
 
-  // ------ Capitol Words API Functionality ------ //
+  // ------ APIs ------ //
+
+
+  // --- Capitol Words API --- //
     
     $scope.words = '';
     $scope.wordsdata = {};
@@ -199,7 +202,6 @@ congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeD
   //Get Senator data from the API
   BillsData.getData().then(function(json){
     $scope.bills = json.data;
-    console.log($scope.bills)
   });
 
 
@@ -210,7 +212,6 @@ congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeD
   //Get Senator data from the API
   VotesData.getData().then(function(json){
     $scope.votes = json.data;
-    console.log($scope.votes)
   });
   // --- Nodes Map --- //
 
@@ -384,7 +385,7 @@ congressApp.directive("networkGraph", function($window){
                       .size([width, height]);
 
 
-      // --- Draw Senator Nodes --- //
+      // ------ Draw Senator Nodes ------ //
 
       var drawSenators = function(selection){
 
@@ -430,6 +431,8 @@ congressApp.directive("networkGraph", function($window){
 
           //Function to establish whether or not there is a word count for the senators
 
+          // --- Draw Senator Nodes --- //
+
           var senatorNodeGroup = selection.selectAll("g.senator")
                           .data(scope.senators)
                       
@@ -453,23 +456,64 @@ congressApp.directive("networkGraph", function($window){
                                   })
                                   .attr("stroke", "rgb(220,220,220)");
 
+                    senatorNodeGroup.append("svg:defs")
+                                .append("svg:pattern")
+                                .attr("id", function(d){
+                                    return "image_" + d.nm_last
+                                })
+                                .attr("patternUnits", "userSpaceOnUse")
+                                .attr("width", "50")
+                                .attr("height", "55")
+                                .attr("x", 25)
+                                .attr("y", 30)
+                                .append("svg:image")
+                                .attr("xlink:href", function(d){
+                                    return "/assets/225x275/" + d.bioguide_id + ".jpg"
+                                })
+                                .attr("x", 0)
+                                .attr("y", 0)
+                                .attr("width", "50")
+                                .attr("height", "57");
                       
                                   
                       senatorNodeGroup
-                                  .on("mouseover", function(d){
-                                      d3.select(this)
-                                          .append("text")
-                                          .text(function(d){
+                                .on("mouseover", function(d){
+                                    d3.select(this)
+                                        .append("text")
+                                        .text(function(d){
                                             return d.nm_last
-                                          })
-                                          .attr("text-anchor", "middle")
-                                          .attr("transform", "translate(0, -5)")
-                                          .style("font-family", "Oswald");
+                                        })
+                                        .attr("text-anchor", "middle")
+                                        .attr("transform", "translate(0, -25)")
+                                        .style("font-family", "Oswald")
+                                        .style("font-size", "12px")
+                                        .style("color", "white");
+                                    d3.select(this)
+                                        .select("circle")
+                                        .attr("fill", function(d){
+                                           return "url(#image_" + d.nm_last + ")"
+                                        })
+                                        .transition()
+                                        .attr("r", 24);
 
                                   })
                                   .on("mouseout", function(d){
-                                      d3.select(this).select("text")
-                                          .remove();
+                                        d3.select(this).select("text")
+                                            .remove();
+                                        d3.select(this).select("circle")
+                                            .attr("fill", function(d){
+                                                if (d.party == "D"){
+                                                    return "rgb(0,180,255)"
+                                                }
+                                                else if (d.party == "R"){
+                                                    return "rgb(252,15,62)"
+                                                }
+                                                else{
+                                                    return "rgb(252,245,162)"
+                                                }
+                                            })
+                                            .transition()
+                                            .attr("r", 6);
                                   });
 
                       senatorNodeGroup.exit().remove();
