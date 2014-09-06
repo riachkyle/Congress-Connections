@@ -148,8 +148,6 @@ congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeD
                 }
 
                 $scope.$digest();
-
-                console.log($scope.links);
             }
 
 
@@ -422,7 +420,9 @@ congressApp.directive("networkGraph", function($window){
                           .attr("y1", function(d){
                               return d.source.y
                           })
-                          .attr("class", "link")
+                          .attr("class", function(d){
+                            return "link " + d.bioguide_id
+                          })
                           .attr("stroke", "#ddd")
                           .attr("stroke-opacity", 0.8);
 
@@ -445,13 +445,13 @@ congressApp.directive("networkGraph", function($window){
                                   .on("click", function(d,i) { scope.senatorinfo(d); })
                                   .attr("fill", function(d){
                                       if (d.party == "D"){
-                                          return "rgb(0,180,255)"
+                                          return "rgb(0,24,147)"
                                       }
                                       else if (d.party == "R"){
-                                        return "rgb(252,15,62)"
+                                        return "rgb(165,26,0)"
                                       }
                                       else{
-                                        return "rgb(252,245,162)"
+                                        return "rgb(141,21,146)"
                                       }
                                   })
                                   .attr("stroke", "rgb(220,220,220)");
@@ -478,6 +478,9 @@ congressApp.directive("networkGraph", function($window){
                                   
                       senatorNodeGroup
                                 .on("mouseover", function(d){
+                                    
+                                    var linkClass = "line." + d.bioguide_id;
+
                                     d3.select(this)
                                         .append("text")
                                         .text(function(d){
@@ -488,6 +491,7 @@ congressApp.directive("networkGraph", function($window){
                                         .style("font-family", "Oswald")
                                         .style("font-size", "12px")
                                         .style("color", "white");
+
                                     d3.select(this)
                                         .select("circle")
                                         .attr("fill", function(d){
@@ -496,6 +500,14 @@ congressApp.directive("networkGraph", function($window){
                                         .transition()
                                         .attr("r", 24);
 
+                                    linkGroup.selectAll("line.link")
+                                        .attr("stroke", "rgba(255,255,255,0)");
+
+                                    var linkSelected = linkGroup.selectAll(linkClass);
+
+                                    linkSelected
+                                        .attr("stroke", "#ddd");
+
                                   })
                                   .on("mouseout", function(d){
                                         d3.select(this).select("text")
@@ -503,21 +515,23 @@ congressApp.directive("networkGraph", function($window){
                                         d3.select(this).select("circle")
                                             .attr("fill", function(d){
                                                 if (d.party == "D"){
-                                                    return "rgb(0,180,255)"
+                                                    return "rgb(0,24,147)"
                                                 }
                                                 else if (d.party == "R"){
-                                                    return "rgb(252,15,62)"
+                                                    return "rgb(165,26,0)"
                                                 }
                                                 else{
-                                                    return "rgb(252,245,162)"
+                                                    return "rgb(141,21,146)"
                                                 }
                                             })
                                             .transition()
                                             .attr("r", 6);
+
+                                        linkGroup.selectAll("line.link")
+                                            .attr("stroke", "#ddd");
                                   });
 
                       senatorNodeGroup.exit().remove();
-
           
 
             
@@ -567,6 +581,15 @@ congressApp.directive("networkGraph", function($window){
 
         selection = d3.select(selection);
 
+        var link = linkGroup.selectAll("line.link")
+                        .data(scope.links);
+
+            link.attr("class", function(d){
+                            return "link " + d.bioguide_id
+                        });
+
+            link.exit().remove();
+
         var senatorNodeGroup = selection.selectAll("g.senator")
                           .data(scope.senators)
                       
@@ -575,19 +598,18 @@ congressApp.directive("networkGraph", function($window){
                                   .on("click", function(d,i) { scope.senatorinfo(d); })
                                   .attr("fill", function(d){
                                       if (d.party == "D"){
-                                          return "rgb(0,180,255)"
+                                          return "rgb(0,24,147)"
                                       }
                                       else if (d.party == "R"){
-                                        return "rgb(252,15,62)"
+                                        return "rgb(165,26,0)"
                                       }
                                       else{
-                                        return "rgb(252,245,162)"
+                                        return "rgb(141,21,146)"
                                       }
                                   })
                                   .attr("stroke", "rgb(220,220,220");
 
                     senatorNodeGroup.exit().remove();
-
                     
 
         force
