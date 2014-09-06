@@ -501,8 +501,8 @@ congressApp.directive("networkGraph", function($window){
                                         })
                                         .attr("text-anchor", "middle")
                                         .attr("transform", "translate(0, -25)")
-                                        .style("font-family", "Oswald")
-                                        .style("font-size", "12px")
+                                        .style("font-family", "Open Sans Condensed")
+                                        .style("font-size", "16px")
                                         .style("color", "black");
 
                                     d3.select(this)
@@ -677,6 +677,25 @@ congressApp.directive("networkGraph", function($window){
                                     
                                 var linkClass = "line." + d.committee_id;
                                 var nodeClass = "g." + d.committee_id;
+                                console.log("run")
+
+                                d3.selectAll("circle.committee")
+                                            .transition()
+                                            .attr("r", 15);
+
+                                        
+                                d3.selectAll("text")
+                                            .remove();
+
+                                committeeNodeGroup.append("text")
+                                            .text(function(d){
+                                                return d.committee_id
+                                            })
+                                            .style("font-size", "16px")
+                                            .style("font-family", "Open Sans Condensed")
+                                            .attr("text-anchor", "middle")
+                                            .attr("transform", "translate(0,5)");
+
 
                                 d3.selectAll("g.committee")
                                         .select("text").remove();
@@ -687,8 +706,8 @@ congressApp.directive("networkGraph", function($window){
                                             return d.committee_name
                                         })
                                         .attr("text-anchor", "middle")
-                                        .style("font-family", "Oswald")
-                                        .style("font-size", "12px");
+                                        .style("font-family", "Open Sans Condensed")
+                                        .style("font-size", "16px");
 
                                 d3.select(this)
                                         .select("circle")
@@ -712,8 +731,8 @@ congressApp.directive("networkGraph", function($window){
                                         })
                                         .attr("text-anchor", "middle")
                                         .attr("transform", "translate(0, -15)")
-                                        .style("font-family", "Oswald")
-                                        .style("font-size", "12px")
+                                        .style("font-family", "Open Sans Condensed")
+                                        .style("font-size", "16px")
                                         .style("color", "black");
 
                 // -- Committee MouseOut Function -- //
@@ -734,8 +753,8 @@ congressApp.directive("networkGraph", function($window){
                                               .text(function(d){
                                                  return d.committee_id
                                               })
-                                              .style("font-size", "12px")
-                                              .style("font-family", "Oswald")
+                                              .style("font-size", "16px")
+                                              .style("font-family", "Open Sans Condensed")
                                               .attr("text-anchor", "middle")
                                               .attr("transform", "translate(0, 5)");
 
@@ -745,8 +764,8 @@ congressApp.directive("networkGraph", function($window){
                           .text(function(d){
                              return d.committee_id
                           })
-                          .style("font-size", "12px")
-                          .style("font-family", "Oswald")
+                          .style("font-size", "16px")
+                          .style("font-family", "Open Sans Condensed")
                           .attr("text-anchor", "middle")
                           .attr("transform", "translate(0, 5)");
                                   
