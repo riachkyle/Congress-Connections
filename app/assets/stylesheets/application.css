@@ -17,6 +17,7 @@
 @import url(http://fonts.googleapis.com/css?family=Oswald);
 @import url(http://fonts.googleapis.com/css?family=Playfair+Display);
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
 
 
 @mixin translate-center($x, $y) {
@@ -49,7 +50,7 @@ h1{
 	margin: 0 auto;
 }
 
-.senator{
+.senator, .committee{
   cursor: pointer;
 }
 
