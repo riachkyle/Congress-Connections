@@ -11,6 +11,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
       
 <script> 
+
 var congressApp = angular.module('congressApp',[])
 
 
@@ -38,8 +39,25 @@ congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeD
     $scope.wordsdata = {};
     $scope.senfor = {};
     $scope.senwords = {};
+    $scope.billcheck = '';
 
     console.log($scope.wordsdata);
+
+
+$scope.changebill = function(billcheck) {
+  $scope.billfinal = [];
+  var bill = $scope.votes;
+  for (var i = 0; i < bill.length - 1; ++i){
+    if (bill[i].bill_id === billcheck) {
+      $scope.billfinal.push(bill[i]);
+      console.log($scope.billfinal);
+    }
+  }
+  
+  console.log($scope.billfinal);
+  console.log($scope.billcheck);
+};
+
 
 
     // Sets the variable for the senator info box
