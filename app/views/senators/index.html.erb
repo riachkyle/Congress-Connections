@@ -30,7 +30,7 @@
         <br>2: {{senwords[1].ngram}}
         <br>3: {{senwords[2].ngram}}
         <br>4: {{senwords[3].ngram}}
-        <br> 5: {{senwords[4].ngram}}</p>
+        <br>5: {{senwords[4].ngram}}</p>
       </div>
     </div>
  
@@ -38,7 +38,12 @@
 
 
 
-<div word-cloud id="word-cloud"></div> 
+
+  <div class='billcollection'>
+    <select ng-model="billcheck" ng-change="changebill(billcheck)" ng-options="item.bill_id as (item.title) for item in bills"></select>
+  
+      
+  </div>
 
 
 
