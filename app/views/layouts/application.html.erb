@@ -817,9 +817,10 @@ congressApp.directive("networkGraph", function($window){
           var selection = d3.select(selection);
 
           var committeeNodeGroup = selection.selectAll("g.committee")
-                          .data(scope.groups)
+                          .data(scope.groups);
                       
-              committeeNodeGroup.enter()
+              committeeNodeGroup
+                          .enter()
                           .append("g")
                           .attr("class", function(d){
                             return "committee " + d.senators
@@ -830,6 +831,19 @@ congressApp.directive("networkGraph", function($window){
                           .attr("fill", function(d) {
                             return "rgba(240,240,240,1)"
                           })
+
+              committeeNodeGroup
+                          .select("text").remove();
+
+              committeeNodeGroup
+                          .append("text")
+                          .text(function(d){
+                             return d.committee_id
+                          })
+                          .style("font-size", "16px")
+                          .style("font-family", "Open Sans Condensed")
+                          .attr("text-anchor", "middle")
+                          .attr("transform", "translate(0, 5)");
                           
                 // -- Committee MouseOver Function -- //
 
@@ -980,15 +994,6 @@ congressApp.directive("networkGraph", function($window){
                                               .attr("transform", "translate(0, 5)");
 
                                   });
-
-              committeeNodeGroup.append("text")
-                          .text(function(d){
-                             return d.committee_id
-                          })
-                          .style("font-size", "16px")
-                          .style("font-family", "Open Sans Condensed")
-                          .attr("text-anchor", "middle")
-                          .attr("transform", "translate(0, 5)");
                                   
 
               committeeNodeGroup.exit().remove();
