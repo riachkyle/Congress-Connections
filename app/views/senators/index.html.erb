@@ -14,6 +14,16 @@
         <button type="submit" ng-click="updatewords()">Search!</button>
     </div>
 
+    <!-- end Capitol Words Search -->
+
+    <!-- Votes Drop Down Menu -->
+
+    <div class='billcollection'>
+        <select ng-model="billcheck" ng-change="changebill(billcheck)" ng-options="item.bill_id as (item.title) for item in bills"></select>
+    </div>
+
+    <!-- end Votes Drown Down -->
+
     <div class="eachsenator"> 
       <div class="senator-images"><img ng-src="/assets/225x275/{{currentsen.bioguide_id}}.jpg"/></div>
       <div class"senator-text">
@@ -33,19 +43,6 @@
         <br>5: {{senwords[4].ngram}}</p>
       </div>
     </div>
- 
-   
-
-
-
-
-  <div class='billcollection'>
-    <select ng-model="billcheck" ng-change="changebill(billcheck)" ng-options="item.bill_id as (item.title) for item in bills"></select>
-  
-      
-  </div>
-
-
 
   </div>
 
