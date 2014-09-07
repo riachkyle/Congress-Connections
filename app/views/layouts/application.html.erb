@@ -20,7 +20,8 @@ congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeD
 
     // ------ Map Nodes ------ //
 
-    //Mapping nodes is necessary in order to tie data together
+    // Mapping nodes is necessary in order to tie data together.
+    // Call on this function for each of the senator nodes, group nodes, and links nodes.
 
     $scope.mapNodes = function(nodes, field){
                     
@@ -42,24 +43,43 @@ congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeD
     $scope.wordsdata = {};
     $scope.senfor = {};
     $scope.senwords = {};
-    $scope.billcheck = '';
-
-    console.log($scope.wordsdata);
+    $scope.billCheck = '';
 
 
-$scope.changebill = function(billcheck) {
-  $scope.billfinal = [];
-  var bill = $scope.votes;
-  for (var i = 0; i < bill.length - 1; ++i){
-    if (bill[i].bill_id === billcheck) {
-      $scope.billfinal.push(bill[i]);
-      console.log($scope.billfinal);
-    }
-  }
-  
-  console.log($scope.billfinal);
-  console.log($scope.billcheck);
-};
+    // --- Bills API --- //
+
+    $scope.changebill = function(billCheck) {
+        
+        //create copies of senators and links so that we can reset them on a new search
+        $scope.senators = angular.copy($scope.senatorsReset);
+        $scope.links = angular.copy($scope.linksReset);
+
+
+        $scope.votesFinal = [];
+        $scope.votes.forEach(function(v){
+            if (v.bill_id == billCheck){
+                $scope.votesFinal.push(v)
+            }
+        });
+
+        var votesMap = $scope.mapNodes($scope.votesFinal, "bioguide_id");
+
+        $scope.senators.forEach(function(s){
+            s.vote = votesMap.get(s.bioguide_id);
+        });
+
+        for(i = $scope.senators.length-1; i >= 0; --i){
+            if( $scope.senators[i].vote.vote !== "Yea" ){
+                for (j = $scope.links.length-1; j >= 0; --j){
+                    if ($scope.links[j].bioguide_id == $scope.senators[i].bioguide_id){
+                        $scope.links.splice(j, 1)
+                    }
+                }
+                $scope.senators.splice(i, 1);
+            }
+        };
+
+    };
 
 
 
@@ -97,7 +117,7 @@ $scope.changebill = function(billcheck) {
     function showResponse2 (response) {
                 RESPONSE = response;
                 $scope.senwords = response;
-                $scope.$apply();
+                $scope.$digest();
                 
                 if (this && this.url && (typeof(this.url) == "string")) {
                     var anchor = jQuery("#url");
@@ -221,7 +241,7 @@ $scope.changebill = function(billcheck) {
   });
 
 
- // --- Bill Data API --- //
+ // --- Votes Data API --- //
 
   $scope.votes = {};
 
@@ -229,6 +249,7 @@ $scope.changebill = function(billcheck) {
   VotesData.getData().then(function(json){
     $scope.votes = json.data;
   });
+
   // --- Nodes Map --- //
 
   //The nodes map needs to be accessible by the links when they draw from one node to the other.
@@ -339,6 +360,13 @@ congressApp.directive("networkGraph", function($window){
       scope.$watch( 'wordsdata', function(){
             
             if (scope.senators.length && scope.wordsdata.length){
+                updateSenators("svg");
+            }
+      });
+
+      scope.$watch( 'votesFinal', function(){
+            
+            if (scope.senators.length && scope.votesFinal.length){
                 updateSenators("svg");
             }
       });
