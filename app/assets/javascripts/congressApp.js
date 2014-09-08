@@ -1,0 +1,1 @@
+var congressApp = angular.module('congressApp',[]);

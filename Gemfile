@@ -33,7 +33,10 @@ gem 'rails_12factor', group: :production
 # Use Unicorn Webserver
 gem 'unicorn'
 
+# Use Angular gems to make it work with Rails
+gem 'angularjs-rails'
 gem 'active_model_serializers'
+gem 'angular-rails-templates'
 
 group :development, :test do
   gem 'rspec-rails', '~>3.0.0'
