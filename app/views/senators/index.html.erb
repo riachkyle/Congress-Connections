@@ -1,41 +1,46 @@
-  <h1>The Congress Connection Project</h1>
-
-  <div class="description">The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress.  Using APIs compiled by the Sunlight Foundation, we have created an interactive network visualization for users to explore.  Press the various connection options to see different data views.</div>
-
-  <div ng-controller="Congress">
-
-    <div network-graph id="network-graph" chart-data="senatordata" ng-click="senatorinfo"></div>
-
-
-    <!-- Capital Words Search Bar -->
+<div class="container">
     
-    <div class="capwords">
-        <input type="text" size="25" placeholder="Search items by tags" data-ng-model="words">
-        <button type="submit" ng-click="updatewords()">Search</button>
-    </div>
+    <h1>The Congress Connection Project</h1>
 
-    <!-- end Capitol Words Search -->
+    <div class="description">The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress.  Using APIs compiled by the Sunlight Foundation, we have created an interactive network visualization for users to explore.  Press the various connection options to see different data views.</div>
 
-    <!-- Votes Drop Down Menu -->
+    <div ng-controller="Congress">
 
-    <div class='billcollection'>
-        <select ng-model="billcheck" ng-change="changebill(billcheck)" ng-options="item.bill_id as (item.title) for item in bills"></select>
-    </div>
-
-    <!-- end Votes Drown Down -->
-
-    <div class="eachSenator" ng-show="senatorActive" ng-class="{zoomIn : senatorActive}"> 
-      <div class="minimize" ng-click="minimizeSenator()">X</div>
-      <div class="senator-images"><img ng-src="/assets/225x275/{{currentsen.bioguide_id}}.jpg"/></div>
-      <div class"senator-text">
-      <h3>{{currentsen.senator_name}}</h3>
-      <div class="state" ng-class="{democrat : currentsen.party == 'D', republican : currentsen.party == 'R'}">{{currentsen.party}}, {{currentsen.state_name}}</div>
-      <div term-graph id="term-graph"></div>
-
-      <div class="words" ng-show="senwords.length">Top 5 Words:
-        <br>{{senwords[0].ngram}}, {{senwords[1].ngram}}, {{senwords[2].ngram}}, {{senwords[3].ngram}}, {{senwords[4].ngram}}</div>
+      <!-- Capital Words Search Bar -->
+      
+      <div class="capwords">
+          <input type="text" size="25" placeholder="Search Capitol Words API" data-ng-model="words" class="capWordSearch">
+          <input type="submit" name="submit" ng-click="updatewords()" id="searchButton">
       </div>
+
+      <!-- end Capitol Words Search -->
+
+      <!-- Votes Drop Down Menu -->
+
+      <div class='billCollection'>
+          <select ng-model="billcheck" ng-change="changebill(billcheck)" ng-options="item.bill_id as (item.title) for item in bills" placeholder="Select a Bill">
+            <option value="">Select a Bill</option>
+          </select>
+      </div>
+
+      <!-- end Votes Drown Down -->
+
+      <div network-graph id="network-graph" chart-data="senatordata" ng-click="senatorinfo"></div>
+
+      <div class="eachSenator" ng-show="senatorActive" ng-class="{zoomIn : senatorActive}"> 
+        <div class="minimize" ng-click="minimizeSenator()">X</div>
+        <div class="senator-images"><img ng-src="/assets/225x275/{{currentsen.bioguide_id}}.jpg"/></div>
+        <div class"senator-text">
+        <h3>{{currentsen.senator_name}}</h3>
+        <div class="state" ng-class="{democrat : currentsen.party == 'D', republican : currentsen.party == 'R'}">{{currentsen.party}}, {{currentsen.state_name}}</div>
+        <div term-graph id="term-graph"></div>
+
+        <div class="words" ng-show="senwords.length">Top 5 Words:
+          <br>{{senwords[0].ngram}}, {{senwords[1].ngram}}, {{senwords[2].ngram}}, {{senwords[3].ngram}}, {{senwords[4].ngram}}</div>
+        </div>
+      </div>
+
     </div>
 
-  </div>
+</div>
 
