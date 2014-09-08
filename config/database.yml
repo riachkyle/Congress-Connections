@@ -82,4 +82,4 @@ production:
   <<: *default
   database: congress_connections_production
   username: congress_connections
-  password: <%= ENV['CONGRESS_CONNECTIONS_DATABASE_PASSWORD'] %>
+  password: password
