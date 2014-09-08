@@ -292,7 +292,7 @@ congressApp.factory('SenateData', ['$http', function($http){
   var senators = {};
 
   senators.getData = function(){
-    var url = 'http://localhost:3000/prod_senators/';
+    var url = 'http://ccproject.herokuapp.com/prod_senators/';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };
@@ -306,7 +306,7 @@ congressApp.factory('CommitteeData', ['$http', function($http){
   var committees = {};
 
   committees.getData = function(){
-    var url = 'http://localhost:3000/prod_committee_refs/';
+    var url = 'http://ccproject.herokuapp.com/prod_committee_refs/';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };
@@ -321,7 +321,7 @@ congressApp.factory('CommitteeLinksData', ['$http', function($http){
   var committeelinks = {};
 
   committeelinks.getData = function(){
-    var url = 'http://localhost:3000/prod_committees/';
+    var url = 'http://ccproject.herokuapp.com/prod_committees/';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };
@@ -335,7 +335,7 @@ congressApp.factory('BillsData', ['$http', function($http){
   var bills = {};
 
   bills.getData = function(){
-    var url = 'http://localhost:3000/prod_bills/';
+    var url = 'http://ccproject.herokuapp.com/prod_bills/';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };
@@ -350,7 +350,7 @@ congressApp.factory('VotesData', ['$http', function($http){
   var votes = {};
 
   votes.getData = function(){
-    var url = 'http://localhost:3000/prod_votes/';
+    var url = 'http://ccproject.herokuapp.com/prod_votes/';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };
