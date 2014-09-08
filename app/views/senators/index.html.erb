@@ -11,7 +11,7 @@
     
     <div class="capwords">
         <input type="text" size="25" placeholder="Search items by tags" data-ng-model="words">
-        <button type="submit" ng-click="updatewords()">Search!</button>
+        <button type="submit" ng-click="updatewords()">Search</button>
     </div>
 
     <!-- end Capitol Words Search -->
@@ -24,23 +24,16 @@
 
     <!-- end Votes Drown Down -->
 
-    <div class="eachsenator"> 
+    <div class="eachSenator" ng-show="senatorActive" ng-class="{zoomIn : senatorActive}"> 
+      <div class="minimize" ng-click="minimizeSenator()">X</div>
       <div class="senator-images"><img ng-src="/assets/225x275/{{currentsen.bioguide_id}}.jpg"/></div>
       <div class"senator-text">
-      <p>Click on an Senator circle </p>
-      <p>Name: {{currentsen.senator_name}}<br>
-      State:  {{currentsen.state_name}} <br>
-      Party: {{currentsen.party}} <br>
-      Rank: {{currentsen.rank}} <br>
-      Term Started: {{currentsen.term_start}} <br>
-      Term Ended: {{currentsen.tern_end}}</p>
+      <h3>{{currentsen.senator_name}}</h3>
+      <div class="state" ng-class="{democrat : currentsen.party == 'D', republican : currentsen.party == 'R'}">{{currentsen.party}}, {{currentsen.state_name}}</div>
+      <div term-graph id="term-graph"></div>
 
-      <p>Top 5 words said by this senator: 
-        <br>1: {{senwords[0].ngram}}
-        <br>2: {{senwords[1].ngram}}
-        <br>3: {{senwords[2].ngram}}
-        <br>4: {{senwords[3].ngram}}
-        <br>5: {{senwords[4].ngram}}</p>
+      <div class="words" ng-show="senwords.length">Top 5 Words:
+        <br>{{senwords[0].ngram}}, {{senwords[1].ngram}}, {{senwords[2].ngram}}, {{senwords[3].ngram}}, {{senwords[4].ngram}}</div>
       </div>
     </div>
 
