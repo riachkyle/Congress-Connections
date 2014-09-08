@@ -17,4 +17,5 @@ RSpec.describe ProdCommitteeRefsController, :type => :controller do
 		end
 
 	end
+	
 end

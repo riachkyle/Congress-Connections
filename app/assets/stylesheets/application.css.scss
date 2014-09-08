@@ -18,6 +18,7 @@
 @import url(http://fonts.googleapis.com/css?family=Playfair+Display);
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+@import url(http://fonts.googleapis.com/css?family=Oswald:300);
 
 
 @mixin translate-center($x, $y) {
@@ -31,10 +32,18 @@
 }
 
 h1{
-	font-size: 40px;
+  font-size: 40px;
 	font-family: 'Playfair Display', serif;
   text-align: center;
-  
+}
+
+h3{
+  margin: 25px 0 15px;
+  line-height: 0;
+  font-size: 22px;
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .description{
@@ -67,20 +76,104 @@ h1{
   }
 }
 
-.eachsenator {
- 
+.eachSenator {
   width: 500px;
-  height: 400px;
+  height: 250px;
   margin: 0 auto;
   text-align: center;
-  border: 2px solid black;
- 
+  background-color: rgba(255,255,255,.9);
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 13px 63px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 13px 63px -9px rgba(0,0,0,0.75);
+  box-shadow: 0px 13px 63px -9px rgba(0,0,0,0.75);
+  position: absolute;
+  top: 400px;
+  margin-left: -250px;
+  left: 50%;
+
+  .words{
+      font-family: 'Open Sans Condensed', sans-serif;
+      font-size: 18px;
+      line-height: 32px;
+      text-align: center;
+      margin: 20px auto;
+  }
+
+}
+
+.minimize{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+.minimize:hover{
+    color: rgb(180,180,180);
 }
 
 .senator-images {
   float:left;
+
+  img{
+    width: 150px;
+    padding: 20px;
+  }
+
 }
 
 .senator-text {
   float:left;
+  
+}
+
+.state{
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.republican{
+    color: rgb(163,0,6);
+}
+
+.democrat{
+    color: rgb(2,93,140);
+}
+
+
+/* ------ Animations ------ */
+
+/* Zoom In */
+@-webkit-keyframes zoomIn{
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn{
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    -ms-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  50%{
+    opacity: 1;
+  }
+}
+
+.zoomIn{
+  -webkit-animation: zoomIn .4s;
+  animation: zoomIn .4s;
 }
