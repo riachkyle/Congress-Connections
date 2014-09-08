@@ -1,11 +1,11 @@
-Congress Connections - Network Visualization of the U.S. Congress
+#Congress Connections - Network Visualization of the U.S. Congress
 
 Congress Connections is a data visualization application that provides insight into the many connections between legislators, committees, bills, votes, and influences.  
 
 The current release supports lookup functionality for U.S. Senators only. 
 
 
-Data Source:
+##Data Source:
 
 Congress Connections utilizes the Sunlight Foundation suite of API's to support congressional data visualization.
 
@@ -23,7 +23,7 @@ http://sunlightlabs.github.io/Capitol-Words/
 
 The Congress API provides affiliation data on senators, committees, votes, and bills and is the primary data source for the network visualization.   
 
-API Methods used:
+###API Methods used:
 
 /legislators
 /committees
