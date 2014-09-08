@@ -27,6 +27,12 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
+# Use Rails_12Factor for Heroku
+gem 'rails_12factor', group: :production
+
+# Use Unicorn Webserver
+gem 'unicorn'
+
 gem 'active_model_serializers'
 
 group :development, :test do
@@ -41,6 +47,7 @@ group :test do
   gem 'shoulda-matchers', require: false
 end
 
+ruby "2.1.2"
 
 
 # Use ActiveModel has_secure_password
