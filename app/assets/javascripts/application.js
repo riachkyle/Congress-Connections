@@ -15,6 +15,12 @@
 //= require angular
 //= require angular-resource
 //= require angular-rails-templates
+//= require angular/congressApp
+//= require angular/congressAppController
+//= require angular/congressBillsDataFactory
+//= require angular/congressCommitteeLinksFactory
+//= require angular/congressSenateDataFactory
+//= require angular/congressVotesDataFactory
 //= require d3
 //= require_tree ../templates
 //= require_tree .
