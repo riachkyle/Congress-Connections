@@ -1,23 +1,23 @@
 congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeData', 'CommitteeLinksData', 'BillsData', 'VotesData', function($scope, $http, SenateData, CommitteeData, CommitteeLinksData, BillsData, VotesData) {
 
 
-    // ------ Map Nodes ------ //
+// ------ Map Nodes ------ //
 
-    // Mapping nodes is necessary in order to tie data together.
-    // Call on this function for each of the senator nodes, group nodes, and links nodes.
+// Mapping nodes is necessary in order to tie data together.
+// Call on this function for each of the senator nodes, group nodes, and links nodes.
 
-    $scope.mapNodes = function(nodes, field){
+$scope.mapNodes = function(nodes, field){
                     
-                nodesMap = d3.map()
-                nodes.forEach(function(n){
-                    nodesMap.set(n[field], n)
-                });
+    nodesMap = d3.map()
+    nodes.forEach(function(n){
+        nodesMap.set(n[field], n)
+    });
 
-                return nodesMap;
+    return nodesMap;
 
-      };
+};
 
-  // ------ APIs ------ //
+// ------ APIs ------ //
 
 
     // --- Capitol Words API --- //

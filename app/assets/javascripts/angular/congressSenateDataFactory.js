@@ -3,7 +3,7 @@ congressApp.factory('SenateData', ['$http', function($http){
   var senators = {};
 
   senators.getData = function(){
-    var url = 'http://ccproject.herokuapp.com/prod_senators/';
+    var url = 'http://localhost:3000/prod_senators/';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };

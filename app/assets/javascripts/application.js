@@ -18,7 +18,7 @@
 //= require angular/congressApp
 //= require angular/congressAppController
 //= require angular/congressBillsDataFactory
-//= require angular/congressCommitteeLinksFactory
+//= require angular/congressCommitteeLinksDataFactory
 //= require angular/congressSenateDataFactory
 //= require angular/congressVotesDataFactory
 //= require d3

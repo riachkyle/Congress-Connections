@@ -8,53 +8,45 @@ congressApp.directive("networkGraph", function($window){
     link: function(scope, elem, attrs){
 
 
+    // --- Draw Graph --- //
 
-      //Watch the $scope.senators variable. If it updates, run the draw senators function.
-      scope.$watch( 'senators', function(){
-  
-          if (scope.senators.length && scope.links.length){
+    //This function checks to see if the senators, links, and groups data are all available. If they are, the draw functions will be run.
+
+    function drawGraphs(){
+        if (scope.senators.length && scope.links.length && scope.groups.length){
 
             drawSenators("#graphCanvas");
-
-          }
-
-      });
-
-      scope.$watch( 'wordsdata', function(){
-            
-            if (scope.senators.length && scope.wordsdata.length){
-                updateSenators("#graphCanvas");
-            }
-      });
-
-      scope.$watch( 'votesFinal', function(){
-            
-            if (scope.senators.length && scope.votesFinal.length){
-                updateSenators("#graphCanvas");
-            }
-      });
-
-      //Watch $scope.groups variable. If it updates, run the draw senators function.
-      scope.$watch( 'groups', function() {
-
-          if (scope.groups.length && scope.links.length){
-
             drawGroups("#graphCanvas");
 
-          }
+        }
+    }
 
 
-      });
+    scope.$watch( 'senators', function(){
+        drawGraphs();
+    });
+
+    scope.$watch( 'wordsdata', function(){
+        if (scope.senators.length && scope.wordsdata.length){
+            updateSenators("#graphCanvas");
+        }
+    });
+
+    scope.$watch( 'votesFinal', function(){   
+        if (scope.senators.length && scope.votesFinal.length){
+            updateSenators("#graphCanvas");
+        }
+    });
+
+    //Watch $scope.groups variable. If it updates, run the draw senators function.
+    scope.$watch( 'groups', function() {
+        drawGraphs();
+    });
 
 
-      scope.$watch( 'links', function() {
-            
-          if (scope.links.length){
-            drawSenators("#graphCanvas");
-            drawGroups("#graphCanvas");
-          }
-
-      })
+    scope.$watch( 'links', function() {
+        drawGraphs();
+    })
       
 
       // --- Draw SVG --- //
@@ -677,7 +669,7 @@ congressApp.directive("networkGraph", function($window){
               var link = selection.selectAll("line.link");
 
               link.attr("x2", function(d){
-                            console.log( d.target.x )
+                            return d.target.x 
                         })
                         .attr("y2", function(d){
                             return d.target.y
