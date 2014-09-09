@@ -16,6 +16,7 @@
 //= require angular-resource
 //= require angular-rails-templates
 //= require d3
+//= require_tree ../templates
 //= require_tree .
 
 
