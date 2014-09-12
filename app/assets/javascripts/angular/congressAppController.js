@@ -51,6 +51,8 @@ $scope.mapNodes = function(nodes, field){
             s.vote = votesMap.get(s.bioguide_id);
         });
 
+        
+        // Take out from senators from the senators nodes that did not vote 'Yea' for this particular bill'. Take out their links as well.
         for(i = $scope.senators.length-1; i >= 0; --i){
             if( $scope.senators[i].vote.vote !== "Yea" ){
                 for (j = $scope.links.length-1; j >= 0; --j){
@@ -66,7 +68,6 @@ $scope.mapNodes = function(nodes, field){
 
     //function that will make a live api call to Sunlight for individual senators======
     $scope.updatesenwords = function(){
-    console.log($scope.senwords)
     var query_params = { apikey: 'fa096fc2f69047c8a33d4c3862cba250',
                         entity_type: 'legislator',
                         entity_value: $scope.senfor,
