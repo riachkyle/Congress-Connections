@@ -2,43 +2,123 @@
     
     <h1>The Congress Connection Project</h1>
 
-    <div class="description">The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress.  Using APIs compiled by the Sunlight Foundation, we have created an interactive network visualization for users to explore.  Press the various connection options to see different data views.</div>
+    <div class="description">The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress. Using APIs compiled by the <a href="http://sunlightfoundation.com/" target="_blank">Sunlight Foundation</a>, the application is an interactive network visualization for users to explore. Currently, the application only presents data from the 113th Congress, which first met on January 3, 2013, and will end on January 3, 2015. Press the various connection options to see different data views.</div>
 
     <div ng-controller="Congress">
 
-      <!-- Capital Words Search Bar -->
-      
-      <div class="capwords">
-          <input type="text" size="25" placeholder="Search Capitol Words API" data-ng-model="words" class="capWordSearch">
-          <input type="submit" name="submit" ng-click="updatewords()" id="searchButton">
-      </div>
+        <!-- Searches -->
 
-      <!-- end Capitol Words Search -->
+        <div class="searches group">
 
-      <!-- Votes Drop Down Menu -->
+            <!-- Capital Words Search Bar -->
+          
+            <div class="capwords">
 
-      <div class='billCollection'>
-          <select ng-model="billcheck" ng-change="changebill(billcheck)" ng-options="item.bill_id as (item.title) for item in bills" placeholder="Select a Bill">
-            <option value="">Select a Bill</option>
-          </select>
-      </div>
+                <div class="searchHead">Capitol Words Search</div>
 
-      <!-- end Votes Drown Down -->
+                <div class="searchDescription">
+                    <em>Type in any word and click "Submit" to see the 10 senators that used that word the most in Capitol proceedings.</em> <i class="fa fa-question-circle fa-lg icon" ng-click="capWordsInfoView=true"></i>
+                </div>
 
-      <div network-graph id="network-graph" chart-data="senatordata" ng-click="senatorinfo"></div>
+                <input type="text" size="25" placeholder="Search Capitol Words API" data-ng-model="words" class="capWordSearch">
+                <input type="submit" name="submit" ng-click="updatewords()" id="searchButton">
 
-      <div class="eachSenator" ng-show="senatorActive" ng-class="{zoomIn : senatorActive}"> 
-        <div class="minimize" ng-click="minimizeSenator()">X</div>
-        <div class="senator-images"><img ng-src="/assets/225x275/{{currentsen.bioguide_id}}.jpg"/></div>
-        <div class"senator-text">
-        <h3>{{currentsen.senator_name}}</h3>
-        <div class="state" ng-class="{democrat : currentsen.party == 'D', republican : currentsen.party == 'R'}">{{currentsen.party}}, {{currentsen.state_name}}</div>
-        <div term-graph id="term-graph"></div>
+            </div>
 
-        <div class="words" ng-show="senwords.length">Top 5 Words:
-          <br>{{senwords[0].ngram}}, {{senwords[1].ngram}}, {{senwords[2].ngram}}, {{senwords[3].ngram}}, {{senwords[4].ngram}}</div>
+            <!-- end Capitol Words Search -->
+
+            <!-- Votes Drop Down Menu -->
+
+            <div class='billCollection'>
+
+                <div class="searchHead">Bills Search</div>
+
+                <div class="searchDescription">
+                    <em>Select a bill that passed in the 113th Congress to see which senators voted "yea" for that bill.</em> <i class="fa fa-question-circle fa-lg icon" ng-click="billsInfoView=true"></i>
+                </div>
+
+                <select ng-model="billcheck" ng-change="changebill(billcheck)" ng-options="item.bill_id as (item.title) for item in bills" placeholder="Select a Bill">
+                    <option value="">Select a Bill</option>
+                </select>
+            </div>
+
+            <!-- end Votes Drown Down -->
+
         </div>
-      </div>
+        <!-- end of Searches -->
+
+      
+        <!-- Visualization Container -->
+
+        <div class="visContainer">
+
+            <!-- Legend -->
+
+            <div legend-canvas id="legend"></div>
+
+            <!-- Network Graph -->
+
+            <div network-graph id="network-graph" chart-data="senatordata" ng-click="senatorinfo"></div>
+
+        </div>
+
+        <!-- Senator Info -->
+
+        <div class="eachSenator" ng-show="senatorActive" ng-class="{zoomIn : senatorActive}"> 
+            <div class="minimize" ng-click="minimizeSenator()">X</div>
+            <div class="senator-images"><img ng-src="/assets/225x275/{{currentsen.bioguide_id}}.jpg"/></div>
+            <div class"senator-text">
+            <h3>{{currentsen.senator_name}}</h3>
+            <div class="state" ng-class="{democrat : currentsen.party == 'D', republican : currentsen.party == 'R'}">{{currentsen.party}}, {{currentsen.state_name}}</div>
+            <div term-graph id="term-graph"></div>
+
+            <div class="words" ng-show="senwords.length">Top 5 Words:
+            <br>{{senwords[0].ngram}}, {{senwords[1].ngram}}, {{senwords[2].ngram}}, {{senwords[3].ngram}}, {{senwords[4].ngram}}</div>
+            </div>
+        </div>
+
+
+        <!-- Infobox Modals -->
+
+        <!-- Cap Words Infobox -->
+
+        <div id="capWordsInfoBox" class="infoBox" ng-show="capWordsInfoView" ng-class="{fadeInUp : capWordsInfoView }">
+
+            <div class="closeWindow" ng-click="capWordsInfoView=false">X</div>
+
+            <h3>Capitol Words Search</h3>
+
+            <hr></hr>
+
+            <div class="infoBoxDiv">
+                The Capitol Words Search utilizes the Sunlight Foundation's <a href="http://sunlightlabs.github.io/Capitol-Words/" target="_blank">Capitol Words API</a>, which gives the public access to the <a href="http://thomas.loc.gov/home/abt.cong.rec.html" target="_blank"><em>Congressional Record</em></a>, a written record of every word spoken in Congressional proceedings. The <em>Congressional Record</em> is published on a daily basis by the Government Printing Office.
+            </div>
+            <div class="infoBoxDiv">
+                The Congress Connection Project currently only searches for words spoken by senators during the 113th Congress.
+            </div>
+            <div class="infoBoxDiv">
+                For more information on the Sunlight Foundation's Capitol Words API, visit the <a href="http://capitolwords.org/?terma=global+warming&termb=climate+change" target="_blank">project page</a>.
+            </div>
+
+        </div>
+
+        <!-- Cap Words Infobox -->
+
+        <div id="billsInfoBox" class="infoBox" ng-show="billsInfoView" ng-class="{fadeInUp : billsInfoView }">
+
+            <div class="closeWindow" ng-click="billsInfoView=false">X</div>
+
+            <h3>Bills Search</h3>
+
+            <hr></hr>
+
+            <div class="infoBoxDiv">
+               The bills search allows users to search through a database of a selection of bills passed by the 113th Congress. When a user selects a bill, it returns all of the senators that voted "yea" for that given bill. The bills currently in the database were collected using the Sunlight Foundation's <a href="https://sunlightlabs.github.io/congress/" target="_blank">Congress API</a>.
+            </div>
+
+        </div>
+
+        <div class="darkenWindow" ng-show="capWordsInfoView || billsInfoView"></div>
 
     </div>
 

@@ -58,13 +58,7 @@ congressApp.directive("networkGraph", function($window){
                       .attr("width", width)
                       .attr("height", height);
 
-        var linkGroup = d3.select("svg").append("g").attr("class", "linkGroup");
-
-      // --- Color Scale --- //
-
-      var groupColors = ['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78', '#2ca02c', '#98df8a', '#d62728', '##fff9896', '#9467bd', '#c5b0d5', '#8c564b', '#c49c94', '#e377c2', '#f7b6d2', '#f7f7f7', '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5', '#ffff00'];
-
-      
+        var linkGroup = d3.select("#graphCanvas").append("g").attr("class", "linkGroup");
 
 
       // --- Outer Force for Senators --- //

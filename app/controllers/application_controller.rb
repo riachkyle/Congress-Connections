@@ -8,4 +8,5 @@ class ApplicationController < ActionController::Base
   		root: false
   	}
   end
+  
 end
