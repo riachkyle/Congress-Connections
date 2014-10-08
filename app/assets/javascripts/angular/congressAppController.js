@@ -1,6 +1,12 @@
 congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeData', 'CommitteeLinksData', 'BillsData', 'VotesData', function($scope, $http, SenateData, CommitteeData, CommitteeLinksData, BillsData, VotesData) {
 
 
+// ------ Views ------ //
+
+$scope.capWordsInfoView=false;
+$scope.billsInfoView=false;
+
+
 // ------ Map Nodes ------ //
 
 // Mapping nodes is necessary in order to tie data together.
