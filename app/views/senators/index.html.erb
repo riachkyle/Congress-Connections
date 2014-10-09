@@ -2,7 +2,9 @@
     
     <h1>The Congress Connection Project</h1>
 
-    <div class="description">The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress. Using APIs compiled by the <a href="http://sunlightfoundation.com/" target="_blank">Sunlight Foundation</a>, the application is an interactive network visualization for users to explore. Currently, the application only presents data from the 113th Congress, which first met on January 3, 2013, and will end on January 3, 2015. Press the various connection options to see different data views.</div>
+    <div class="description">The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress. Using APIs compiled by the <a href="http://sunlightfoundation.com/" target="_blank">Sunlight Foundation</a>, the application is an interactive network visualization linking senators to the committees on which they sit. Currently, the application only contains data from senators in the 113th Congress, which first convened on January 3, 2013, and will end on January 3, 2015. 
+
+    <div class="directions"><em>Place your mouse over a senator node to see the committees that senator sits on. Place your mouse over a committee node to view which senators are members of that committee.</em></div>
 
     <div ng-controller="Congress">
 
@@ -91,7 +93,7 @@
             <hr></hr>
 
             <div class="infoBoxDiv">
-                The Capitol Words Search utilizes the Sunlight Foundation's <a href="http://sunlightlabs.github.io/Capitol-Words/" target="_blank">Capitol Words API</a>, which gives the public access to the <a href="http://thomas.loc.gov/home/abt.cong.rec.html" target="_blank"><em>Congressional Record</em></a>, a written record of every word spoken in Congressional proceedings. The <em>Congressional Record</em> is published on a daily basis by the Government Printing Office.
+                The Capitol Words Search utilizes the Sunlight Foundation's <a href="http://sunlightlabs.github.io/Capitol-Words/" target="_blank">Capitol Words API</a>, which gives the public access to the <a href="http://thomas.loc.gov/home/abt.cong.rec.html" target="_blank"><em>Congressional Record</em></a>, a written record of every word spoken in Congressional proceedings. The <em>Congressional Record</em> is published on a daily basis by the <a href="http://www.gpo.gov/" target="_blank">Government Printing Office</a>.
             </div>
             <div class="infoBoxDiv">
                 The Congress Connection Project currently only searches for words spoken by senators during the 113th Congress.
@@ -119,6 +121,16 @@
         </div>
 
         <div class="darkenWindow" ng-show="capWordsInfoView || billsInfoView"></div>
+
+        <!-- About Section -->
+
+        <div class="about">
+
+            <h4>About the Project</h4>
+
+            <p>The Congress Connection Project was produced by <a href="https://github.com/nickmro" target="_blank">Nick Mrozowski</a>, <a href="https://github.com/teachMeCode" target="_blank">Brian Purcell</a>, and <a href="https://github.com/riachkyle" target="_blank">Kyle Riach</a> as students in General Assembly's <a href="https://generalassemb.ly/education/web-development-immersive" target="_blank">Web Development Immersive</a> course. Learn more about the project, its methodology, and technologies used at the project's <a href="https://github.com/riachkyle/Congress-Connections" target="_blank">GitHub page</a>.</p>
+
+        </div>
 
     </div>
 
