@@ -3,7 +3,7 @@ congressApp.factory('CommitteeLinksData', ['$http', function($http){
   var committeelinks = {};
 
   committeelinks.getData = function(){
-    var url = 'http://localhost:3000/prod_committees/';
+    var url = 'http://ccproject.herokuapp.com/prod_committees/';
     var endpoint = url; 
     return $http({ method: 'GET', url: endpoint });
   };
