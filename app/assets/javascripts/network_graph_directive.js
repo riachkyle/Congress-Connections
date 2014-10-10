@@ -4,7 +4,7 @@
 congressApp.directive("networkGraph", function($window){
   return{
     restrict: "EA",
-    template: "<svg width='800' height='750' id='graphCanvas'></svg>",
+    template: "<svg width='830' height='750' id='graphCanvas'></svg>",
     link: function(scope, elem, attrs){
 
 
@@ -51,7 +51,7 @@ congressApp.directive("networkGraph", function($window){
 
       // --- Draw SVG --- //
 
-      var width = 800;
+      var width = 830;
       var height = 750;
 
       var svg = d3.select(svg)

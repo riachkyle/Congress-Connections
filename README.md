@@ -30,7 +30,9 @@ For the current release, the Congress Connection Project only contains data on s
 
 Bills are limited to a selection of those that passed during the 113th Congress, given the vast number of bills that were introduced and considered during that time period. Future iterations of the project may include both bills that passed and those that did not.
 
-The Capitol Words search returns words that were spoken during Congressional proceedings, as collected and published by the [Government Printing Office](http://www.gpo.gov/). It only returns words spoken during the 113th Congress. 
+The Capitol Words search returns words that were spoken during Congressional proceedings, as collected and published by the [Government Printing Office](http://www.gpo.gov/). It only returns words spoken during the 113th Congress.
+
+Rather than query the Sunlight Foundation APIs every time the graph is updated, data was pulled from the APIs, then stored in the Congress Connection application database.
 
 ##Technologies:
 

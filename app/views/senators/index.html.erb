@@ -1,12 +1,11 @@
-<div class="container">
+<div class="container" ng-controller="Congress">
     
     <h1>The Congress Connection Project</h1>
 
-    <div class="description">The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress. Using APIs compiled by the <a href="http://sunlightfoundation.com/" target="_blank">Sunlight Foundation</a>, the application is an interactive network visualization linking senators to the committees on which they sit. Currently, the application only contains data from senators in the 113th Congress, which first convened on January 3, 2013, and will end on January 3, 2015. 
+    <div class="description">The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress. Using APIs compiled by the <a href="http://sunlightfoundation.com/" target="_blank">Sunlight Foundation</a>, the application is an interactive network visualization linking senators to the committees on which they sit. Currently, the application only contains data from senators in the 113th Congress, which first convened on January 3, 2013, and will end on January 3, 2015.</div>
 
-    <div class="directions"><em>Place your mouse over a senator node to see the committees that senator sits on. Place your mouse over a committee node to view which senators are members of that committee.</em></div>
+    <!-- <div class="directions"><em>Place your mouse over a senator node to see the committees that senator sits on. Place your mouse over a committee node to view which senators are members of that committee.</em></div> -->
 
-    <div ng-controller="Congress">
 
         <!-- Searches -->
 
@@ -48,6 +47,34 @@
 
         </div>
         <!-- end of Searches -->
+
+
+        <!-- Share Links -->
+
+        <div class="share shareTop group">
+            
+            <div id="email">
+                <div class="socialMediaButton">
+                    <a href="mailto:?subject=The%20Congress%20Connection%20Project%20&body=http://ccproject.herokuapp.com"></a>
+                    <p>Email</p>
+                </div>
+            </div>
+
+            <div id="twitter">
+                <div class="socialMediaButton">
+                    <a href="http://twitter.com/share" target="_blank"></a>
+                    <p>Tweet</p>
+                </div>
+            </div>
+
+            <div id="facebook">
+                <div class="socialMediaButton">
+                    <a href="http://www.facebook.com/sharer/sharer.php?u=ccproject.herokuapp.com&title=The%20Congress%20Connection%20Project" target="_blank"></a>
+                    <p>Share</p>
+                </div>
+            </div>
+
+        </div>
 
       
         <!-- Visualization Container -->
@@ -120,8 +147,6 @@
 
         </div>
 
-        <div class="darkenWindow" ng-show="capWordsInfoView || billsInfoView"></div>
-
         <!-- About Section -->
 
         <div class="about">
@@ -132,7 +157,36 @@
 
         </div>
 
+        <!-- Share Links Footer -->
+
+        <div class="share shareBottom group">
+            
+            <div id="email">
+                <div class="socialMediaButton">
+                    <a href="mailto:?subject=The%20Congress%20Connection%20Project%20&body=http://ccproject.herokuapp.com"></a>
+                    <p>Email</p>
+                </div>
+            </div>
+
+            <div id="twitter">
+                <div class="socialMediaButton">
+                    <a href="http://twitter.com/share" target="_blank"></a>
+                    <p>Tweet</p>
+                </div>
+            </div>
+
+            <div id="facebook">
+                <div class="socialMediaButton">
+                    <a href="http://www.facebook.com/sharer/sharer.php?u=ccproject.herokuapp.com&title=The%20Congress%20Connection%20Project" target="_blank"></a>
+                    <p>Share</p>
+                </div>
+            </div>
+
+        </div>
+
     </div>
+
+    <div class="darkenWindow" ng-show="capWordsInfoView || billsInfoView"></div>
 
 </div>
 
