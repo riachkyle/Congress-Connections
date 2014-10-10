@@ -3,8 +3,10 @@ congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeD
 
 // ------ Views ------ //
 
-$scope.capWordsInfoView=false;
-$scope.billsInfoView=false;
+$scope.capWordsInfoView = false;
+$scope.billsInfoView = false;
+
+$scope.wordsView = false;
 
 
 // ------ Map Nodes ------ //
@@ -110,24 +112,26 @@ $scope.mapNodes = function(nodes, field){
 
     //function that will make a live api call to Sunlight Capitol Words======
     $scope.updatewords = function(){
-    var query_params = { apikey: 'fa096fc2f69047c8a33d4c3862cba250',
-                         phrase: $scope.words,
-                         per_page: 10,
-                         chamber: 'senate',
-                         start_date: '2013-01-01',
-                         end_date: '2014-12-31'
+        var query_params = { apikey: 'fa096fc2f69047c8a33d4c3862cba250',
+                            phrase: $scope.words,
+                            per_page: 10,
+                            chamber: 'senate',
+                            start_date: '2013-01-01',
+                            end_date: '2014-12-31'
                          
                        };
-    var endpoint = 'http://capitolwords.org/api/phrases/legislator.json';
-     
-    var options = {
-      data: query_params,
-      type: 'GET',
-      dataType: 'jsonp'      
-    };
+        var endpoint = 'http://capitolwords.org/api/phrases/legislator.json';
+         
+        var options = {
+          data: query_params,
+          type: 'GET',
+          dataType: 'jsonp' 
+        };
 
-    var request = jQuery.ajax(endpoint, options)
-                        .done(showResponse);
+        var request = jQuery.ajax(endpoint, options)
+                            .done(showResponse);
+
+        $scope.wordsView = true;
     };
 
     // function to return the json and reset 'wordsdata' variable=============
@@ -167,6 +171,12 @@ $scope.mapNodes = function(nodes, field){
                 $scope.$digest();
             }
 
+  // Click button to show all senators
+  $scope.showAll = function(){
+      $scope.senators = angular.copy($scope.senatorsReset);
+      $scope.links = angular.copy($scope.linksReset);
+      $scope.wordsView = false;
+  };
 
 
   
