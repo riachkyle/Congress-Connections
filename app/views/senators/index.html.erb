@@ -18,11 +18,13 @@
                 <div class="searchHead">Capitol Words Search</div>
 
                 <div class="searchDescription">
-                    <em>Type in any word and click "Submit" to see the 10 senators that used that word the most in Capitol proceedings.</em> <i class="fa fa-question-circle fa-lg icon" ng-click="capWordsInfoView=true"></i>
+                    <em>Type in any word and hit Enter to see the 10 senators that used that word the most in Capitol proceedings.</em> <i class="fa fa-question-circle fa-lg icon" ng-click="capWordsInfoView=true"></i>
                 </div>
 
-                <input type="text" size="25" placeholder="Search Capitol Words API" data-ng-model="words" class="capWordSearch">
-                <input type="submit" name="submit" ng-click="updatewords()" id="searchButton">
+                <form ng-submit="updatewords()">
+                    <input type="text" size="25" placeholder="Search Capitol Words API" data-ng-model="words" class="capWordSearch" ng-submit="updatewords()" />
+                    <input type="submit" ng-submit="updatewords()" value="Search" id="searchButton"/>
+                </form>
 
             </div>
 
@@ -183,8 +185,6 @@
             </div>
 
         </div>
-
-    </div>
 
     <div class="darkenWindow" ng-show="capWordsInfoView || billsInfoView"></div>
 

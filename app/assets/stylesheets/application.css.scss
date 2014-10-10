@@ -51,7 +51,7 @@ body{
     font-size: 40px;
   	font-family: 'Playfair Display', serif;
     text-align: center;
-    margin: 30px auto 5px;
+    margin: 30px auto 15px;
   }
 
   h3{
@@ -243,12 +243,13 @@ body{
 
       #searchButton{
           padding: 6px;
-          width: 75px;
-          background-color: rgba(81,81,81, 1);
-          border: none;
+          height: 32px;
+          width: 44px;
+          background-color: rgb(142,178,197);
+          border: 1px solid rgba(130,130,130,1);
           border-radius: 5px;
           color: white;
-          font-size: 18px;
+          font-size: 12px;
           font-family: 'Open Sans Condensed', sans-serif;
           letter-spacing: 1px;
           outline: none;
@@ -256,7 +257,7 @@ body{
       }
 
       #searchButton:hover{
-          background-color: rgba(151,151,151,1);
+          background-color: #ccc;
       }
 
   }
