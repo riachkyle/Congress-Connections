@@ -4,13 +4,13 @@
 congressApp.directive("legendCanvas", function($window){
 	return{
 		restrict: "EA",
-		template: "<svg width='140' height='144' id='legendCanvas'></svg>",
+		template: "<svg width='130' height='125' id='legendCanvas'></svg>",
 		link: function(scope, elem, attrs){
 
 			// --- Draw Canvas --- //
 
-			var width = 140;
-			var height = 144;
+			var width = 130;
+			var height = 125;
 
 			var svg = d3.select("#legendCanvas")
 					.attr("width", width)
@@ -18,9 +18,9 @@ congressApp.directive("legendCanvas", function($window){
 
 			// Committee nodes
 			var committee = svg.append("circle")
-                    .attr("r", 20)
-                    .attr("cx", 23)
-                    .attr("cy", 24)
+                    .attr("r", 6)
+                    .attr("cx", 13)
+                    .attr("cy", 14)
                     .attr("fill", function(d) {
                     	return "rgb(220,220,220)"
                     });
@@ -28,22 +28,22 @@ congressApp.directive("legendCanvas", function($window){
 			// Demacrat nodes
 			var dem = svg.append("circle")
 					.attr("r", 6)
-					.attr("cx", 23)
-					.attr("cy", 65)
+					.attr("cx", 13)
+					.attr("cy", 45)
 					.attr("fill", "rgb(142,178,197)");
 
 			// Republican nodes
 			var rep = svg.append("circle")
 					.attr("r", 6)
-					.attr("cx", 23)
-					.attr("cy", 96)
+					.attr("cx", 13)
+					.attr("cy", 76)
 					.attr("fill", "rgb(229,98,92)");
 
 			// Independent/Other nodes
 			var ind = svg.append("circle")
 					.attr("r", 6)
-					.attr("cx", 23)
-					.attr("cy", 127)
+					.attr("cx", 13)
+					.attr("cy", 107)
 					.attr("fill", "rgb(182,98,144)");
 
 			// --- Legend Text --- //
@@ -51,32 +51,32 @@ congressApp.directive("legendCanvas", function($window){
 
 			// Committee Text
 			legendTextGroup.append("text")
-					.attr("x", 55)
-					.attr("y", 32)
+					.attr("x", 45)
+					.attr("y", 22)
 					.attr("font-size", "14px")
 					.attr("font-family", "Roboto")
 					.text("Committee");
 
 			// Democrat Text
 			legendTextGroup.append("text")
-					.attr("x", 55)
-					.attr("y", 71)
+					.attr("x", 45)
+					.attr("y", 53)
 					.attr("font-size", "14px")
 					.attr("font-family", "Roboto")
 					.text("Democrat");
 
 			// Republican Text
 			legendTextGroup.append("text")
-					.attr("x", 55)
-					.attr("y", 102)
+					.attr("x", 45)
+					.attr("y", 84)
 					.attr("font-size", "14px")
 					.attr("font-family", "Roboto")
 					.text("Republican");
 
 			// Independent Text
 			legendTextGroup.append("text")
-					.attr("x", 55)
-					.attr("y", 133)
+					.attr("x", 45)
+					.attr("y", 115)
 					.attr("font-size", "14px")
 					.attr("font-family", "Roboto")
 					.text("Independent");
