@@ -11,6 +11,10 @@ $scope.wordsView = false;
 
 $scope.senatorDropdownView = false;
 
+//Tooltips
+$scope.infoTooltipView = false;
+$scope.noCapWordsView = false;
+
 
 // ------ Map Nodes ------ //
 
@@ -138,9 +142,8 @@ $scope.mapNodes = function(nodes, field){
         var request = jQuery.ajax(endpoint, options)
                             .done(showResponse);
 
-        $scope.wordsView = true;
-
         $scope.unshowSenator();
+
     };
 
     // function to return the json and reset 'wordsdata' variable=============
@@ -148,33 +151,48 @@ $scope.mapNodes = function(nodes, field){
                 RESPONSE = response;
                 
                 $scope.wordsdata = response.results;
-                
-                //create copies of senators and links so that we can reset them on a new search
-                $scope.senators = angular.copy($scope.senatorsReset);
-                $scope.links = angular.copy($scope.linksReset);
 
-                if (this && this.url && (typeof(this.url) == "string")) {
-                    var anchor = jQuery("#url");
-                    anchor.text(this.url.toString());
-                    anchor.attr('href', this.url.toString());
+                if ($scope.wordsdata.length < 1){
+                  $scope.noCapWordsView = true;
+                  setTimeout( function(){
+                    $scope.noCapWordsView = false
+                    $scope.$digest();
+                  }, 3000);
                 }
-                jQuery("#output").text(JSON.stringify(response, null, '  '));
 
-                var wordsMap = $scope.mapNodes($scope.wordsdata, "legislator");
+                else{
 
-                $scope.senators.forEach(function(s){
-                    s.words = wordsMap.get(s.bioguide_id);
-                })
+                  $scope.wordsView = true;
+                  $scope.noCapWordsView = false;
+                
+                  //create copies of senators and links so that we can reset them on a new search
+                  $scope.senators = angular.copy($scope.senatorsReset);
+                  $scope.links = angular.copy($scope.linksReset);
 
-                for(i = $scope.senators.length-1; i >= 0; --i){
-                    if( typeof $scope.senators[i].words === "undefined" ){
-                      for (j = $scope.links.length-1; j >= 0; --j){
-                        if ($scope.links[j].bioguide_id == $scope.senators[i].bioguide_id){
-                          $scope.links.splice(j, 1)
+                  if (this && this.url && (typeof(this.url) == "string")) {
+                      var anchor = jQuery("#url");
+                      anchor.text(this.url.toString());
+                      anchor.attr('href', this.url.toString());
+                  }
+                  jQuery("#output").text(JSON.stringify(response, null, '  '));
+
+                  var wordsMap = $scope.mapNodes($scope.wordsdata, "legislator");
+
+                  $scope.senators.forEach(function(s){
+                      s.words = wordsMap.get(s.bioguide_id);
+                  })
+
+                  for(i = $scope.senators.length-1; i >= 0; --i){
+                      if( typeof $scope.senators[i].words === "undefined" ){
+                        for (j = $scope.links.length-1; j >= 0; --j){
+                          if ($scope.links[j].bioguide_id == $scope.senators[i].bioguide_id){
+                            $scope.links.splice(j, 1)
+                          }
                         }
+                        $scope.senators.splice(i, 1);
                       }
-                      $scope.senators.splice(i, 1);
-                    }
+                  }
+
                 }
 
                 $scope.$digest();
@@ -352,9 +370,9 @@ $scope.mapNodes = function(nodes, field){
                         return d.nm_last
                 })
                 .attr("text-anchor", "middle")
-                .attr("transform", "translate(0, -22)")
-                .style("font-family", "Open Sans Condensed")
-                .style("font-size", "16px")
+                .attr("transform", "translate(0, -25)")
+                .style("font-family", "Roboto")
+                .style("font-size", "14px")
                 .style("color", "black");
 
                 // Senator Image
@@ -400,8 +418,8 @@ $scope.mapNodes = function(nodes, field){
                         return d.committee_name
                     })
                     .attr("text-anchor", "middle")
-                    .style("font-family", "Open Sans Condensed")
-                    .style("font-size", "16px");
+                    .style("font-family", "Roboto")
+                    .style("font-size", "14px");
 
             }
         };
@@ -447,8 +465,8 @@ $scope.mapNodes = function(nodes, field){
                                             })   
                 .attr("text-anchor", "middle")
                 .attr("transform", "translate(0,5)")
-                .style("font-family", "Open Sans Condensed")
-                .style("font-size", "16px");
+                .style("font-family", "Roboto")
+                .style("font-size", "14px");
 
             d3.selectAll("line.link")
                 .attr("stroke", "rgba(220,220,220,.3)");

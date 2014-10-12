@@ -1,1 +1,1 @@
-var congressApp = angular.module('congressApp',[]);
+var congressApp = angular.module('congressApp',['templates']);
