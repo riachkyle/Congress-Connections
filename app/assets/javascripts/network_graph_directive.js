@@ -4,7 +4,7 @@
 congressApp.directive("networkGraph", function($window){
   return{
     restrict: "EA",
-    template: "<svg width='830' height='700' id='graphCanvas'></svg>",
+    template: "<svg width='830' height='750' id='graphCanvas'></svg>",
     link: function(scope, elem, attrs){
 
 
@@ -52,7 +52,7 @@ congressApp.directive("networkGraph", function($window){
       // --- Draw SVG --- //
 
       var width = 830;
-      var height = 700;
+      var height = 750;
 
       var svg = d3.select(svg)
                       .attr("width", width)
@@ -235,8 +235,8 @@ congressApp.directive("networkGraph", function($window){
                           
                           k = e.alpha * 0.1;
 
-                          o.x += (centerPlacement(500, keys, i).x - o.x) * k;
-                          o.y += (centerPlacement(500, keys, i).y - o.y) * k;
+                          o.x += (centerPlacement(550, keys, i).x - o.x) * k;
+                          o.y += (centerPlacement(550, keys, i).y - o.y) * k;
                       });
                   
 
@@ -368,8 +368,8 @@ congressApp.directive("networkGraph", function($window){
                           .text(function(d){
                              return d.committee_id
                           })
-                          .style("font-size", "16px")
-                          .style("font-family", "Open Sans Condensed")
+                          .style("font-size", "14px")
+                          .style("font-family", "Roboto")
                           .attr("text-anchor", "middle")
                           .attr("transform", "translate(0, 5)");
                           
@@ -403,8 +403,8 @@ congressApp.directive("networkGraph", function($window){
                                             .text(function(d){
                                                 return d.committee_id
                                             })
-                                            .style("font-size", "16px")
-                                            .style("font-family", "Open Sans Condensed")
+                                            .style("font-size", "14px")
+                                            .style("font-family", "Roboto")
                                             .attr("text-anchor", "middle")
                                             .attr("transform", "translate(0,5)");
 
@@ -418,8 +418,8 @@ congressApp.directive("networkGraph", function($window){
                                             return d.committee_name
                                         })
                                         .attr("text-anchor", "middle")
-                                        .style("font-family", "Open Sans Condensed")
-                                        .style("font-size", "16px");
+                                        .style("font-family", "Roboto")
+                                        .style("font-size", "14px");
 
                                 d3.select(this)
                                         .select("circle")
@@ -479,8 +479,8 @@ congressApp.directive("networkGraph", function($window){
                                         })
                                         .attr("text-anchor", "middle")
                                         .attr("transform", "translate(0, -15)")
-                                        .style("font-family", "Open Sans Condensed")
-                                        .style("font-size", "16px")
+                                        .style("font-family", "Roboto")
+                                        .style("font-size", "14px")
                                         .style("color", "black");
 
                 // -- Committee MouseOut Function -- //
@@ -524,8 +524,8 @@ congressApp.directive("networkGraph", function($window){
                                               .text(function(d){
                                                  return d.committee_id
                                               })
-                                              .style("font-size", "16px")
-                                              .style("font-family", "Open Sans Condensed")
+                                              .style("font-size", "14px")
+                                              .style("font-family", "Roboto")
                                               .attr("text-anchor", "middle")
                                               .attr("transform", "translate(0, 5)");
 

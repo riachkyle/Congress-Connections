@@ -2,10 +2,6 @@
     
     <h1>The Congress Connection Project</h1>
 
-    <div class="description">The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress. Using APIs compiled by the <a href="http://sunlightfoundation.com/" target="_blank">Sunlight Foundation</a>, the application is an interactive network visualization linking senators to the committees on which they sit. Currently, the application only contains data from senators in the 113th Congress, which first convened on January 3, 2013, and will end on January 3, 2015.</div>
-
-    <!-- <div class="directions"><em>Place your mouse over a senator node to see the committees that senator sits on. Place your mouse over a committee node to view which senators are members of that committee.</em></div> -->
-
 
         <!-- Searches -->
 
@@ -22,9 +18,11 @@
                 </div>
 
                 <form ng-submit="updatewords()">
-                    <input type="text" size="25" placeholder="Search Capitol Words API" data-ng-model="words" class="searchInput" ng-submit="updatewords()" />
+                    <input type="text" size="25" placeholder="Search Capitol Words" data-ng-model="words" class="searchInput" ng-submit="updatewords()" />
                     <input type="submit" ng-submit="updatewords()" value="Search" class="searchButton"/>
                 </form>
+
+                <div ng-show="noCapWordsView" class="noWord" ng-class="{fadeInFast : noCapWordsView}"><em>No senator spoke this word.</em></div>
 
             </div>
 
@@ -106,6 +104,7 @@
 
         <div id="showAll" ng-click="showAll()" ng-show="wordsView" ng-class="{ fadeIn : wordsView }"><i class="fa fa-users"></i> View All</div>
 
+
       
         <!-- Visualization Container -->
 
@@ -118,6 +117,12 @@
             <!-- Network Graph -->
 
             <div network-graph id="network-graph" chart-data="senatordata" ng-click="senatorinfo"></div>
+
+            <!-- Info Button -->
+
+            <div id="directionButton" ng-mouseover="infoTooltipView = true" ng-mouseout="infoTooltipView = false">i</div>
+
+            <info-tooltip ng-show="infoTooltipView" ng-class="{fadeInFast : infoTooltipView}"></info-tooltip>
 
         </div>
 
@@ -203,7 +208,9 @@
 
             <h4>About the Project</h4>
 
-            <p>The Congress Connection Project was produced by <a href="https://github.com/nickmro" target="_blank">Nick Mrozowski</a>, <a href="https://github.com/teachMeCode" target="_blank">Brian Purcell</a>, and <a href="https://github.com/riachkyle" target="_blank">Kyle Riach</a> as students in General Assembly's <a href="https://generalassemb.ly/education/web-development-immersive" target="_blank">Web Development Immersive</a> course. Learn more about the project, its methodology, and technologies used at the project's <a href="https://github.com/riachkyle/Congress-Connections" target="_blank">GitHub page</a>.</p>
+            <p>The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress. Using APIs compiled by the <a href="http://sunlightfoundation.com/" target="_blank">Sunlight Foundation</a>, the application is an interactive network visualization linking senators to the committees on which they sit. Currently, the application only contains data from senators in the 113th Congress, which first convened on January 3, 2013, and will end on January 3, 2015.</p>
+
+            <p>The project was produced by <a href="https://github.com/nickmro" target="_blank">Nick Mrozowski</a>, <a href="https://github.com/teachMeCode" target="_blank">Brian Purcell</a>, and <a href="https://github.com/riachkyle" target="_blank">Kyle Riach</a> as students in General Assembly's <a href="https://generalassemb.ly/education/web-development-immersive" target="_blank">Web Development Immersive</a> course. Learn more about the project, its methodology, and technologies used at the project's <a href="https://github.com/riachkyle/Congress-Connections" target="_blank">GitHub page</a>.</p>
 
         </div>
 
