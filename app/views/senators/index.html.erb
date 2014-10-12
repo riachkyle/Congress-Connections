@@ -13,17 +13,17 @@
 
             <!-- Capital Words Search Bar -->
           
-            <div class="capwords">
+            <div class="capwords search">
 
                 <div class="searchHead">Capitol Words Search</div>
 
                 <div class="searchDescription">
-                    <em>Type in any word and hit Enter to see the 10 senators that used that word the most in Capitol proceedings.</em> <i class="fa fa-question-circle fa-lg icon" ng-click="capWordsInfoView=true"></i>
+                    <em>Type in any word and hit Enter to see the 10 senators that used that word the most.</em> <i class="fa fa-question-circle fa-lg icon" ng-click="capWordsInfoView=true"></i>
                 </div>
 
                 <form ng-submit="updatewords()">
-                    <input type="text" size="25" placeholder="Search Capitol Words API" data-ng-model="words" class="capWordSearch" ng-submit="updatewords()" />
-                    <input type="submit" ng-submit="updatewords()" value="Search" id="searchButton"/>
+                    <input type="text" size="25" placeholder="Search Capitol Words API" data-ng-model="words" class="searchInput" ng-submit="updatewords()" />
+                    <input type="submit" ng-submit="updatewords()" value="Search" class="searchButton"/>
                 </form>
 
             </div>
@@ -32,7 +32,7 @@
 
             <!-- Votes Drop Down Menu -->
 
-            <div class='billCollection'>
+            <div class="billCollection search">
 
                 <div class="searchHead">Bills Search</div>
 
@@ -46,6 +46,30 @@
             </div>
 
             <!-- end Votes Drown Down -->
+
+            <!-- Senator Search -->
+
+            <div class="senatorSearch search">
+
+                <div class="searchHead">Senator Search</div>
+
+                <div class="searchDescription">
+                    <em>Search for a particular senator to see the committees he or she sits on.</em> <i class="fa fa-question-circle fa-lg icon" ng-click="senatorSearchInfoView = true"></i>
+                </div>
+
+                <form ng-submit="senatorSearch(senatorSearchName)" id="senatorSearchForm">
+                    <input ng-model="senatorSearchName" ng-submit="senatorSearch(senatorSearchName)" class="searchInput" placeholder="Search Senators" id="senatorSearch" />
+                    <input type="submit" ng-submit="senatorSearch(senatorSearchName)" value="Search" class="searchButton"/>
+                </form>
+
+                <div class="senatorDropdown" ng-show="senatorDropdownView" id="senatorDropdownDiv">
+                    <div class="senatorSelect" ng-repeat="s in senatorDropdown" ng-click="senatorSearch(s)">{{s}}</div>
+                </div>
+                
+            </div>
+
+            <!-- end Senator Search -->
+
 
         </div>
         <!-- end of Searches -->
@@ -137,7 +161,7 @@
 
         </div>
 
-        <!-- Cap Words Infobox -->
+        <!-- Bill Search Infobox -->
 
         <div id="billsInfoBox" class="infoBox" ng-show="billsInfoView" ng-class="{fadeInUp : billsInfoView }">
 
@@ -149,6 +173,26 @@
 
             <div class="infoBoxDiv">
                The bills search allows users to search through a database of a selection of bills passed by the 113th Congress. When a user selects a bill, it returns all of the senators that voted "yea" for that given bill. The bills currently in the database were collected using the Sunlight Foundation's <a href="https://sunlightlabs.github.io/congress/" target="_blank">Congress API</a>.
+            </div>
+
+        </div>
+
+         <!-- Senator Search Infobox -->
+
+        <div id="senatorSearchInfoBox" class="infoBox" ng-show="senatorSearchInfoView" ng-class="{fadeInUp : senatorSearchInfoView }">
+
+            <div class="closeWindow" ng-click="senatorSearchInfoView=false">X</div>
+
+            <h3>Senator Search</h3>
+
+            <hr></hr>
+
+            <div class="infoBoxDiv">
+               The Senator Search allows users to search for a particular senator in the dataset and see what committees he or she sits on.
+            </div>
+
+            <div class="infoBoxDiv">
+               When searching, only the senators in the current data view are searchable. For example, if viewing the "yea" votes for a particular bill, a senator will not be searchable if he or she did not vote for that bill. Press "View All" to return to the full view and search through all senators.
             </div>
 
         </div>
@@ -190,7 +234,7 @@
 
         </div>
 
-    <div class="darkenWindow" ng-show="capWordsInfoView || billsInfoView"></div>
+    <div class="darkenWindow" ng-show="capWordsInfoView || billsInfoView || senatorSearchInfoView"></div>
 
 </div>
 
