@@ -2,6 +2,8 @@
     
     <h1>The Congress Connection Project</h1>
 
+    <div class="description">The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress. Using APIs compiled by the <a href="http://sunlightfoundation.com/" target="_blank">Sunlight Foundation</a>, the application is an interactive network visualization linking senators to the committees on which they sit. Currently, the application only contains data from senators in the 113th Congress, which first convened on January 3, 2013, and will end on January 3, 2015.</div>
+
 
         <!-- Searches -->
 
@@ -14,7 +16,7 @@
                 <div class="searchHead">Capitol Words Search</div>
 
                 <div class="searchDescription">
-                    <em>Type in any word and hit Enter to see the 10 senators that used that word the most.</em> <i class="fa fa-question-circle fa-lg icon" ng-click="capWordsInfoView=true"></i>
+                    <em>Type in a word to see the 10 senators that used that word the most.</em> <i class="fa fa-question-circle fa-lg icon" ng-click="capWordsInfoView=true"></i>
                 </div>
 
                 <form ng-submit="updatewords()">
@@ -35,7 +37,7 @@
                 <div class="searchHead">Bills Search</div>
 
                 <div class="searchDescription">
-                    <em>Select a bill that passed in the 113th Congress to see which senators voted "yea" for that bill.</em> <i class="fa fa-question-circle fa-lg icon" ng-click="billsInfoView=true"></i>
+                    <em>Select a bill to see which senators voted "yea" for that bill.</em> <i class="fa fa-question-circle fa-lg icon" ng-click="billsInfoView=true"></i>
                 </div>
 
                 <select ng-model="billcheck" ng-change="changebill(billcheck)" ng-options="item.bill_id as (item.title) for item in bills" placeholder="Select a Bill">
@@ -207,8 +209,6 @@
         <div class="about">
 
             <h4>About the Project</h4>
-
-            <p>The Congress Connection Project aims to allow users to explore connections that exist within the U.S. Congress. Using APIs compiled by the <a href="http://sunlightfoundation.com/" target="_blank">Sunlight Foundation</a>, the application is an interactive network visualization linking senators to the committees on which they sit. Currently, the application only contains data from senators in the 113th Congress, which first convened on January 3, 2013, and will end on January 3, 2015.</p>
 
             <p>The project was produced by <a href="https://github.com/nickmro" target="_blank">Nick Mrozowski</a>, <a href="https://github.com/teachMeCode" target="_blank">Brian Purcell</a>, and <a href="https://github.com/riachkyle" target="_blank">Kyle Riach</a> as students in General Assembly's <a href="https://generalassemb.ly/education/web-development-immersive" target="_blank">Web Development Immersive</a> course. Learn more about the project, its methodology, and technologies used at the project's <a href="https://github.com/riachkyle/Congress-Connections" target="_blank">GitHub page</a>.</p>
 
