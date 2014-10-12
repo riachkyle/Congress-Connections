@@ -4,7 +4,7 @@
 congressApp.directive("networkGraph", function($window){
   return{
     restrict: "EA",
-    template: "<svg width='830' height='750' id='graphCanvas'></svg>",
+    template: "<svg width='830' height='700' id='graphCanvas'></svg>",
     link: function(scope, elem, attrs){
 
 
@@ -52,7 +52,7 @@ congressApp.directive("networkGraph", function($window){
       // --- Draw SVG --- //
 
       var width = 830;
-      var height = 750;
+      var height = 700;
 
       var svg = d3.select(svg)
                       .attr("width", width)
@@ -95,6 +95,8 @@ congressApp.directive("networkGraph", function($window){
           force
                   .nodes(scope.senators)
                   .start();
+
+          d3.selectAll('line').remove();
 
           var links = scope.links;
 
@@ -140,13 +142,16 @@ congressApp.directive("networkGraph", function($window){
             s.committees = s.committees.join(" ");
           });
 
+          // Remove past senator nodes
+          selection.selectAll("g.senator").remove();
+
           var senatorNodeGroup = selection.selectAll("g.senator")
                           .data(scope.senators)
                       
                       senatorNodeGroup.enter()
                                 .append("g")
                                 .attr("class", function(d){
-                                    return "senator " + d.committees
+                                    return "senator " + d.committees + " " + d.bioguide_id;
                                 })
                                 .append("circle")
                                 .attr("r", 6)
@@ -195,150 +200,24 @@ congressApp.directive("networkGraph", function($window){
                       senatorNodeGroup
                                 .on("mouseover", function(d){
                                     
-                                    var linkClass = "line." + d.bioguide_id;
+                                    var senatorNodeClass = "g." + d.bioguide_id + ".senator";
 
-                                    // Variable representing circles with this senator's bioguide_id.
-                                    var nodeClass = "g." + d.bioguide_id;
+                                    if (senatorNodeClass != scope.currentSenatorNode){
+                                        d3.selectAll("g.senator")
+                                            .selectAll("circle")
+                                            .attr("r", 6)
+                                            .attr("stroke", "none");
 
-                                    // All Senator Nodes
-                                    // Reduce the alpha level of every senator node to make them transparent.
+                                        d3.selectAll("g.senator").select("text")
+                                                .remove();
+                                    }
 
-                                    d3.selectAll("g.senator")
-                                        .select("circle")
-                                        .attr("fill", function(d){
-                                              if (d.party == "D"){
-                                                  return "rgba(142,178,197,.2)"
-                                              }
-                                              else if (d.party == "R"){
-                                                  return "rgba(229,98,92,.2)"
-                                              }
-                                              else{
-                                                  return "rgba(182,98,144,.2)"
-                                              }
-                                          })
-                                        .attr("stroke", "none");
-
-                                    // Senator Name
-                                    // Append the senator's name to the node
-
-                                    d3.select(this)
-                                        .append("text")
-                                        .text(function(d){
-                                            return d.nm_last
-                                        })
-                                        .attr("text-anchor", "middle")
-                                        .attr("transform", "translate(0, -25)")
-                                        .style("font-family", "Open Sans Condensed")
-                                        .style("font-size", "16px")
-                                        .style("color", "black");
-
-                                    // Senator Image
-                                    // Fill this node with the senator's image
-
-                                    d3.select(this)
-                                        .select("circle")
-                                        .attr("fill", function(d){
-                                           return "url(#image_" + d.nm_last + ")"
-                                        })
-                                        .attr("stroke", "#ddd")
-                                        .transition()
-                                        .attr("r", 24);
-
-                                    linkGroup.selectAll("line.link")
-                                        .attr("stroke", "rgba(255,255,255,0)");
-
-                                    var linkSelected = linkGroup.selectAll(linkClass);
-
-                                    linkSelected
-                                        .attr("stroke", "#ddd");
-
-                                    // Committee Highlight
-                                    // Show only the committees that the senator is a part of.
-
-                                    d3.selectAll("circle.committee")
-                                        .attr("fill", "rgba(220,220,220,.2)")
-                                        .attr("stroke", "none");
-
-                                    d3.selectAll("g.committee")
-                                        .select("text")
-                                        .remove()
-
-                                    var committeeNodes = d3.selectAll(nodeClass);
-
-                                    committeeNodes.select("circle")
-                                        .attr("fill", "rgba(220,220,220,1)")
-                                        .transition()
-                                        .attr("r", 30)
-
-                                    committeeNodes.append("text")
-                                        .text(function(d){
-                                            return d.committee_name
-                                        })
-                                        .attr("text-anchor", "middle")
-                                        .style("font-family", "Open Sans Condensed")
-                                        .style("font-size", "16px");
+                                    scope.showSenator(d);
 
                                   })
                                   .on("mouseout", function(d){
 
-                                        d3.selectAll("g.senator")
-                                            .select("circle")
-                                            .attr("fill", function(d){
-                                                  if (d.party == "D"){
-                                                      return "rgba(142,178,197,1)"
-                                                  }
-                                                  else if (d.party == "R"){
-                                                      return "rgba(229,98,92,1)"
-                                                  }
-                                                  else{
-                                                      return "rgba(182,98,144,1)"
-                                                  }
-                                            });
-
-                                        d3.select(this).select("text")
-                                            .remove();
-                                        
-                                        d3.select(this).select("circle")
-                                            .attr("fill", function(d){
-                                                if (d.party == "D"){
-                                                    return "rgba(142,178,197,1)"
-                                                }
-                                                else if (d.party == "R"){
-                                                    return "rgba(229,98,92,1)"
-                                                }
-                                                else{
-                                                    return "rgba(182,98,144,1)"
-                                                }
-                                            })
-                                            .transition()
-                                            .attr("r", 6)
-                                            .attr("stroke", "none");
-
-                                        linkGroup.selectAll("line.link")
-                                            .attr("stroke", "rgba(220,220,220,.3)");
-
-                                        // Committee Nodes
-                                        // Return committee nodes to normal size.
-
-                                        d3.selectAll("g.committee")
-                                            .select("text").remove();
-
-                                        d3.selectAll("g.committee")
-                                            .select("circle")
-                                            .attr("fill", "rgba(220,220,220,1)")
-                                            .transition()
-                                            .attr("r", 20);
-
-                                        d3.selectAll("g.committee")
-                                            .append("text")
-                                            .text(function(d){
-                                              return d.committee_id
-                                            })   
-                                            .attr("text-anchor", "middle")
-                                            .attr("transform", "translate(0,5)")
-                                            .style("font-family", "Open Sans Condensed")
-                                            .style("font-size", "16px");
-
+                                    scope.unshowSenator();
 
                                   });
 
@@ -356,8 +235,8 @@ congressApp.directive("networkGraph", function($window){
                           
                           k = e.alpha * 0.1;
 
-                          o.x += (centerPlacement(550, keys, i).x - o.x) * k;
-                          o.y += (centerPlacement(550, keys, i).y - o.y) * k;
+                          o.x += (centerPlacement(500, keys, i).x - o.x) * k;
+                          o.y += (centerPlacement(500, keys, i).y - o.y) * k;
                       });
                   
 
@@ -497,6 +376,14 @@ congressApp.directive("networkGraph", function($window){
                 // -- Committee MouseOver Function -- //
 
                 committeeNodeGroup.on("mouseover", function(d){
+
+                                d3.selectAll("g.senator")
+                                        .selectAll("circle")
+                                        .attr("r", 6)
+                                        .attr("stroke", "none");
+
+                                d3.selectAll("g.senator").select("text")
+                                            .remove();
                                     
                                 var linkClass = "line." + d.committee_id;
                                 var nodeClass = "g." + d.committee_id;
@@ -686,6 +573,9 @@ congressApp.directive("networkGraph", function($window){
               });
 
                   
+        
+
+
       }
     }
   }

@@ -51,7 +51,7 @@ body{
     font-size: 40px;
   	font-family: 'Playfair Display', serif;
     text-align: center;
-    margin: 30px auto 15px;
+    margin: 30px auto 25px;
   }
 
   h3{
@@ -204,28 +204,31 @@ body{
       margin: 30px 0 10px;
 
       .searchHead{
-          width: 300px;
+          width: 230px;
           font-family: 'Playfair Display', serif;
-          font-size: 24px;
+          font-size: 20px;
       }
 
       .searchDescription{
-          width: 300px;
+          width: 230px;
           margin: 0 0 10px;
-          font-size: 14px;
+          font-size: 12px;
           color: #888;
       }
-  }
 
-  .capwords{
-      position: absolute;
-      width: 350px;
-      padding: 0 0 0 20px;
-      margin: 0 auto 40px;
-      float: left;
+      .search{
+          position: relative;
+          float: left;
+          width: 230px;
+          margin-right: 40px;
+      }
 
-      .capWordSearch{
-          width: 245px;
+      .search:last-child{
+          margin-right: 0;
+      }
+
+      .searchInput{
+          width: 170px;
           height: 40px;
           -webkit-border-radius: 6px;
           -moz-border-radius: 6px;
@@ -241,7 +244,7 @@ body{
           color: rgba(81,81,81, 1);
       }
 
-      #searchButton{
+      .searchButton{
           padding: 6px;
           height: 32px;
           width: 44px;
@@ -256,20 +259,25 @@ body{
           cursor: pointer;
       }
 
-      #searchButton:hover{
+      .searchButton:hover{
           background-color: #ccc;
       }
+  }
+
+  .capwords{
+      position: absolute;
+      padding: 0 0 0 20px;
+      margin: 0 auto 10px;
 
   }
 
   .billCollection{
-      float: right;
       padding: 0 20px 0 0;
 
       select{
           margin: 0 auto;
           background: white;
-          width: 320px;
+          width: 230px;
           padding: 5px;
           font-size: 18px;
           font-family: 'Open Sans Condensed', sans-serif;
@@ -279,6 +287,33 @@ body{
           border: 1px solid rgba(130,130,130,1);
           height: 40px;
       }
+  }
+
+  .senatorDropdown{
+      position: absolute;
+      width: 170px;
+
+      background: white;
+      border: 1px solid rgb(181,181,181);
+
+      font-family: 'Open Sans Condensed', sans-serif;
+      font-size: 16px;
+
+      -webkit-box-shadow: 0px 3px 5px 0px rgba(51,51,51,1);
+      -moz-box-shadow: 0px 3px 5px 0px rgba(51,51,51,1);
+      box-shadow: 0px 3px 5px 0px rgba(51,51,51,1);
+
+      z-index: 3;
+
+  }
+
+  .senatorSelect{
+      padding: 0 5px;
+      cursor: pointer;
+  }
+
+  .senatorSelect:hover{
+      background-color: rgb(242,244,246);
   }
 
 
@@ -341,13 +376,14 @@ body{
     height: 230px;
     margin: 0 auto;
     text-align: center;
-    background-color: rgba(255,255,255,.9);
+    background-color: rgba(255,255,255,.95);
+    border: 1px solid rgb(200,200,200);
     border-radius: 5px;
     -webkit-box-shadow: 0px 13px 63px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 13px 63px -9px rgba(0,0,0,0.75);
     box-shadow: 0px 13px 63px -9px rgba(0,0,0,0.75);
-    position: absolute;
-    top: 500px;
+    position: fixed;
+    top: 200px;
     margin-left: -250px;
     left: 50%;
 
@@ -566,6 +602,6 @@ body{
 }
 
 .fadeIn {
-  -webkit-animation: fadeIn 1s forwards;
-  animation: fadeIn 1s forwards;
+  -webkit-animation: fadeIn 2s forwards;
+  animation: fadeIn 2s forwards;
 }

@@ -5,8 +5,11 @@ congressApp.controller('Congress', ['$scope', '$http', 'SenateData', 'CommitteeD
 
 $scope.capWordsInfoView = false;
 $scope.billsInfoView = false;
+$scope.senatorSearchInfoView = false;
 
 $scope.wordsView = false;
+
+$scope.senatorDropdownView = false;
 
 
 // ------ Map Nodes ------ //
@@ -72,6 +75,10 @@ $scope.mapNodes = function(nodes, field){
             }
         };
 
+        $scope.wordsView = true;
+
+        $scope.unshowSenator();
+
     };
 
     //function that will make a live api call to Sunlight for individual senators======
@@ -132,6 +139,8 @@ $scope.mapNodes = function(nodes, field){
                             .done(showResponse);
 
         $scope.wordsView = true;
+
+        $scope.unshowSenator();
     };
 
     // function to return the json and reset 'wordsdata' variable=============
@@ -176,6 +185,7 @@ $scope.mapNodes = function(nodes, field){
       $scope.senators = angular.copy($scope.senatorsReset);
       $scope.links = angular.copy($scope.linksReset);
       $scope.wordsView = false;
+      $scope.unshowSenator();
   };
 
 
@@ -283,6 +293,241 @@ $scope.mapNodes = function(nodes, field){
 
     $scope.minimizeSenator = function(){
         $scope.senatorActive = false;
-    };     
+    };
+
+
+
+    // ------ Scoped D3 Functions ------ //
+
+    // Current Senator node tells which senator node is currently highlighted
+    $scope.currentSenatorNode = null;
+
+
+    // The showSenator function is in the controller so that it can be accessed by both the senator search and the mouseover function.
+
+    $scope.showSenator = function(d){
+
+        // Variable representing circle with this senator's bioguide_id.
+        var senatorNodeClass = "g." + d.bioguide_id + ".senator";
+
+        if (senatorNodeClass != $scope.currentSenatorNode){
+
+            $scope.currentSenatorNode = senatorNodeClass;
+
+            var linkGroup = d3.selectAll("g.linkGroup");
+
+            var linkClass = "line." + d.bioguide_id;
+
+            var committeeNodeClass = "g." + d.bioguide_id + ".committee";
+
+            // All Senator Nodes
+            // Reduce the alpha level of every senator node to make them transparent.
+
+            d3.selectAll("g.senator")
+                .select("circle")
+                .attr("fill", function(d){
+                    if (d.party == "D"){
+                        return "rgba(142,178,197,.2)"
+                    }
+                    else if (d.party == "R"){
+                        return "rgba(229,98,92,.2)"
+                    }
+                    else{
+                        return "rgba(182,98,144,.2)"
+                    }
+                })
+                .attr("stroke", "none")
+                .attr("r", 6)
+                .attr("stroke", "none");
+
+                d3.selectAll("g.senator").select("text")
+                    .remove();
+
+                // Senator Name
+                // Append the senator's name to the node
+
+                d3.select(senatorNodeClass)
+                    .append("text")
+                    .text(function(d){
+                        return d.nm_last
+                })
+                .attr("text-anchor", "middle")
+                .attr("transform", "translate(0, -22)")
+                .style("font-family", "Open Sans Condensed")
+                .style("font-size", "16px")
+                .style("color", "black");
+
+                // Senator Image
+                // Fill this node with the senator's image
+
+                d3.select(senatorNodeClass)
+                    .select("circle")
+                    .attr("fill", function(d){
+                        return "url(#image_" + d.nm_last + ")"
+                    })
+                    .attr("stroke", "#ddd")
+                    .transition()
+                    .attr("r", 24);
+
+                linkGroup.selectAll("line.link")
+                    .attr("stroke", "rgba(255,255,255,0)");
+
+                var linkSelected = linkGroup.selectAll(linkClass);
+
+                linkSelected
+                    .attr("stroke", "#ddd");
+
+                // Committee Highlight
+                // Show only the committees that the senator is a part of.
+
+                d3.selectAll("circle.committee")
+                    .attr("fill", "rgba(220,220,220,.2)")
+                    .attr("stroke", "none");
+
+                d3.selectAll("g.committee")
+                    .select("text")
+                    .remove()
+
+                var committeeNodes = d3.selectAll(committeeNodeClass);
+
+                committeeNodes.select("circle")
+                    .attr("fill", "rgba(220,220,220,1)")
+                    .transition()
+                    .attr("r", 30)
+
+                committeeNodes.append("text")
+                    .text(function(d){
+                        return d.committee_name
+                    })
+                    .attr("text-anchor", "middle")
+                    .style("font-family", "Open Sans Condensed")
+                    .style("font-size", "16px");
+
+            }
+        };
+
+        // The unshowSenator is in the controller so that it can be accessed by the searches and the mouseout function.
+
+        $scope.unshowSenator = function(){
+
+            d3.selectAll("g.senator")
+                .select("circle")
+                .attr("fill", function(d){
+                    if (d.party == "D"){
+                        return "rgba(142,178,197,1)"
+                    }
+                    else if (d.party == "R"){
+                        return "rgba(229,98,92,1)"
+                    }
+                    else{
+                        return "rgba(182,98,144,1)"
+                    }
+                })
+                .transition()
+                .attr("r", 6)
+                .attr("stroke", "none");
+
+            d3.selectAll("g.senator")
+                .select("text")
+                .remove();
+
+            d3.selectAll("g.committee")
+                .select("text").remove();
+
+            d3.selectAll("g.committee")
+                .select("circle")
+                .attr("fill", "rgba(220,220,220,1)")
+                .transition()
+                .attr("r", 20);
+
+            d3.selectAll("g.committee")
+                .append("text")
+                .text(function(d){
+                    return d.committee_id
+                                            })   
+                .attr("text-anchor", "middle")
+                .attr("transform", "translate(0,5)")
+                .style("font-family", "Open Sans Condensed")
+                .style("font-size", "16px");
+
+            d3.selectAll("line.link")
+                .attr("stroke", "rgba(220,220,220,.3)");
+
+            $scope.currentSenatorNode = null;
+        }
+
+        // ------ Senator Search Function ------ //
+
+        $scope.senatorSearchName = undefined;
+
+        $scope.$watch( "senatorSearchName", function(){
+            if (typeof $scope.senatorSearchName !== "undefined"){
+              $scope.senatorSelect($scope.senatorSearchName)
+            }
+        })
+
+        // Create the search dropdown
+        $scope.senatorSelect = function(name){
+            var nameArray = name.split(" ");
+            var firstSenatorDropdown = [];
+            if ($("#senatorSearch").is(":focus")){
+              for (i = 0; i < $scope.senators.length; ++i){
+                if (name.length < 1){
+                    firstSenatorDropdown = [];
+                    $scope.senatorDropdownView = false;
+                }
+                else if (nameArray.length > 0){
+                    if (nameArray.length == 1){
+                      if(nameArray[0].toLowerCase() == $scope.senators[i].nm_first.substring(0, name.length).toLowerCase() ||
+                      nameArray[0].toLowerCase() == $scope.senators[i].nm_last.substring(0, name.length).toLowerCase()){
+                        firstSenatorDropdown.push($scope.senators[i].senator_name);
+                        $scope.senatorDropdownView = true;
+                      }
+                    }
+                    else if (nameArray.length > 1){
+                      if(nameArray[0].toLowerCase() == $scope.senators[i].nm_first.substring(0, nameArray[0].length).toLowerCase() &&
+                      nameArray[1].toLowerCase() == $scope.senators[i].nm_last.substring(0, nameArray[1].length).toLowerCase()){
+                        firstSenatorDropdown.push($scope.senators[i].senator_name);
+                        $scope.senatorDropdownView = true;
+                      }
+                    }
+                }
+              }
+              if (firstSenatorDropdown.length < 1){
+                    $scope.senatorDropdownView = false;
+              }
+              $scope.senatorDropdown = firstSenatorDropdown.sort();
+            }
+            
+        };
+
+        // Conduct the search
+        $scope.senatorSearch = function(name){
+            // Loop through senators to find the senator with that name
+            for (i = 0; i < $scope.senators.length; ++i){
+              if (name.toLowerCase() == $scope.senators[i].senator_name.substring(0, name.length).toLowerCase()){
+                $scope.showSenator($scope.senators[i]);
+                $scope.currentSenatorNode = "g." + $scope.senators[i].bioguide_id + ".senator";
+                break
+              }
+            }
+            $scope.senatorDropdownView = false;
+        }
+        
+        // Close the dropdown when clicking away
+        $(document).click(function(event){
+          if (!$(event.target).closest("#senatorDropdownDiv").length){
+            if($scope.senatorDropdownView == true){
+              $scope.senatorDropdownView = false;
+              $scope.$digest();
+            }
+            else{
+              $scope.unshowSenator()
+            }
+          }
+          else{
+
+          }
+        })
 
 }]);
