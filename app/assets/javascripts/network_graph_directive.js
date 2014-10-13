@@ -120,7 +120,7 @@ congressApp.directive("networkGraph", function($window){
                           .attr("class", function(d){
                             return "link " + d.bioguide_id + " " + d.committee_id
                           })
-                          .attr("stroke", "rgba(220,220,220,.3");
+                          .attr("stroke", "rgba(220,220,220,.3)");
 
           link.exit().remove();
 
