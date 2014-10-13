@@ -73,7 +73,7 @@ body{
   }
 
   a, .icon{
-      color: rgb(142,178,197);
+      color: rgb(123,165,209);
       text-decoration: none;
   }
 
@@ -370,7 +370,7 @@ body{
       font-weight: 300;
       
       cursor: pointer;
-      z-index: 3;
+      z-index: 5;
   }
 
   #showAll:hover{
@@ -524,7 +524,7 @@ body{
   font-size: 18px;
   font-weight: 300;
   font-family: 'Roboto', sans-serif;
-  z-index: 2;
+  z-index: 5;
 
   h3{
     margin: 20px 0 40px;
