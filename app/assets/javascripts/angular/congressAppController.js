@@ -530,6 +530,7 @@ $scope.mapNodes = function(nodes, field){
               }
             }
             $scope.senatorDropdownView = false;
+            $scope.senatorSearchName = name;
         }
         
         // Close the dropdown when clicking away
